@@ -52,7 +52,6 @@ import axios from "axios";
 import CTLogo from "../../assets/icons/general/Logo-CT.svg";
 import CTLogoOnly from "@/assets/icons/general/LogoPrimary.svg";
 import CloseIcon from "@/assets/icons/general/icon-menu-close.svg";
-import { BASE_API } from "@/constant/api";
 import Link from "next/link";
 import { useBookingData } from "@/context/BookingContext";
 
@@ -213,16 +212,18 @@ const BookingPage = () => {
 
   useEffect(() => {
     const fetchCountry = () => {
-      axios.get(`${BASE_API}/guests/country`).then((response) => {
-        const sortedCountry: ICountry[] = response.data.data
-          .sort((prev: ICountry, curr: ICountry) =>
-            prev.countryName.localeCompare(curr.countryName)
-          )
-          .sort((prev: ICountry, curr: ICountry) =>
-            prev.favorite === curr.favorite ? 0 : prev.favorite ? -1 : 1
-          );
-        setCountries(sortedCountry);
-      });
+      axios
+        .get(`${process.env.NEXT_PUBLIC_BASE_API}/guests/country`)
+        .then((response) => {
+          const sortedCountry: ICountry[] = response.data.data
+            .sort((prev: ICountry, curr: ICountry) =>
+              prev.countryName.localeCompare(curr.countryName)
+            )
+            .sort((prev: ICountry, curr: ICountry) =>
+              prev.favorite === curr.favorite ? 0 : prev.favorite ? -1 : 1
+            );
+          setCountries(sortedCountry);
+        });
     };
 
     fetchCountry();
@@ -231,7 +232,7 @@ const BookingPage = () => {
   useEffect(() => {
     if (selectedHotel.hotelName) {
       const lotNumber = getLotNumber(selectedHotel.hotelName);
-      const detailedHotelApiUrl = `${BASE_API}/landing-page/lot-info/${lotNumber}`;
+      const detailedHotelApiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/lot-info/${lotNumber}`;
 
       axios
         .get(detailedHotelApiUrl)
@@ -247,7 +248,7 @@ const BookingPage = () => {
         )
         .catch((error) => console.error(error));
 
-      const taxSSTApiUrl = `${BASE_API}/landing-page/tax-and-service-charge/?lot=${lotNumber}`;
+      const taxSSTApiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/tax-and-service-charge/?lot=${lotNumber}`;
 
       axios
         .get(taxSSTApiUrl)
@@ -279,7 +280,7 @@ const BookingPage = () => {
 
   const handleSubmit = () => {
     if (bookingSchedule.date && bookingSchedule.duration) {
-      const apiUrl = `${BASE_API}/landing-page/booking/`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/booking/`;
 
       const formattedRoomBooking = roomBookings.map((roomBooking) => ({
         roomTypeName: roomBooking.roomType,
@@ -316,14 +317,14 @@ const BookingPage = () => {
           roomBookings: roomBookings,
           selectedHotel: selectedHotel,
           bookingSchedule: bookingSchedule,
-          bookingNo: "KLIA123123",
+          bookingNo: result.data.data.bookingId,
         };
 
         setBookingData(tempBookingData);
 
         const iPay88Data: IPaymentTerminal = {
           amount: paymentInfo.debitAmount,
-          refNo: result.data.bookingNo,
+          refNo: tempBookingData.bookingNo,
           userContact: formik.values.phone,
           userEmail: formik.values.email,
           userName: formik.values.firstName + " " + formik.values.lastName,
@@ -392,7 +393,7 @@ const BookingPage = () => {
           consentSigned={consentSigned}
           handleConsentSignChange={handleConsentSignChange}
           handleAddPromotion={handleAddPromotion}
-          handleSubmit={handleSubmit}
+          handleSubmit={formik.handleSubmit}
         />
       ) : (
         <></>

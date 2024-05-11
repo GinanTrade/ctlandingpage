@@ -16,6 +16,7 @@ const AirsideOverviewKLIA2 = () => {
       header={headerContent}
       content={textContent}
       image={AirsideImage}
+      isInRestricted={true}
     />
   );
 };

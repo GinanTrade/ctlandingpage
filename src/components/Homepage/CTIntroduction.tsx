@@ -28,6 +28,8 @@ const gridContents = [
   { title: "Flexible Check-in Time", description: "Lorem Ipsum" },
   { title: "Book by the Hours", description: "Lorem Ipsum" },
   { title: "Luggage Storage Service", description: "Lorem Ipsum" },
+  { title: "Refreshing Shower Service", description: "Lorem Ipsum" },
+  { title: "Gender-Specific Zones", description: "Lorem Ipsum" },
 ];
 
 const CTIntroduction = () => {
@@ -68,7 +70,12 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
           {textContents[1].text}
         </Typography>
       </Stack>
-      <Box display={"flex"} flexDirection={"column"} marginY={4}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        marginTop={4}
+        marginBottom={"200px"}
+      >
         <Typography variant="body2" width={"48vw"}>
           {textContents[2].text}
         </Typography>

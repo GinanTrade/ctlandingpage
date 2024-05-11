@@ -48,7 +48,7 @@ const rightSection = {
     { title: "Newsroom", url: "/news" },
     { title: "divider", url: "/" },
     { title: "FAQ", url: "/faq" },
-    { title: "Stay Protocol", url: "/" },
+    { title: "CSR", url: "/csr" },
     { title: "Best Rate Guarantee", url: "/" },
     { title: "Instagram", url: "/" },
   ],

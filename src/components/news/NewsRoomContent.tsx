@@ -20,7 +20,6 @@ import NewsImage5 from "./images/news-5.jpg";
 import NewsImage6 from "./images/news-6.jpg";
 import IconArrowLeft from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import { useEffect, useState } from "react";
-import { STRAPI_BASE } from "@/constant/api";
 import axios from "axios";
 import { handleConvertArticle } from "@/utils/functions";
 import { IArticle } from "@/models/Article";
@@ -76,7 +75,7 @@ const NewsRoomContent = () => {
   const [articles, setArticles] = useState<IArticle[]>([]);
 
   useEffect(() => {
-    const apiUrl = `${STRAPI_BASE}/api/articles?populate=*`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE}/api/articles?populate=*`;
 
     // setIsLoadingImage(true);
     axios

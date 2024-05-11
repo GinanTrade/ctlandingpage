@@ -14,6 +14,9 @@ import ContentWrapper from "../global/ContentWrapper";
 import Image from "next/image";
 import { features } from "process";
 import { useState } from "react";
+import HeaderTop from "../global/HeaderTop";
+import { featuresEnum } from "@/constant/Enums";
+import { DurationIcons, FeaturesIcons, RoomsIcons } from "@/constant/Icons";
 
 import EyeIcon from "@/assets/icons/general/icon-view-black.svg";
 import AirsideImage from "@/assets/images/list-klia2-airside.jpg";
@@ -21,13 +24,13 @@ import LandSideImage from "@/assets/images/list-klia2-landside@2x.jpg";
 import MaxImage from "@/assets/images/list-klia2-max@2x.jpg";
 import SleepLoungeRoomImage from "@/assets/images/list-klia1-landside@2x.jpg";
 import SleepLoungImage from "@/assets/images/list-klia1-landside2@2x.jpg";
+import PublicAreaIcon from "./images/public-area-icon.svg";
+import RestrictedAreaIcon from "./images/restricted-area-icon.svg";
+import CTMaxIcon from "./images/logo-display-capsuletransitMAX@2x.png";
 
 import IconArrowLeft from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import LocationIcon from "@/assets/icons/general/icon-location-grey.svg";
-
-import HeaderTop from "../global/HeaderTop";
-import { featuresEnum } from "@/constant/Enums";
-import { DurationIcons, FeaturesIcons, RoomsIcons } from "@/constant/Icons";
+import { daDK } from "@mui/x-date-pickers/locales";
 
 const textContent = [
   { title: "Our Hotels and Locations" },
@@ -39,6 +42,7 @@ const terminal1Hotels = {
   title: "Capsule Transit Sleep Lounge",
   location: "KLIA Terminal 1, Public Area",
   backgroundUrl: SleepLoungeRoomImage,
+  logo: PublicAreaIcon,
   description:
     "Lorem ipsum dolor sit amet, consectetuer adipis cing elit, sed diam nonummy nibh euismod tinci dunt ut laoreet dolore.",
   features: [
@@ -58,6 +62,7 @@ const terminal2Hotels = [
     title: "Capsule Transit Airside",
     location: "KLIA Terminal 2, Restricted Area",
     backgroundUrl: "/videos/list-klia2-airside.mp4",
+    logo: RestrictedAreaIcon,
     description:
       "For early flights, Late arrivals, Missed flights or last minute flight cancellations.",
     features: [
@@ -81,6 +86,7 @@ const terminal2Hotels = [
     description:
       "Suitable for transiting within KLIA2 International Departure area.",
     backgroundUrl: LandSideImage,
+    logo: PublicAreaIcon,
     features: [
       featuresEnum.ThreeHourStay,
       featuresEnum.SixHourStay,
@@ -104,6 +110,7 @@ const terminal2Hotels = [
     description:
       "For those who prefers more of everything. Privacy. Space. En-suite bathroom.",
     backgroundUrl: MaxImage,
+    logo: CTMaxIcon,
     features: [
       featuresEnum.SixHourStay,
       featuresEnum.TwelveHourStay,
@@ -202,9 +209,23 @@ const KLIA2Hotels = (props: {
                 clipPath:
                   "polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%)",
               }}
-              onMouseOut={() => props.handleHoverImage("")}
             >
-              <Typography variant="h6" width={"60%"} textAlign={"center"}>
+              <Image
+                src={data.logo}
+                alt={data.title}
+                style={{
+                  maxWidth: "200px",
+                  maxHeight: "100%",
+                  width: "auto",
+                  height: "auto",
+                }}
+              />
+              <Typography
+                variant="h6"
+                width={"60%"}
+                textAlign={"center"}
+                marginTop={4}
+              >
                 {data.description}
               </Typography>
               <Box
@@ -379,9 +400,23 @@ const KLIA1Hotels = (props: {
               clipPath:
                 "polygon(10% 0, 90% 0, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0 90%, 0 10%)",
             }}
-            onMouseOut={() => props.handleHoverImage("")}
           >
-            <Typography variant="h6" width={"60%"} textAlign={"center"}>
+            <Image
+              src={terminal1Hotels.logo}
+              alt={terminal1Hotels.title}
+              style={{
+                maxWidth: "200px",
+                maxHeight: "100%",
+                width: "auto",
+                height: "auto",
+              }}
+            />
+            <Typography
+              variant="h6"
+              width={"60%"}
+              textAlign={"center"}
+              marginTop={4}
+            >
               {terminal1Hotels.description}
             </Typography>
             <Box

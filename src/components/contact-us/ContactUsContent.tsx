@@ -1,4 +1,3 @@
-import { STRAPI_BASE } from "@/constant/api";
 import { IContactUs } from "@/models/Contact";
 import { handleConvertContactUs } from "@/utils/functions";
 import { Grid, Stack, Typography } from "@mui/material";
@@ -17,7 +16,7 @@ const ContactUsContent = () => {
   const [otherContact, setOtherContact] = useState<IContactUs[]>([]);
 
   useEffect(() => {
-    const apiUrl = `${STRAPI_BASE}/api/contacts?populate=*`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE}/api/contacts?populate=*`;
 
     // setIsLoadingImage(true);
     axios

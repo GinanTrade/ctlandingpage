@@ -149,6 +149,7 @@ const StaySectionHome = (props: {
 }) => {
   const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isSmallDevice = useMediaQuery("(max-width:400px)");
 
   const [informationHovered, setInformationHovered] = useState<boolean>(false);
   return (
@@ -181,7 +182,11 @@ const StaySectionHome = (props: {
             alignItems={"center"}
             marginBottom={2}
           >
-            <Image src={T1Icon} alt="terminal-1-icon" />
+            <Image
+              src={T1Icon}
+              alt="terminal-1-icon"
+              style={{ width: isHandheldDevice ? 100 : 150, height: "auto" }}
+            />
           </Box>
           <Typography variant="h4" textAlign={"center"} marginBottom={5}>
             {options[0].title}
@@ -205,7 +210,12 @@ const StaySectionHome = (props: {
           <Image
             src={TrainBusIcon}
             alt="transit-icon"
-            style={{ marginBottom: "50px", objectFit: "contain" }}
+            style={{
+              marginBottom: "50px",
+              objectFit: "contain",
+              width: isHandheldDevice ? 200 : "100%",
+              height: "auto",
+            }}
           />
           <Box onMouseEnter={() => setInformationHovered(true)}>
             {informationHovered ? (
@@ -241,7 +251,11 @@ const StaySectionHome = (props: {
             alignItems={"center"}
             marginBottom={2}
           >
-            <Image src={T2Icon} alt="terminal-2-icon" />
+            <Image
+              src={T2Icon}
+              alt="terminal-2-icon"
+              style={{ width: isHandheldDevice ? 100 : 150, height: "auto" }}
+            />
           </Box>
           <Typography variant="h4" textAlign={"center"} marginBottom={5}>
             {options[1].title}

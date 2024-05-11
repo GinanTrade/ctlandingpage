@@ -33,7 +33,6 @@ import {
 import FemaleSingleImage from "../landside/images/room-single-female@2x.jpg";
 import CTRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import { useEffect, useState } from "react";
-import { BASE_API, STRAPI_BASE } from "@/constant/api";
 import axios from "axios";
 const title = "Select Your Room";
 
@@ -205,7 +204,7 @@ const RoomTypesContent = (props: {
     if (props.bookingSchedule.date && props.bookingSchedule.duration) {
       const checkInDatetimeEpoch = props.bookingSchedule.date.getTime() / 1000;
       const lotNumber = getLotNumber(props.selectedHotel.hotelName);
-      const apiUrl = `${BASE_API}/landing-page/list-for-booking/?checkInDatetime=${checkInDatetimeEpoch}&duration=${props.bookingSchedule.duration}&lotId=${lotNumber}`;
+      const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/list-for-booking/?checkInDatetime=${checkInDatetimeEpoch}&duration=${props.bookingSchedule.duration}&lotId=${lotNumber}`;
 
       setIsLoading(true);
       fetch(apiUrl, {
@@ -233,7 +232,7 @@ const RoomTypesContent = (props: {
   }, [props.bookingSchedule, props.selectedHotel.hotelName]);
 
   useEffect(() => {
-    const apiUrl = `${STRAPI_BASE}/api/room-type-images?populate=*`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE}/api/room-type-images?populate=*`;
 
     setIsLoadingImage(true);
     axios
@@ -243,7 +242,7 @@ const RoomTypesContent = (props: {
 
         const formattedData: IRoomImages[] = data.map((data: any) => ({
           name: data.attributes.title,
-          url: `${STRAPI_BASE}${data.attributes.image.data.attributes.url}`,
+          url: `${process.env.NEXT_PUBLIC_STRAPI_BASE}${data.attributes.image.data.attributes.url}`,
         }));
 
         setRoomImages(formattedData);
@@ -527,7 +526,10 @@ const BookNowButton = (props: {
           <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
             <Box display={"flex"} justifyContent={"end"} alignItems={"center"}>
               <Button
-                onClick={() => props.handleChangeStepper(4)}
+                onClick={() => {
+                  props.handleChangeStepper(4);
+                  window.scrollTo(0, 0);
+                }}
                 sx={{
                   padding: 0,
                 }}

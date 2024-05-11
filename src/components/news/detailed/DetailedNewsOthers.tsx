@@ -1,5 +1,4 @@
 import HeaderTop from "@/components/global/HeaderTop";
-import { STRAPI_BASE } from "@/constant/api";
 import { IArticle } from "@/models/Article";
 import { handleConvertArticle } from "@/utils/functions";
 import { ChevronRight, DateRange } from "@mui/icons-material";
@@ -25,7 +24,7 @@ const DetailedNewsOthers = (props: { id: number }) => {
   const [articles, setArticles] = useState<IArticle[]>([]);
 
   useEffect(() => {
-    const apiUrl = `${STRAPI_BASE}/api/articles?populate=*`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE}/api/articles?populate=*`;
 
     // setIsLoadingImage(true);
     axios

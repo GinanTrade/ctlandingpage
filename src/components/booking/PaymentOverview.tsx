@@ -1,4 +1,3 @@
-import { BASE_API } from "@/constant/api";
 import { IPaymentInfo, IRoomBooking } from "@/models/Booking";
 import { displayThousands } from "@/utils/functions";
 import {
@@ -89,7 +88,7 @@ const PromotionSection = (props: {
   >();
 
   const handleGetPromotion = () => {
-    const apiUrl = `${BASE_API}/landing-page/promotions/?promoCode=${promotionValue}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/promotions/?promoCode=${promotionValue}`;
     axios
       .get(apiUrl)
       .then((result) => {

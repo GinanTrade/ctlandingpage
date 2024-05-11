@@ -1,9 +1,12 @@
 import {
   Box,
+  Divider,
   Grid,
   IconButton,
+  Stack,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import ContentWrapper from "../ContentWrapper";
 import HeaderBottom from "../HeaderBottom";
@@ -17,8 +20,10 @@ const HotelOverview = (props: {
   content: string[];
   image: any;
   illus?: any;
+  isInRestricted?: boolean;
 }) => {
   const router = useRouter();
+  const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
     <ContentWrapper noMarginTop>
@@ -49,8 +54,30 @@ const HotelOverview = (props: {
             width={"100%"}
             paddingRight={5}
           >
-            <Typography variant="body2">{props.content[0]}</Typography>
-            <Typography width={isHandheldDevice ? "100%" : "90%"}>
+            {props.isInRestricted && (
+              <Stack marginBottom={isHandheldDevice ? 0 : 2}>
+                <Typography
+                  variant="h6"
+                  fontWeight={700}
+                  sx={{ color: theme.palette.CtColorScheme.pink300 }}
+                >
+                  Located at Restricted Area
+                </Typography>
+                <Divider
+                  sx={{
+                    bgcolor: theme.palette.CtColorScheme.pink300,
+                    height: "5px",
+                  }}
+                />
+              </Stack>
+            )}
+            <Typography variant="body2" marginTop={2}>
+              {props.content[0]}
+            </Typography>
+            <Typography
+              marginTop={isHandheldDevice ? 1 : 3}
+              width={isHandheldDevice ? "100%" : "90%"}
+            >
               {props.content[1]}
             </Typography>
             <Box

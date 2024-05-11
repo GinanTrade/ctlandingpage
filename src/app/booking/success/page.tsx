@@ -20,13 +20,54 @@ import CTButton from "@/components/global/CTButton";
 import Footer from "@/components/global/Footer";
 
 import CTRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
+import axios from "axios";
 
 const BookingSuccessPage = () => {
   const { bookingData, setBookingData } = useBookingData();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   const router = useRouter();
 
-  const handleDownloadReceipt = () => {};
+  const handleDownloadReceipt = () => {
+    const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/generate-receipt/`;
+
+    const formData = {
+      bookingId: "556167b4-2637-43fd-b471-43b6127ab2b3",
+    };
+
+    axios
+      .post(apiUrl, formData)
+      .then((res) => {
+        const pdfContent = atob(res.data.pdf_base64);
+        handleDownloadFile(pdfContent);
+      })
+      .catch((res) => {
+        // Notification.failed(res.response.data.message);
+      });
+  };
+
+  const handleDownloadFile = (pdfContent: string) => {
+    // Convert the decoded content to a Uint8Array
+    const pdfData = new Uint8Array(pdfContent.length);
+    for (let i = 0; i < pdfContent.length; i++) {
+      pdfData[i] = pdfContent.charCodeAt(i);
+    }
+
+    const pdfBlob = new Blob([pdfData], { type: "application/pdf" });
+
+    // Create a download link
+    const url = URL.createObjectURL(pdfBlob);
+
+    // Create an anchor element to trigger the download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "Receipt.pdf";
+
+    // Click the link to start the download
+    link.click();
+
+    // Clean up by revoking the object URL
+    URL.revokeObjectURL(url);
+  };
 
   if (bookingData) {
     return (

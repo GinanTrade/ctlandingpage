@@ -62,7 +62,7 @@ const textContent = [
     options: [
       { name: "FAQ", link: "/faq" },
       { name: "Divider", link: "" },
-      { name: "Stay Protocol", link: "" },
+      { name: "CSR", link: "/csr" },
       { name: "Divider", link: "" },
       { name: "Best Rate Guarantee", link: "" },
     ],

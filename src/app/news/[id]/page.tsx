@@ -8,7 +8,6 @@ import DetailedNewsContent from "@/components/news/detailed/DetailedNewsContent"
 import DetailedNewsHero from "@/components/news/detailed/DetailedNewsHero";
 import DetailedNewsIntro from "@/components/news/detailed/DetailedNewsIntro";
 import DetailedNewsOthers from "@/components/news/detailed/DetailedNewsOthers";
-import { STRAPI_BASE } from "@/constant/api";
 import { IArticle } from "@/models/Article";
 import { DynamicParams } from "@/models/NextJSDynamicParams";
 import { handleConvertArticle } from "@/utils/functions";
@@ -26,7 +25,7 @@ const DetailedArticlePage = ({ params: { id } }: DynamicParams) => {
   ];
 
   useEffect(() => {
-    const apiUrl = `${STRAPI_BASE}/api/articles/${id}?populate=*`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE}/api/articles/${id}?populate=*`;
 
     // setIsLoadingImage(true);
     axios

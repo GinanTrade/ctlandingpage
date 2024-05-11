@@ -411,7 +411,10 @@ const ContinueSection = (props: {
     >
       <Box display={"flex"} justifyContent={"end"} alignItems={"center"}>
         <Button
-          onClick={() => props.handleChangeStepper(5)}
+          onClick={() => {
+            props.handleChangeStepper(5);
+            window.scrollTo(0, 0);
+          }}
           sx={{
             padding: 0,
           }}
