@@ -138,7 +138,22 @@ const ScheduleSection = (props: {
             </Select>
           </Stack>
         </Stack>
-        <Box display={"flex"} marginTop={"120px"}>
+        <Box
+          display={"flex"}
+          marginTop={"120px"}
+          justifyContent={"space-between"}
+          width={isHandheldDevice ? "100%" : "800px"}
+        >
+          <Button onClick={() => props.handleChangeStepper(3)}>
+            <Image
+              src={IconArrowRight}
+              alt="CT-Right-Up"
+              style={{ transform: "rotate(180deg)" }}
+            />
+            <Typography variant="h4" marginLeft={3}>
+              Back
+            </Typography>
+          </Button>
           <Button onClick={() => props.handleChangeStepper(3)}>
             <Typography variant="h4" marginRight={3}>
               Next

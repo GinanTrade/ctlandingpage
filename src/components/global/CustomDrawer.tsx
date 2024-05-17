@@ -3,6 +3,7 @@ import {
   Button,
   Divider,
   Drawer,
+  Fade,
   Grid,
   IconButton,
   Slide,
@@ -112,9 +113,11 @@ const DesktopDrawer = (props: {
       bgcolor={theme.palette.CtColorScheme.blue800}
       overflow={"hidden"}
     >
-      <IconButton onClick={props.handleClose} sx={{ alignSelf: "end" }}>
-        <Image src={CloseIcon} alt="close-icon" />
-      </IconButton>
+      <Box display={"flex"} justifyContent={"flex-end"} width={"100%"}>
+        <IconButton onClick={props.handleClose}>
+          <Image src={CloseIcon} alt="close-icon" />
+        </IconButton>
+      </Box>
       <Grid container alignItems={"center"} height={"100%"}>
         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
           {hotels.map((terminal, index) => (
@@ -161,8 +164,7 @@ const DesktopDrawer = (props: {
               alt="capsule-transit"
               style={{ width: "70%", height: "auto", zIndex: 0 }}
             />
-            <Slide
-              direction={"up"}
+            <Fade
               in={props.hovered === "Airside"}
               mountOnEnter
               unmountOnExit
@@ -173,9 +175,8 @@ const DesktopDrawer = (props: {
                 alt="capsule-transit"
                 style={{ width: "70%", height: "auto", zIndex: 0 }}
               />
-            </Slide>
-            <Slide
-              direction={"up"}
+            </Fade>
+            <Fade
               in={props.hovered === "Landside"}
               mountOnEnter
               unmountOnExit
@@ -186,9 +187,8 @@ const DesktopDrawer = (props: {
                 alt="capsule-transit"
                 style={{ width: "70%", height: "auto", zIndex: 0 }}
               />
-            </Slide>
-            <Slide
-              direction={"up"}
+            </Fade>
+            <Fade
               in={props.hovered === "MAX"}
               mountOnEnter
               unmountOnExit
@@ -199,9 +199,8 @@ const DesktopDrawer = (props: {
                 alt="capsule-transit"
                 style={{ width: "70%", height: "auto", zIndex: 0 }}
               />
-            </Slide>
-            <Slide
-              direction={"up"}
+            </Fade>
+            <Fade
               in={props.hovered === "Sleep Lounge"}
               mountOnEnter
               unmountOnExit
@@ -212,7 +211,7 @@ const DesktopDrawer = (props: {
                 alt="capsule-transit"
                 style={{ width: "70%", height: "auto", zIndex: 0 }}
               />
-            </Slide>
+            </Fade>
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
@@ -322,7 +321,7 @@ const HandheldDrawer = (props: { handleClose: VoidFunction }) => {
         width={"100%"}
       >
         <Image src={CTIcon} alt="close-icon" />
-        <IconButton onClick={props.handleClose} sx={{ alignSelf: "end" }}>
+        <IconButton onClick={props.handleClose} sx={{ alignSelf: "flex-end" }}>
           <Image src={CloseIcon} alt="close-icon" />
         </IconButton>
       </Stack>

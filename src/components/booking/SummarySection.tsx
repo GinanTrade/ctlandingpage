@@ -261,9 +261,9 @@ const RoomBookingSection = (props: {
               <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
-                alignItems={"end"}
+                alignItems={"flex-end"}
               >
-                <Stack direction={"row"} alignItems={"end"} spacing={1}>
+                <Stack direction={"row"} alignItems={"flex-end"} spacing={1}>
                   <Typography variant="h5">RM{roomBooking.price}</Typography>
                   <Typography variant="subtitle2">
                     for {props.bookingSchedule.duration}h

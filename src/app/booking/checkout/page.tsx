@@ -12,12 +12,13 @@ const CheckOutPage = () => {
 
   const apiUrl = "https://payment.ipay88.com.my/epayment/entry.asp";
 
+  const bookingNo = searchParams.get("bookingNo");
   const amount = searchParams.get("amount");
   const refNo = searchParams.get("refNo");
   const userContact = searchParams.get("contact");
   const userEmail = searchParams.get("email");
   const userName = searchParams.get("name");
-  const hotelName = searchParams.get("lot");
+  const prodDesc = searchParams.get("prodDesc");
 
   const merchantCode = "M05633";
   const merchantKey = "aCngOtFUyu";
@@ -59,7 +60,15 @@ const CheckOutPage = () => {
   //     "https://capsuletransitprod.southeastasia.cloudapp.azure.com/api/v1/ipay88/manual-confirm/",
   // };
 
-  if (refNo && amount && userName && userEmail && userContact) {
+  if (
+    refNo &&
+    amount &&
+    userName &&
+    userEmail &&
+    userContact &&
+    bookingNo &&
+    prodDesc
+  ) {
     return (
       <>
         <div>Sending payment request to iPay88...</div>
@@ -73,15 +82,11 @@ const CheckOutPage = () => {
             value={Number(amount).toFixed(2)}
           />
           <input type="hidden" name="Currency" value={currency} />
-          <input
-            type="hidden"
-            name="ProdDesc"
-            value={`${hotelName} Capsule Transit`}
-          />
+          <input type="hidden" name="ProdDesc" value={prodDesc} />
           <input type="hidden" name="UserName" value={userName} />
           <input type="hidden" name="UserEmail" value={userEmail} />
           <input type="hidden" name="UserContact" value={userContact} />
-          {/* <input type="hidden" name="Remark" value="" /> */}
+          <input type="hidden" name="Remark" value={bookingNo} />
           <input type="hidden" name="Lang" value="UTF-8" />
           <input type="hidden" name="SignatureType" value="SHA256" />
           <input

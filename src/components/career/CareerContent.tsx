@@ -31,7 +31,7 @@ const CareerContent = () => {
         leftComponent={<Typography>Job Opening</Typography>}
         middleComponent={<Typography>CapsuleTransit</Typography>}
         rightComponent={
-          <Box display={"flex"} justifyContent={"end"}>
+          <Box display={"flex"} justifyContent={"flex-end"}>
             <Typography>{jobPositions.length} Positions</Typography>
           </Box>
         }
@@ -45,7 +45,7 @@ const CareerContent = () => {
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-          <Stack width={"100%"} alignItems={"end"}>
+          <Stack width={"100%"} alignItems={"flex-end"}>
             {jobPositions.map((job, index) => (
               <Stack
                 key={index}

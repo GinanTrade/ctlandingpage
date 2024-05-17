@@ -47,7 +47,12 @@ const CTDedication = () => {
 const DesktopView = (props: { handleCommitmentClick: VoidFunction }) => {
   return (
     <>
-      <Box display={"flex"} flexDirection={"column"} marginY={4} width={"50%"}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        marginY={4}
+        maxWidth={"900px"}
+      >
         <Typography variant="h3">{contentTexts[0].text}</Typography>
       </Box>
       <Box marginTop={10} marginBottom={"200px"}>
@@ -57,7 +62,7 @@ const DesktopView = (props: { handleCommitmentClick: VoidFunction }) => {
           variant="secondary"
         />
       </Box>
-      <Box display={"flex"} alignItems={"end"}>
+      <Box display={"flex"} alignItems={"flex-end"}>
         <Image
           src={IllustrationRestingLady}
           alt="cloud-man-walkin"
@@ -107,7 +112,7 @@ const HandheldView = (props: { handleCommitmentClick: VoidFunction }) => {
           variant="secondary"
         />
       </Box>
-      <Box display={"flex"} alignItems={"end"} width={"100%"}>
+      <Box display={"flex"} alignItems={"flex-end"} width={"100%"}>
         <Image
           src={IllustrationRestingLady}
           alt="cloud-man-walkin"

@@ -190,15 +190,13 @@ const KLIA2Hotels = (props: {
 
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
-    <Grid container direction={"row"} columnSpacing={3} rowSpacing={5}>
+    <Grid container direction={"row"} columnSpacing={"50px"} rowSpacing={5}>
       {terminal2Hotels.map((data, index) => (
         <Grid item key={index} xs={12} sm={12} md={4} lg={4} xl={4}>
-          {props.hovered === data.title &&
-          !isHandheldDevice &&
-          typeof data.backgroundUrl !== "string" ? (
+          {props.hovered === data.title && !isHandheldDevice ? (
             <Box
               width="100%"
-              height={isHandheldDevice ? "500px" : "700px"}
+              height={isHandheldDevice ? "500px" : "65vh"}
               display="flex"
               flexDirection={"column"}
               justifyContent="center"
@@ -292,16 +290,22 @@ const KLIA2Hotels = (props: {
           ) : (
             <Box
               width={"100%"}
-              height={isHandheldDevice ? "500px" : "700px"}
+              height={isHandheldDevice ? "500px" : "65vh"}
               onMouseOver={() => props.handleHoverImage(data.title)}
+              zIndex={1}
             >
               {typeof data.backgroundUrl === "string" ? (
                 <video
                   autoPlay
                   muted
                   loop
-                  playsInline
-                  style={{ width: "100%", height: "100%" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center",
+                    zIndex: props.hovered === data.title ? -100 : 1,
+                  }}
                 >
                   <source src={data.backgroundUrl} type="video/mp4" />
                 </video>

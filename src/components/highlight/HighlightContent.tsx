@@ -1,4 +1,11 @@
-import { Box, Grid, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import ContentWrapper from "../global/ContentWrapper";
 import HeaderBottom from "../global/HeaderBottom";
 import Image from "next/image";
@@ -36,11 +43,9 @@ const BestLocationSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>01</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container
@@ -67,15 +72,15 @@ const BestLocationSection = () => {
             </Typography>
             <Typography>
               In <b>KLIA Terminal 2,</b> we are located in 3 locations:
-              <ul style={{ marginTop: 0 }}>
-                <li>
-                  Airside at Satellite Building, International Departure Hall,
-                  Level 2 (towards Gate Q).
-                </li>
-                <li>Landside at gatewat@klia2, Level 1.</li>
-                <li>MAX at lorem ipsum.</li>
-              </ul>
             </Typography>
+            <ul style={{ marginTop: 0 }}>
+              <li>
+                Airside at Satellite Building, International Departure Hall,
+                Level 2 (towards Gate Q).
+              </li>
+              <li>Landside at gatewat@klia2, Level 1.</li>
+              <li>MAX at lorem ipsum.</li>
+            </ul>
           </Stack>
         </Grid>
       </Grid>
@@ -88,11 +93,9 @@ const FlexibleCheckInSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>02</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container
@@ -131,11 +134,9 @@ const BookByHoursSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>03</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container
@@ -177,11 +178,9 @@ const LuggageLockerSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>04</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container
@@ -196,11 +195,6 @@ const LuggageLockerSection = () => {
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
           <Box position={"relative"}>
             <Typography variant="h3">Luggage Storage Locker</Typography>
-            <Image
-              src={IllustrationStandaloneBook}
-              alt="stand-alone"
-              style={{ position: "absolute" }}
-            />
           </Box>
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
@@ -215,6 +209,22 @@ const LuggageLockerSection = () => {
               storage service too! Rent a locker from as low as RM30 and explore
               the airport unencumbered, knowing your luggage is safe with us.
             </Typography>
+            <Stack marginBottom={isHandheldDevice ? 0 : 2}>
+              <Divider
+                sx={{
+                  bgcolor: theme.palette.primary.main,
+                  height: "5px",
+                  marginBottom: 1,
+                }}
+              />
+              <Typography
+                variant="h6"
+                fontWeight={700}
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Available for Standalone Booking!
+              </Typography>
+            </Stack>
           </Stack>
         </Grid>
       </Grid>
@@ -227,11 +237,9 @@ const ShowerServiceSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>05</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container
@@ -245,16 +253,6 @@ const ShowerServiceSection = () => {
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
           <Box position={"relative"}>
-            <Image
-              src={IllustrationStandaloneBook}
-              alt="stand-alone"
-              style={{
-                position: "absolute",
-                bottom: 150,
-                right: 50,
-                transform: "rotate(20deg)",
-              }}
-            />
             <Typography variant="h3">Refreshing Shower Service</Typography>
           </Box>
         </Grid>
@@ -269,6 +267,22 @@ const ShowerServiceSection = () => {
               at just RM50 per use that comes with a temporary locker to store
               your luggage.
             </Typography>
+            <Stack marginBottom={isHandheldDevice ? 0 : 2}>
+              <Divider
+                sx={{
+                  bgcolor: theme.palette.primary.main,
+                  height: "5px",
+                  marginBottom: 1,
+                }}
+              />
+              <Typography
+                variant="h6"
+                fontWeight={700}
+                sx={{ color: theme.palette.primary.main }}
+              >
+                Available for Standalone Booking!
+              </Typography>
+            </Stack>
           </Stack>
         </Grid>
       </Grid>
@@ -281,11 +295,9 @@ const GenderSpecificSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>06</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container

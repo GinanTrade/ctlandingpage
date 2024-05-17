@@ -24,6 +24,7 @@ import axios from "axios";
 
 const BookingSuccessPage = () => {
   const { bookingData, setBookingData } = useBookingData();
+  console.log(bookingData);
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   const router = useRouter();
 
@@ -95,7 +96,7 @@ const BookingSuccessPage = () => {
             <ButtonBase onClick={() => router.push("/")}>
               <Box
                 display={"flex"}
-                justifyContent={"end"}
+                justifyContent={"flex-end"}
                 alignItems={"center"}
               >
                 <Image
@@ -152,7 +153,7 @@ const SummarySection = (props: { bookingData: IBookingInformation }) => {
       <Grid item xs={0} sm={0} md={0} lg={1} xl={1}>
         <Box
           display={"flex"}
-          justifyContent={"end"}
+          justifyContent={"flex-end"}
           alignItems={"center"}
           height={"100%"}
         >
@@ -194,7 +195,7 @@ const SummarySection = (props: { bookingData: IBookingInformation }) => {
       <Grid item xs={0} sm={0} md={0} lg={1} xl={1}>
         <Box
           display={"flex"}
-          justifyContent={"end"}
+          justifyContent={"flex-end"}
           alignItems={"center"}
           height={"100%"}
         >
@@ -234,6 +235,7 @@ const SummarySection = (props: { bookingData: IBookingInformation }) => {
 
 const SummaryContent = (props: { title: string; data: string | string[] }) => {
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  console.log(typeof props.data);
   if (!isHandheldDevice) {
     return (
       <Stack spacing={0.5} width={"100%"}>

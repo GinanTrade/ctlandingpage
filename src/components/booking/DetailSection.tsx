@@ -405,7 +405,11 @@ const ProceedPaymentSection = (props: {
               : theme.palette.CtColorScheme.grey100
           }
         >
-          <Box display={"flex"} justifyContent={"end"} alignItems={"center"}>
+          <Box
+            display={"flex"}
+            justifyContent={"flex-end"}
+            alignItems={"center"}
+          >
             <Typography variant="h4">All Good, Continue</Typography>
             <Image
               src={CTRight}

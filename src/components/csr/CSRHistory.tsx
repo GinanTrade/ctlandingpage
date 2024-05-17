@@ -39,7 +39,7 @@ const DesktopView = () => {
       >
         <Typography variant="h4">{contentTexts[1].text}</Typography>
       </Box>
-      <Box display={"flex"} alignItems={"end"}>
+      <Box display={"flex"} alignItems={"flex-end"}>
         <Image
           src={IllustrationCSR}
           alt="cloud-man-walkin"
@@ -65,7 +65,7 @@ const HandheldView = () => {
       <Box
         display={"flex"}
         justifyContent={"center"}
-        alignItems={"end"}
+        alignItems={"flex-end"}
         width={"100%"}
       >
         <Image

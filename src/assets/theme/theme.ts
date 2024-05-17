@@ -53,7 +53,13 @@ const theme = createTheme({
           borderRadius: 0,
           boxShadow: "none",
           textTransform: "none",
+          "&:hover": {
+            backgroundColor: "transparent",
+          },
         },
+      },
+      defaultProps: {
+        disableRipple: true,
       },
     },
   },
@@ -102,7 +108,7 @@ const theme = createTheme({
       },
     },
     h3: {
-      fontSize: "3.75rem",
+      fontSize: "3.25rem",
       fontWeight: 600,
       color: "#1A1A1a",
       "@media (max-width: 1050px)": {

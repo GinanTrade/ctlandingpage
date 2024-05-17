@@ -69,11 +69,7 @@ const CTButton = (props: {
             },
           }}
         >
-          <Typography
-            variant="button"
-            color={hovered && props.variant === "primary" ? "white" : "black"}
-            noWrap
-          >
+          <Typography variant="button" color={"white"} noWrap>
             {props.text}
           </Typography>
         </Box>

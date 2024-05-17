@@ -31,11 +31,16 @@ const DetailedNewsIntro = (props: {
       <Breadcrumbs separator={<KeyboardArrowRightIcon fontSize="small" />}>
         {props.breadCrumbsContent.map((content, index) => {
           return index !== props.breadCrumbsContent.length - 1 ? (
-            <Link underline="hover" color="inherit" href={content.url}>
+            <Link
+              key={index}
+              underline="hover"
+              color="inherit"
+              href={content.url}
+            >
               {content.name}
             </Link>
           ) : (
-            <Typography>{content.name}</Typography>
+            <Typography key={index}>{content.name}</Typography>
           );
         })}
       </Breadcrumbs>

@@ -28,9 +28,9 @@ const HotelOverview = (props: {
   return (
     <ContentWrapper noMarginTop>
       <HeaderBottom
-        leftComponent={<Typography>{props.header[0]}</Typography>}
-        middleComponent={<Typography>{props.header[1]}</Typography>}
-        rightComponent={<Typography>{props.header[2]}</Typography>}
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid
         container

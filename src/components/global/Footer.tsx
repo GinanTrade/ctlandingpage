@@ -109,7 +109,7 @@ const Footer = () => {
                   justifyContent={"space-between"}
                   alignItems={"center"}
                 >
-                  <Typography variant="h1" color={"primary"}>
+                  <Typography variant="h3" color={"primary"}>
                     {textContent[4].title}
                   </Typography>
                   <Image src={ArrowTopRight} alt="CT-Right-Up" />
@@ -260,7 +260,7 @@ const ShortcutSection = () => {
       <Stack
         direction={"row"}
         paddingRight={isHandheldDevice ? 0 : "50px"}
-        alignItems={"end"}
+        alignItems={"flex-end"}
         justifyContent={"space-between"}
       >
         <Image src={CTIconPrimary} alt={"ct-icon"} />

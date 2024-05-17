@@ -2,12 +2,12 @@
 
 import { useBookingData } from "@/context/BookingContext";
 import axios, { AxiosInstance, CancelToken, CancelTokenSource } from "axios";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const CheckBooking = () => {
   const { bookingData } = useBookingData();
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [cancelToken, setCancelToken] = useState<CancelTokenSource | null>(
@@ -67,7 +67,7 @@ const CheckBooking = () => {
         };
       }>(
         axios,
-        `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/check-booking-status?bookingId=${bookingData?.bookingNo}`,
+        `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/check-booking-status?bookingId=${bookingData?.bookingId}`,
         // `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/lot-info/1`,
         150, // Number of retries
         2000, // Timeout between retries in milliseconds
@@ -75,14 +75,12 @@ const CheckBooking = () => {
       );
 
       setIsLoading(false);
-      if (data.data.status === "Failed") {
-        //   Notification.failed("payment failed");
+      if (data.status === "Failed") {
         return;
       }
 
-      if (data.data.status === "Success") {
-        //   navigate("/pos");
-        //   Notification.success("payment success");
+      if (data.status === "success") {
+        router.push("/booking/success");
         return;
       }
     } catch (error: any) {

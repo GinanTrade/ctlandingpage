@@ -16,7 +16,6 @@ const MaxOverviewKLIA2 = () => {
       header={headerContent}
       content={textContent}
       image={MaxImage}
-      illus={IllusSVG}
     />
   );
 };

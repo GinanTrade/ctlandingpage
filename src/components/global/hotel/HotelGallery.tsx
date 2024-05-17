@@ -169,6 +169,7 @@ const HotelGallery = (props: {
           alignItems={"center"}
           maxWidth={"100%"}
           spacing={3}
+          paddingBottom={1}
           sx={{ overflowX: "auto", overflowY: "hidden" }}
         >
           {props.images
@@ -180,15 +181,14 @@ const HotelGallery = (props: {
               }
             })
             .map((image, index) => (
-              <Box key={index} width={"100%"} height={"80vh"}>
+              <Box key={index} width={"100%"} height={"50vh"}>
                 <Image
                   src={image.image}
                   alt={`airside-${index}`}
                   style={{
                     maxWidth: "600px",
-                    maxHeight: "100%",
                     width: "auto",
-                    height: "auto",
+                    height: "100%",
                     // width: "30vw",
                     // height: "100%",
                   }}

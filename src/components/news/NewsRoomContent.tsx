@@ -134,7 +134,7 @@ const NewsRoomContent = () => {
               </Stack>
             </Grid>
             <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>
-              <Box display={"flex"} justifyContent={"end"}>
+              <Box display={"flex"} justifyContent={"flex-end"}>
                 <Link
                   href={{
                     pathname: `/news/${article.id}`,

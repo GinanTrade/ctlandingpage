@@ -141,7 +141,7 @@ const PromotionSection = (props: {
               display="flex"
               bgcolor={theme.palette.primary.main}
               color={theme.palette.CtColorScheme.blue800}
-              alignSelf={"end"}
+              alignSelf={"flex-end"}
               marginLeft={1}
             >
               (<Check />) Code Applied!
@@ -151,7 +151,7 @@ const PromotionSection = (props: {
               <Box
                 display="flex"
                 color={theme.palette.CtColorScheme.pink300}
-                alignItems={"end"}
+                alignItems={"flex-end"}
                 marginLeft={1}
               >
                 (X) The code is not applicable.

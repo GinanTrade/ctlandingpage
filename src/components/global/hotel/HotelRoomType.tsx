@@ -38,7 +38,7 @@ const HotelRoomType = (props: {
           </Typography>
         }
         rightComponent={
-          <Stack direction={"row"} justifyContent={"end"} marginBottom={1}>
+          <Stack direction={"row"} justifyContent={"flex-end"} marginBottom={1}>
             {props.timeIcons.map((duration, index) => {
               return (
                 DurationIcons.duration(duration) !== "" && (

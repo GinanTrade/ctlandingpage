@@ -76,7 +76,7 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
         marginTop={4}
         marginBottom={"200px"}
       >
-        <Typography variant="body2" width={"48vw"}>
+        <Typography variant="body2" maxWidth={"800px"}>
           {textContents[2].text}
         </Typography>
         <Typography variant="body2" color={theme.palette.CtColorScheme.neon300}>
@@ -103,7 +103,7 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
       </Stack> */}
       <Box
         display={"flex"}
-        alignItems={"end"}
+        alignItems={"flex-end"}
         // position={"absolute"}
       >
         <Image
@@ -112,8 +112,6 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
           style={{
             position: "absolute",
             right: 100,
-            // transform: "scale(1)",
-            // marginRight: 30,
           }}
         />
       </Box>
@@ -172,7 +170,7 @@ const HandheldView = (props: { handleHighlightButtonPress: VoidFunction }) => {
         </Typography>
       </Box>
 
-      <Box display={"flex"} justifyContent={"end"} height={"300px"}>
+      <Box display={"flex"} justifyContent={"flex-end"} height={"300px"}>
         <Image
           src={IllustrationCloudMan}
           alt="cloud-man-walkin"

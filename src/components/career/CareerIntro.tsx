@@ -26,8 +26,8 @@ const CareerIntro = () => {
           <Box
             display={"flex"}
             height={"100%"}
-            justifyContent={"end"}
-            alignItems={"end"}
+            justifyContent={"flex-end"}
+            alignItems={"flex-end"}
           >
             <Stack width={"60%"} spacing={1}>
               <Typography>{textContent[2]}</Typography>

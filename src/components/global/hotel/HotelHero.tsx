@@ -44,7 +44,7 @@ const DesktopView = (props: {
         display="flex"
         height="100%"
         flexDirection="column"
-        justifyContent="end"
+        justifyContent="flex-end"
         width="50%"
         sx={{
           position: "absolute",
@@ -90,7 +90,7 @@ const HandheldView = (props: {
         display="flex"
         height="100%"
         flexDirection="column"
-        justifyContent="end"
+        justifyContent="flex-end"
         width="50%"
         sx={{
           position: "absolute",

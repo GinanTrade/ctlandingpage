@@ -33,12 +33,12 @@ const DesktopView = (props: {
       direction={"row"}
       width={"100%"}
       justifyContent={"space-between"}
-      alignItems={"end"}
+      alignItems={"flex-end"}
       borderBottom={1}
       marginBottom={props.marginBottom ? props.marginBottom : 8}
       paddingBottom={props.paddingBottom}
     >
-      <Typography variant="h3" width={"25%"}>
+      <Typography variant="h3" width={"400px"}>
         {props.title}
       </Typography>
       <Stack
@@ -68,9 +68,7 @@ const HandheldView = (props: {
       paddingBottom={2}
       spacing={4}
     >
-      <Typography variant="h3" maxWidth={"300px"}>
-        {props.title}
-      </Typography>
+      <Typography variant="h3">{props.title}</Typography>
       <Stack
         direction={"row"}
         alignItems={"center"}

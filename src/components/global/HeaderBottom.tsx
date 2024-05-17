@@ -42,7 +42,7 @@ const DesktopView = (props: {
         lg={4}
         xl={4}
         height={"20px"}
-        justifyContent={"end"}
+        justifyContent={"flex-end"}
       >
         {props.rightComponent}
       </Grid>
@@ -61,7 +61,7 @@ const HandheldView = (props: {
         {props.leftComponent}
       </Grid>
       <Grid item xs={8} sm={8} md={8} lg={4} xl={4} height={"20px"}>
-        <Stack spacing={1} width={"100%"} alignItems={"end"}>
+        <Stack spacing={1} width={"100%"} alignItems={"flex-end"}>
           {props.middleComponent}
           {props.rightComponent}
         </Stack>

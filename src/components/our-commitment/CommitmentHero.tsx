@@ -46,7 +46,7 @@ const DesktopView = () => {
           {textContent[2]}
         </Typography>
       </Box>
-      <Box display={"flex"} alignItems={"end"}>
+      <Box display={"flex"} alignItems={"flex-end"}>
         <Image
           src={IllustrationCommitment}
           alt="cloud-man-walkin"

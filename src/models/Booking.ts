@@ -108,6 +108,7 @@ export interface IRoomImages {
 
 export interface IPaymentTerminal {
   refNo: string;
+  bookingNo: string;
   amount: number;
   userName: string;
   userContact: string;
@@ -122,4 +123,5 @@ export interface IBookingInformation {
   selectedHotel: IBookingLocation;
   bookingSchedule: IBookingSchedule;
   bookingNo: string;
+  bookingId: string;
 }

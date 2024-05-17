@@ -36,11 +36,9 @@ const BestRateSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>01</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid container marginY={isHandheldDevice ? "100px" : 8}>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
@@ -130,11 +128,9 @@ const ContactlessServiceSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>02</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid container marginY={isHandheldDevice ? "100px" : 8}>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
@@ -165,11 +161,9 @@ const FlexibleCancellationSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>03</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid container marginY={isHandheldDevice ? "100px" : 8}>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
@@ -219,11 +213,9 @@ const CommitedCleanSection = () => {
   return (
     <>
       <HeaderBottom
-        leftComponent={<Typography>04</Typography>}
-        middleComponent={<Typography>{recurringTexts[0]}</Typography>}
-        rightComponent={
-          <Typography textAlign={"end"}>{recurringTexts[1]}</Typography>
-        }
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
       />
       <Grid container marginY={isHandheldDevice ? "100px" : 8}>
         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>

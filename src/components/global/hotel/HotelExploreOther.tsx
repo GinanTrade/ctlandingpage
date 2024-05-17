@@ -36,13 +36,13 @@ const HotelExploreOther = (props: { otherHotels: IOtherHotels[] }) => {
         <Grid
           container
           direction={"row"}
-          columnSpacing={3}
+          columnSpacing={"50px"}
           marginTop={"100px"}
           marginBottom={6}
         >
           {props.otherHotels.map((data, index) => (
             <Grid item key={index} xs={12} sm={12} md={4} lg={4} xl={4}>
-              <Box width={"100%"} height={"700px"}>
+              <Box width={"100%"} height={"65vh"}>
                 <Image
                   src={data.backgroundUrl}
                   alt={data.title}

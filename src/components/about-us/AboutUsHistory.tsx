@@ -63,7 +63,7 @@ const AboutUsHistory = () => {
           </Stack>
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6} xl={6}>
-          <Box display={"flex"} justifyContent={"end"}>
+          <Box display={"flex"} justifyContent={"flex-end"}>
             <Image
               src={AboutImage}
               alt="capsule-about"
@@ -118,7 +118,7 @@ const DesktopWhySoDrawer = (props: { handleClose: VoidFunction }) => {
   const theme = useTheme();
   return (
     <Box
-      alignSelf={"end"}
+      alignSelf={"flex-end"}
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
@@ -135,7 +135,7 @@ const DesktopWhySoDrawer = (props: { handleClose: VoidFunction }) => {
         direction={"row"}
         width={"100%"}
         justifyContent={"space-between"}
-        alignItems={"end"}
+        alignItems={"flex-end"}
         borderBottom={1}
         borderColor={theme.palette.CtColorScheme.white}
         marginBottom={10}
@@ -160,7 +160,7 @@ const DesktopWhySoDrawer = (props: { handleClose: VoidFunction }) => {
               width={"100%"}
               height={"100%"}
               justifyContent={"center"}
-              alignItems={"end"}
+              alignItems={"flex-end"}
             >
               <Image src={OurStoryIllustration} alt="our-story-illustration" />
             </Box>
@@ -235,7 +235,7 @@ const HandheldWhySoDrawer = (props: { handleClose: VoidFunction }) => {
   const theme = useTheme();
   return (
     <Box
-      alignSelf={"end"}
+      alignSelf={"flex-end"}
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
@@ -251,7 +251,7 @@ const HandheldWhySoDrawer = (props: { handleClose: VoidFunction }) => {
         direction={"row"}
         width={"100%"}
         justifyContent={"space-between"}
-        alignItems={"end"}
+        alignItems={"flex-end"}
         borderBottom={1}
         borderColor={theme.palette.CtColorScheme.white}
         marginBottom={10}
@@ -277,7 +277,7 @@ const HandheldWhySoDrawer = (props: { handleClose: VoidFunction }) => {
               height={"100%"}
               marginTop={4}
               justifyContent={"center"}
-              alignItems={"end"}
+              alignItems={"flex-end"}
             >
               <Image
                 src={OurStoryIllustration}

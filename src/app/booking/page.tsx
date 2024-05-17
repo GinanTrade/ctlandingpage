@@ -210,12 +210,23 @@ const BookingPage = () => {
     setPaymentInfo(paymentInfoObject);
   }, [roomBookings, taxPercentage, paymentInfo.promotion]);
 
+  const filterDuplicateCountries = (countries: ICountry[]): ICountry[] => {
+    const seen = new Set<string>();
+    return countries.filter((country) => {
+      const duplicate = seen.has(country.countryName);
+      seen.add(country.countryName);
+      return !duplicate;
+    });
+  };
+
   useEffect(() => {
     const fetchCountry = () => {
       axios
         .get(`${process.env.NEXT_PUBLIC_BASE_API}/guests/country`)
         .then((response) => {
-          const sortedCountry: ICountry[] = response.data.data
+          const sortedCountry: ICountry[] = filterDuplicateCountries(
+            response.data.data
+          )
             .sort((prev: ICountry, curr: ICountry) =>
               prev.countryName.localeCompare(curr.countryName)
             )
@@ -317,26 +328,36 @@ const BookingPage = () => {
           roomBookings: roomBookings,
           selectedHotel: selectedHotel,
           bookingSchedule: bookingSchedule,
-          bookingNo: result.data.data.bookingId,
+          bookingNo: result.data.data.bookingNo,
+          bookingId: result.data.data.bookingId,
         };
 
         setBookingData(tempBookingData);
 
         const iPay88Data: IPaymentTerminal = {
           amount: paymentInfo.debitAmount,
-          refNo: tempBookingData.bookingNo,
+          refNo: tempBookingData.bookingId,
+          bookingNo: tempBookingData.bookingNo,
           userContact: formik.values.phone,
           userEmail: formik.values.email,
           userName: formik.values.firstName + " " + formik.values.lastName,
           lot: selectedHotel.hotelName,
         };
 
+        const roomDescriptions = roomBookings.map(formatRoomBooking).join(", ");
+
+        const productDescription = `${iPay88Data.lot} Capsule Transit: ${roomDescriptions}`;
+
         router.push(
-          `/booking/checkout?refNo=${iPay88Data.refNo}&amount=${iPay88Data.amount}&contact=${iPay88Data.userContact}&email=${iPay88Data.userEmail}&name=${iPay88Data.userName}&lot=${iPay88Data.lot}`
+          `/booking/checkout?refNo=${iPay88Data.refNo}&bookingNo=${iPay88Data.bookingNo}&amount=${iPay88Data.amount}&contact=${iPay88Data.userContact}&email=${iPay88Data.userEmail}&name=${iPay88Data.userName}&prodDesc=${productDescription}`
         );
       });
     }
   };
+
+  function formatRoomBooking(roomBooking: IRoomBooking): string {
+    return `${roomBooking.quantity}x ${roomBooking.roomType}`;
+  }
 
   return (
     <Box
@@ -432,7 +453,7 @@ const BookingHeader = () => {
         display={"flex"}
         width={"33%"}
         height={"100%"}
-        justifyContent={"end"}
+        justifyContent={"flex-end"}
         alignItems={"center"}
       >
         <IconButton onClick={() => router.back()} sx={{ alignSelf: "end" }}>
@@ -507,7 +528,8 @@ const BookingStepper = (props: {
       width={"100%"}
       justifyContent={"center"}
       alignItems={"center"}
-      paddingY={3}
+      paddingTop={3}
+      paddingBottom={3}
       spacing={isHandheldDevice ? 0 : 5}
       borderBottom={2}
     >

@@ -23,7 +23,7 @@ import { IBookingLocation } from "@/models/Booking";
 
 import T1Icon from "./images/Icons/t1-icon.svg";
 import T2Icon from "./images/Icons/t2-icon.svg";
-import TrainBusIcon from "./images/Icons/train-bus-icon.svg";
+import TrainBusGIF from "./images/CT-transport.gif";
 
 import Terminal1DetailedIcon from "./images/Icons/terminal-1-detailed-icon.svg";
 import Terminal1DetailedIconHovered from "./images/Icons/terminal-1-detailed-icon-hover.svg";
@@ -149,7 +149,7 @@ const StaySectionHome = (props: {
 }) => {
   const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
-  const isSmallDevice = useMediaQuery("(max-width:400px)");
+  const isSmallDevice = useMediaQuery("(max-width:500px)");
 
   const [informationHovered, setInformationHovered] = useState<boolean>(false);
   return (
@@ -208,12 +208,12 @@ const StaySectionHome = (props: {
           onMouseLeave={() => setInformationHovered(false)}
         >
           <Image
-            src={TrainBusIcon}
+            src={TrainBusGIF}
             alt="transit-icon"
             style={{
               marginBottom: "50px",
               objectFit: "contain",
-              width: isHandheldDevice ? 200 : "100%",
+              width: isSmallDevice ? 150 : isHandheldDevice ? 200 : "100%",
               height: "auto",
             }}
           />

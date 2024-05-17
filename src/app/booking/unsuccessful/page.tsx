@@ -63,7 +63,11 @@ const BookingUnsuccessfulPage = () => {
             <Typography textAlign={"center"}>{textContent[1]}</Typography>
           </Stack>
           <ButtonBase onClick={() => router.push("/")} sx={{ marginTop: 6 }}>
-            <Box display={"flex"} justifyContent={"end"} alignItems={"center"}>
+            <Box
+              display={"flex"}
+              justifyContent={"flex-end"}
+              alignItems={"center"}
+            >
               <Image
                 src={CTRight}
                 alt="CT-Right-Up"
