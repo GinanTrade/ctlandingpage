@@ -157,6 +157,8 @@ const theme = createTheme({
       fontWeight: 600,
       "@media (max-width: 1050px)": {
         fontSize: "2.125rem", // Adjust font size for mobile
+        color: "#1A1A1A",
+        fontWeight: 600,
       },
     },
     caption: {

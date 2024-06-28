@@ -10,21 +10,21 @@ const title = "Explore other stays";
 const otherHotels: IOtherHotels[] = [
   {
     title: "Capsule Transit Airside",
-    location: "KLIA Terminal 2, Public Area",
+    location: "KLIA Terminal 2, Restricted Area",
     backgroundUrl: AirSideImage,
-    url: "klia-2/airside",
+    url: "/klia-2/airside",
   },
   {
     title: "Capsule Transit Landside",
     location: "KLIA Terminal 2, Public Area",
     backgroundUrl: LandSideImage,
-    url: "klia-2/landside",
+    url: "/klia-2/landside",
   },
   {
     title: "Capsule Transit Sleep Lounge",
     location: "KLIA Terminal 1, Public Area",
     backgroundUrl: SleepLoungeImage,
-    url: "klia-1/sleep-lounge",
+    url: "/klia-1/sleep-lounge",
   },
 ];
 

@@ -40,7 +40,7 @@ const DesktopView = () => {
         <Typography variant={"h2"} color={theme.palette.CtColorScheme.white}>
           {textContent[0]}
         </Typography>
-        <div
+        {/* <div
           style={{
             display: "inline-block",
           }}
@@ -53,7 +53,7 @@ const DesktopView = () => {
           >
             {textContent[1]} <b>{textContent[2]}</b>
           </Typography>
-        </div>
+        </div> */}
       </Stack>
     </Box>
   );
@@ -88,7 +88,7 @@ const HandheldView = () => {
         <Typography variant={"h2"} color={theme.palette.CtColorScheme.white}>
           {textContent[0]}
         </Typography>
-        <div
+        {/* <div
           style={{
             display: "inline-block",
           }}
@@ -101,7 +101,7 @@ const HandheldView = () => {
           >
             {textContent[1]} <b>{textContent[2]}</b>
           </Typography>
-        </div>
+        </div> */}
       </Stack>
     </Box>
   );

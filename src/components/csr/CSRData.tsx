@@ -1,3 +1,4 @@
+import { APIHeader } from "@/api/Header";
 import { displayThousands } from "@/utils/functions";
 import { Grid, Stack, Typography } from "@mui/material";
 import axios from "axios";
@@ -15,7 +16,7 @@ const CSRData = () => {
     const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BASE}/api/csr-number`;
 
     axios
-      .get(apiUrl)
+      .get(apiUrl, APIHeader)
       .then((response) => {
         const data = response.data.data.attributes;
         const convertedData = {

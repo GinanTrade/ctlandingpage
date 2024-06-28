@@ -29,20 +29,14 @@ const DesktopView = () => {
         alignItems={"center"}
         marginTop={"200px"}
       >
-        <div
-          style={{
-            display: "inline-block",
-          }}
+        <Typography
+          variant="h6"
+          display="inline"
+          padding="5px"
+          fontWeight={700}
         >
-          <Typography
-            variant="h6"
-            display="inline"
-            bgcolor={theme.palette.primary.main}
-            padding="5px"
-          >
-            <b>{textContent[1]}</b> {textContent[2]}
-          </Typography>
-        </div>
+          {textContent[1]} {textContent[2]}
+        </Typography>
         <Typography
           variant={"h2"}
           color={"black"}
@@ -84,20 +78,14 @@ const HandheldView = () => {
         alignItems={"center"}
         marginTop={"120px"}
       >
-        <div
-          style={{
-            display: "inline-block",
-          }}
+        <Typography
+          variant="h6"
+          display="inline"
+          padding="5px"
+          fontWeight={700}
         >
-          <Typography
-            variant="h6"
-            display="inline"
-            bgcolor={theme.palette.primary.main}
-            padding="5px"
-          >
-            <b>{textContent[1]}</b> {textContent[2]}
-          </Typography>
-        </div>
+          {textContent[1]} {textContent[2]}
+        </Typography>
         <Typography
           fontSize={"46px"}
           fontWeight={700}

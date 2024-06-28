@@ -20,9 +20,9 @@ const DesktopView = () => {
   const theme = useTheme();
   return (
     <Box
-      marginBottom={"100px"}
+      // marginBottom={"100px"}
       width={"100%"}
-      sx={{ position: "relative", height: "83vh" }}
+      sx={{ position: "relative", height: "100vh" }}
     >
       <Image
         src={HeroBackground}
@@ -72,13 +72,14 @@ const HandheldView = () => {
     <Box
       marginBottom={"100px"}
       width={"100%"}
-      sx={{ position: "relative", height: "83vh" }}
+      sx={{ position: "relative", height: "100vh" }}
     >
       <Image
         src={HeroBackground}
         alt="CapsuleHero"
         layout="fill"
         objectPosition="center"
+        objectFit="cover"
       />
       <Box
         display={"flex"}

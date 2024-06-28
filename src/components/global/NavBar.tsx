@@ -100,22 +100,22 @@ const DesktopView = (props: {
       }
     >
       <Stack direction={"row"} spacing={3} width={"33%"}>
-        <IconButton onClick={props.handleOpenDrawer}>
+        <Button onClick={props.handleOpenDrawer} sx={{ boxShadow: "none" }}>
           <Image
             src={OpenDrawerIcon}
             alt="drawer-open"
             width={30}
             height={30}
           />
-        </IconButton>
+        </Button>
 
         <Button onClick={() => router.push("/klia-1")}>KLIA Terminal 1</Button>
         <Button onClick={() => router.push("/klia-2")}>KLIA Terminal 2</Button>
       </Stack>
       <Box display={"flex"} width={"33%"} justifyContent={"center"}>
-        <IconButton onClick={() => router.push("/")}>
+        <Button onClick={() => router.push("/")}>
           <Image src={CTLogo} alt="CapsuleTransit-Logo" />
-        </IconButton>
+        </Button>
       </Box>
       <Stack
         direction={"row"}

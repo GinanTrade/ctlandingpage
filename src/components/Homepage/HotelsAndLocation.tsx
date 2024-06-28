@@ -5,6 +5,8 @@ import {
   Divider,
   Grid,
   IconButton,
+  MenuItem,
+  Select,
   Stack,
   Typography,
   useMediaQuery,
@@ -31,6 +33,7 @@ import CTMaxIcon from "./images/logo-display-capsuletransitMAX@2x.png";
 import IconArrowLeft from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import LocationIcon from "@/assets/icons/general/icon-location-grey.svg";
 import { daDK } from "@mui/x-date-pickers/locales";
+import { useRouter } from "next/navigation";
 
 const textContent = [
   { title: "Our Hotels and Locations" },
@@ -45,6 +48,7 @@ const terminal1Hotels = {
   logo: PublicAreaIcon,
   description:
     "Lorem ipsum dolor sit amet, consectetuer adipis cing elit, sed diam nonummy nibh euismod tinci dunt ut laoreet dolore.",
+  link: "/klia-1/sleep-lounge",
   features: [
     featuresEnum.amMin3Hour,
     featuresEnum.pmMin6Hour,
@@ -61,10 +65,11 @@ const terminal2Hotels = [
   {
     title: "Capsule Transit Airside",
     location: "KLIA Terminal 2, Restricted Area",
-    backgroundUrl: "/videos/list-klia2-airside.mp4",
+    backgroundUrl: AirsideImage,
     logo: RestrictedAreaIcon,
     description:
       "For early flights, Late arrivals, Missed flights or last minute flight cancellations.",
+    link: "/klia-2/airside",
     features: [
       featuresEnum.OneHourStay,
       featuresEnum.ThreeHourStay,
@@ -87,6 +92,7 @@ const terminal2Hotels = [
       "Suitable for transiting within KLIA2 International Departure area.",
     backgroundUrl: LandSideImage,
     logo: PublicAreaIcon,
+    link: "/klia-2/landside",
     features: [
       featuresEnum.ThreeHourStay,
       featuresEnum.SixHourStay,
@@ -111,6 +117,7 @@ const terminal2Hotels = [
       "For those who prefers more of everything. Privacy. Space. En-suite bathroom.",
     backgroundUrl: MaxImage,
     logo: CTMaxIcon,
+    link: "/klia-2/max",
     features: [
       featuresEnum.SixHourStay,
       featuresEnum.TwelveHourStay,
@@ -128,10 +135,17 @@ const terminal2Hotels = [
   },
 ];
 
+enum kliaTerminals {
+  klia1 = "klia1",
+  klia2 = "klia2",
+}
+
 const HotelAndLocation = () => {
   const theme = useTheme();
 
-  const [KLIA2Selected, setKLIA2Selected] = useState<boolean>(true);
+  const [KLIA2Selected, setKLIA2Selected] = useState<string>(
+    kliaTerminals.klia2
+  );
 
   const [hovered, setHovered] = useState<string>("");
 
@@ -144,7 +158,7 @@ const HotelAndLocation = () => {
   return (
     <ContentWrapper>
       <HeaderTop title={textContent[0].title}>
-        <Stack
+        {/* <Stack
           direction={"row"}
           spacing={2}
           justifyContent={isHandheldDevice ? "space-between" : "start"}
@@ -171,9 +185,32 @@ const HotelAndLocation = () => {
               <Image src={EyeIcon} alt={"eye-icon"} style={{ marginLeft: 5 }} />
             )}
           </Button>
-        </Stack>
+        </Stack> */}
+        <Select
+          size="small"
+          value={KLIA2Selected}
+          onChange={(event) => setKLIA2Selected(event.target.value)}
+          startAdornment={
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              marginX={1}
+            >
+              <Image
+                src={LocationIcon}
+                alt="location-icon"
+                style={{ marginLeft: 1, marginRight: 1 }}
+              />
+            </Box>
+          }
+          sx={{ borderRadius: 0 }}
+        >
+          <MenuItem value={kliaTerminals.klia1}>KLIA Terminal 1</MenuItem>
+          <MenuItem value={kliaTerminals.klia2}>KLIA Terminal 2</MenuItem>
+        </Select>
       </HeaderTop>
-      {KLIA2Selected ? (
+      {KLIA2Selected === kliaTerminals.klia2 ? (
         <KLIA2Hotels hovered={hovered} handleHoverImage={handleHoverImage} />
       ) : (
         <KLIA1Hotels hovered={hovered} handleHoverImage={handleHoverImage} />
@@ -187,12 +224,23 @@ const KLIA2Hotels = (props: {
   handleHoverImage: (data: string) => void;
 }) => {
   const theme = useTheme();
+  const router = useRouter();
 
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
     <Grid container direction={"row"} columnSpacing={"50px"} rowSpacing={5}>
       {terminal2Hotels.map((data, index) => (
-        <Grid item key={index} xs={12} sm={12} md={4} lg={4} xl={4}>
+        <Grid
+          item
+          key={index}
+          xs={12}
+          sm={12}
+          md={4}
+          lg={4}
+          xl={4}
+          onMouseOver={() => props.handleHoverImage(data.title)}
+          onMouseOut={() => props.handleHoverImage("")}
+        >
           {props.hovered === data.title && !isHandheldDevice ? (
             <Box
               width="100%"
@@ -291,7 +339,6 @@ const KLIA2Hotels = (props: {
             <Box
               width={"100%"}
               height={isHandheldDevice ? "500px" : "65vh"}
-              onMouseOver={() => props.handleHoverImage(data.title)}
               zIndex={1}
             >
               {typeof data.backgroundUrl === "string" ? (
@@ -334,7 +381,12 @@ const KLIA2Hotels = (props: {
             <Typography variant="h4" width={"50%"}>
               {data.title}
             </Typography>
-            <IconButton sx={{ transform: "scaleX(-1)" }}>
+            <IconButton
+              onClick={() => {
+                router.push(data.link);
+              }}
+              sx={{ transform: "scaleX(-1)" }}
+            >
               <Image
                 src={IconArrowLeft}
                 alt="arrow-left"
@@ -385,15 +437,25 @@ const KLIA1Hotels = (props: {
   handleHoverImage: (data: string) => void;
 }) => {
   const theme = useTheme();
+  const router = useRouter();
 
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
     <Grid container direction={"row"} columnSpacing={3}>
-      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={4}
+        lg={4}
+        xl={4}
+        onMouseOver={() => props.handleHoverImage(terminal1Hotels.title)}
+        onMouseOut={() => props.handleHoverImage("")}
+      >
         {props.hovered === terminal1Hotels.title ? (
           <Box
             width="100%"
-            height={isHandheldDevice ? "500px" : "700px"}
+            height={isHandheldDevice ? "500px" : "65vh"}
             display="flex"
             flexDirection={"column"}
             justifyContent="center"
@@ -485,11 +547,7 @@ const KLIA1Hotels = (props: {
             </Stack>
           </Box>
         ) : (
-          <Box
-            width={"100%"}
-            height={isHandheldDevice ? "500px" : "700px"}
-            onMouseOver={() => props.handleHoverImage(terminal1Hotels.title)}
-          >
+          <Box width={"100%"} height={isHandheldDevice ? "500px" : "65vh"}>
             <Image
               src={terminal1Hotels.backgroundUrl}
               alt={terminal1Hotels.title}
@@ -512,7 +570,10 @@ const KLIA1Hotels = (props: {
           <Typography variant="h4" width={"50%"}>
             {terminal1Hotels.title}
           </Typography>
-          <IconButton sx={{ transform: "scaleX(-1)" }}>
+          <IconButton
+            onClick={() => router.push(terminal1Hotels.link)}
+            sx={{ transform: "scaleX(-1)" }}
+          >
             <Image
               src={IconArrowLeft}
               alt="arrow-left"
@@ -555,7 +616,7 @@ const KLIA1Hotels = (props: {
       </Grid>
       {!isHandheldDevice && (
         <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-          <Box width={"100%"} height={"700px"}>
+          <Box width={"100%"} height={"65vh"}>
             <Image
               src={SleepLoungImage}
               alt={"capsule-transit-sleep-lounge"}

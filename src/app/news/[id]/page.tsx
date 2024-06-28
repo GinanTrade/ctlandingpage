@@ -1,5 +1,6 @@
 "use client";
 
+import { APIHeader } from "@/api/Header";
 import ContentWrapper from "@/components/global/ContentWrapper";
 import Footer from "@/components/global/Footer";
 import NavBar from "@/components/global/NavBar";
@@ -29,7 +30,7 @@ const DetailedArticlePage = ({ params: { id } }: DynamicParams) => {
 
     // setIsLoadingImage(true);
     axios
-      .get(apiUrl)
+      .get(apiUrl, APIHeader)
       .then((response) => {
         const data = response.data.data;
 

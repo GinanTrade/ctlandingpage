@@ -77,6 +77,9 @@ const BookingPage = () => {
   const [countries, setCountries] = useState<ICountry[]>([]);
 
   const [consentSigned, setConsentSigned] = useState<boolean>(false);
+
+  const [csrfToken, setCsrfToken] = useState<string>("");
+
   const handleConsentSignChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -141,7 +144,11 @@ const BookingPage = () => {
     if (selectedRoom && selectedRoom.quantity > 1) {
       setRoomBookings([
         ...filteredRoomBookings,
-        { ...selectedRoom, quantity: selectedRoom.quantity - 1 },
+        {
+          ...selectedRoom,
+          quantity: selectedRoom.quantity - 1,
+          sum: selectedRoom.sum - selectedRoom.price,
+        },
       ]);
     } else {
       setRoomBookings(filteredRoomBookings);
@@ -164,6 +171,8 @@ const BookingPage = () => {
       (total, curr) => (total = total + curr.price * curr.quantity),
       0
     );
+
+    sum = parseFloat(sum.toFixed(2));
 
     const sumBeforeDiscount = sum;
 
@@ -230,10 +239,25 @@ const BookingPage = () => {
             .sort((prev: ICountry, curr: ICountry) =>
               prev.countryName.localeCompare(curr.countryName)
             )
-            .sort((prev: ICountry, curr: ICountry) =>
-              prev.favorite === curr.favorite ? 0 : prev.favorite ? -1 : 1
-            );
+            // .sort((prev: ICountry, curr: ICountry) =>
+            //   prev.favorite === curr.favorite ? 0 : prev.favorite ? -1 : 1
+            // )
+            .sort((prev: ICountry, curr: ICountry) => {
+              if (prev.countryName === "Malaysia") {
+                return -1; // 'Malaysia' comes before all other countries
+              } else if (curr.countryName === "Malaysia") {
+                return 1; // 'Malaysia' comes before all other countries
+              } else {
+                return 0; // Maintain the existing order for other countries
+              }
+            });
           setCountries(sortedCountry);
+
+          const malaysia = sortedCountry.filter(
+            (country) => country.countryName.toLowerCase() === "malaysia"
+          );
+
+          formik.setFieldValue("nationality", malaysia[0].countryName);
         });
     };
 
@@ -272,6 +296,21 @@ const BookingPage = () => {
         .catch((error) => console.error(error));
     }
   }, [selectedHotel.hotelName]);
+
+  useEffect(() => {
+    const fetchCSRFToken = () => {
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/csrf/generate-csrf-token/`
+        )
+        .then((response) => {
+          setCsrfToken(response.data.csrfToken);
+          // document.cookie = `csrfToken=${response.data.csrfToken}`;
+        });
+    };
+
+    fetchCSRFToken();
+  }, []);
 
   const formik: FormikProps<IGuestDetail> = useFormik({
     initialValues: GuestDetailInitial,
@@ -321,37 +360,61 @@ const BookingPage = () => {
         gender: formik.values.gender,
       };
 
-      axios.post(apiUrl, formData).then((result) => {
-        const tempBookingData: IBookingInformation = {
-          guestDetail: formik.values,
-          payment: paymentInfo,
-          roomBookings: roomBookings,
-          selectedHotel: selectedHotel,
-          bookingSchedule: bookingSchedule,
-          bookingNo: result.data.data.bookingNo,
-          bookingId: result.data.data.bookingId,
-        };
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/csrf/generate-csrf-token/`,
+          { withCredentials: true }
+        )
+        .then((response) => {
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/booking/`,
+              formData,
+              {
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                  "X-CSRFToken": response.data.csrfToken,
+                  Cookie: `csrftoken=${response.data.csrfToken}`,
+                },
+                withCredentials: true,
+              }
+            )
+            .then((result) => {
+              const tempBookingData = {
+                guestDetail: formik.values,
+                payment: paymentInfo,
+                roomBookings: roomBookings,
+                selectedHotel: selectedHotel,
+                bookingSchedule: bookingSchedule,
+                bookingNo: result.data.data.bookingNo,
+                bookingId: result.data.data.bookingId,
+              };
 
-        setBookingData(tempBookingData);
+              setBookingData(tempBookingData);
 
-        const iPay88Data: IPaymentTerminal = {
-          amount: paymentInfo.debitAmount,
-          refNo: tempBookingData.bookingId,
-          bookingNo: tempBookingData.bookingNo,
-          userContact: formik.values.phone,
-          userEmail: formik.values.email,
-          userName: formik.values.firstName + " " + formik.values.lastName,
-          lot: selectedHotel.hotelName,
-        };
+              const iPay88Data = {
+                amount: paymentInfo.debitAmount,
+                refNo: tempBookingData.bookingId,
+                bookingNo: tempBookingData.bookingNo,
+                userContact: formik.values.phone,
+                userEmail: formik.values.email,
+                userName:
+                  formik.values.firstName + " " + formik.values.lastName,
+                lot: selectedHotel.hotelName,
+              };
 
-        const roomDescriptions = roomBookings.map(formatRoomBooking).join(", ");
+              const roomDescriptions = roomBookings
+                .map(formatRoomBooking)
+                .join(", ");
 
-        const productDescription = `${iPay88Data.lot} Capsule Transit: ${roomDescriptions}`;
+              const productDescription = `${iPay88Data.lot} Capsule Transit: ${roomDescriptions}`;
 
-        router.push(
-          `/booking/checkout?refNo=${iPay88Data.refNo}&bookingNo=${iPay88Data.bookingNo}&amount=${iPay88Data.amount}&contact=${iPay88Data.userContact}&email=${iPay88Data.userEmail}&name=${iPay88Data.userName}&prodDesc=${productDescription}`
-        );
-      });
+              router.push(
+                `/booking/checkout?refNo=${iPay88Data.refNo}&bookingNo=${iPay88Data.bookingNo}&amount=${iPay88Data.amount}&contact=${iPay88Data.userContact}&email=${iPay88Data.userEmail}&name=${iPay88Data.userName}&prodDesc=${productDescription}`
+              );
+            });
+        });
     }
   };
 
@@ -379,6 +442,7 @@ const BookingPage = () => {
       ) : stepper === 2 ? (
         <ScheduleSection
           bookingSchedule={bookingSchedule}
+          bookingLocation={selectedHotel}
           handleChangeDatePromotion={handleChangeDatePromotion}
           handleChangeStepper={handleChangeStepper}
           handleEmptyRoomBooking={handleEmptyRoomBooking}
@@ -457,7 +521,7 @@ const BookingHeader = () => {
         alignItems={"center"}
       >
         <IconButton onClick={() => router.back()} sx={{ alignSelf: "end" }}>
-          <Image src={CloseIcon} alt="close-icon" />
+          <Image src={CloseIcon} alt="close-icon" width={35} height={35} />
         </IconButton>
       </Box>
     </Box>

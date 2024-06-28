@@ -1,4 +1,4 @@
-import { IBookingSchedule } from "@/models/Booking";
+import { IBookingLocation, IBookingSchedule } from "@/models/Booking";
 import {
   Box,
   Button,
@@ -14,6 +14,7 @@ import {
   DatePicker,
   LocalizationProvider,
   TimePicker,
+  multiSectionDigitalClockSectionClasses,
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
@@ -25,6 +26,7 @@ const title = "When would you like to check in?";
 const durations = [3, 6, 12, 24];
 
 const ScheduleSection = (props: {
+  bookingLocation: IBookingLocation;
   bookingSchedule: IBookingSchedule;
   handleChangeDatePromotion: (value: IBookingSchedule) => void;
   handleChangeStepper: (value: number) => void;
@@ -32,6 +34,8 @@ const ScheduleSection = (props: {
 }) => {
   const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+
+  const currentDateTime = new Date();
 
   const handleDateOnChange = (date: Date): void => {
     const newValue = { ...props.bookingSchedule, date: date };
@@ -71,7 +75,7 @@ const ScheduleSection = (props: {
             flexDirection={"column"}
             justifyContent={"center"}
             width={isHandheldDevice ? "100%" : "350px"}
-            height={isHandheldDevice ? "100px" : "400px"}
+            height={isHandheldDevice ? "100px" : "300px"}
             spacing={2}
           >
             <Typography fontWeight={"600"}>Date</Typography>
@@ -81,6 +85,7 @@ const ScheduleSection = (props: {
               slots={{
                 openPickerIcon: ArrowDropDownIcon,
               }}
+              minDate={currentDateTime}
               sx={{ fontWeight: 600 }}
             />
           </Stack>
@@ -88,25 +93,41 @@ const ScheduleSection = (props: {
             flexDirection={"column"}
             justifyContent={"center"}
             width={isHandheldDevice ? "100%" : "350px"}
-            height={isHandheldDevice ? "100px" : "400px"}
+            height={isHandheldDevice ? "100px" : "300px"}
             spacing={2}
           >
             <Typography fontWeight={"600"}>Time</Typography>
             <TimePicker
               value={props.bookingSchedule.date}
               onChange={(newValue) => handleDateOnChange(newValue as Date)}
-              format={"hh:mm a"}
+              format={"HH:mm"}
+              ampm={false}
               slots={{
                 openPickerIcon: ArrowDropDownIcon,
               }}
-              sx={{ fontWeight: 600 }}
+              minTime={currentDateTime}
+              slotProps={{
+                layout: {
+                  sx: {
+                    [`.${multiSectionDigitalClockSectionClasses.root}:after`]: {
+                      display: "none",
+                    },
+                  },
+                },
+              }}
+              sx={{
+                fontWeight: 600,
+                "&::after": {
+                  display: "none", // Hide the ::after pseudo-element if it's causing issues
+                },
+              }}
             />
           </Stack>
           <Stack
             flexDirection={"column"}
             justifyContent={"center"}
             width={isHandheldDevice ? "100%" : "350px"}
-            height={isHandheldDevice ? "100px" : "400px"}
+            height={isHandheldDevice ? "100px" : "300px"}
             spacing={2}
           >
             <Typography fontWeight={"600"}>Duration</Typography>
@@ -140,11 +161,11 @@ const ScheduleSection = (props: {
         </Stack>
         <Box
           display={"flex"}
-          marginTop={"120px"}
+          marginTop={"80px"}
           justifyContent={"space-between"}
           width={isHandheldDevice ? "100%" : "800px"}
         >
-          <Button onClick={() => props.handleChangeStepper(3)}>
+          <Button onClick={() => props.handleChangeStepper(1)}>
             <Image
               src={IconArrowRight}
               alt="CT-Right-Up"

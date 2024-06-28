@@ -283,11 +283,11 @@ const GuestDetailForm = (props: {
             Phone Number
           </Typography>
           <TextField
-            variant="outlined"
+            // variant="outlined"
             onChange={props.formik.handleChange}
             value={props.formik.values.phone}
             name="phone"
-            // sx={textFieldProps}
+            sx={textFieldProps}
           />
           {/* <MuiPhoneNumber
             defaultCountry="my"
@@ -361,9 +361,9 @@ const DetailPageFooter = (props: {
             value={props.consentSigned}
             onChange={props.handleConsentSignChange}
             sx={{
-              color: theme.palette.CtColorScheme.yellow500,
+              color: theme.palette.CtColorScheme.pink300,
               "&.Mui-checked": {
-                color: theme.palette.CtColorScheme.yellow500,
+                color: theme.palette.CtColorScheme.pink300,
               },
               "&.MuiCheckbox-root": {
                 padding: 0,

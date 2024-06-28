@@ -27,7 +27,7 @@ import HotelGallery, {
 } from "../global/hotel/HotelGallery";
 0;
 
-const textContents = ["Have a Glance", "Grid", "List"];
+const textContents = ["At a Glance", "Grid", "List"];
 
 const AirsideImages: IHotelGalleryImages[] = [
   { image: Airside1, category: "Female Only Zone" },

@@ -11,6 +11,7 @@ import CTButton from "../global/CTButton";
 import Image from "next/image";
 
 import IllustrationCloudMan from "./images/illus-travel-guy.svg";
+import { useRouter } from "next/navigation";
 
 const textContents = [
   { text: "Welcome to" },
@@ -34,10 +35,13 @@ const gridContents = [
 
 const CTIntroduction = () => {
   const theme = useTheme();
+  const router = useRouter();
 
   const handleKLIA1ButtonPress = () => {};
   const handleKLIA2ButtonPress = () => {};
-  const handleHighlightButtonPress = () => {};
+  const handleHighlightButtonPress = () => {
+    router.push("/highlight");
+  };
 
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
@@ -58,7 +62,7 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
       <Stack
         direction={"row"}
         padding={"5px"}
-        bgcolor={theme.palette.CtColorScheme.neon200}
+        // bgcolor={theme.palette.CtColorScheme.neon200}
         spacing={1}
         marginY={2}
         display={"inline-flex"}

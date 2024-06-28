@@ -28,7 +28,7 @@ const DesktopView = (props: {
 }) => {
   return (
     <Grid container borderTop={1} height={"20px"} paddingY={2}>
-      <Grid item xs={4} sm={4} md={4} lg={4} xl={4} height={"20px"}>
+      {/* <Grid item xs={4} sm={4} md={4} lg={4} xl={4} height={"20px"}>
         {props.leftComponent}
       </Grid>
       <Grid item xs={4} sm={4} md={4} lg={4} xl={4} height={"20px"}>
@@ -45,7 +45,7 @@ const DesktopView = (props: {
         justifyContent={"flex-end"}
       >
         {props.rightComponent}
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

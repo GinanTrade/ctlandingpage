@@ -14,6 +14,7 @@ const ImageFooter = () => {
           maxHeight: "600px",
           width: "100%",
           height: "auto",
+          objectFit: "cover",
         }}
       />
     </Box>

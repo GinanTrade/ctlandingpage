@@ -25,6 +25,7 @@ import { handleConvertArticle } from "@/utils/functions";
 import { IArticle } from "@/models/Article";
 import { format } from "date-fns";
 import Link from "next/link";
+import { APIHeader } from "@/api/Header";
 
 const contents = [
   {
@@ -79,7 +80,7 @@ const NewsRoomContent = () => {
 
     // setIsLoadingImage(true);
     axios
-      .get(apiUrl)
+      .get(apiUrl, APIHeader)
       .then((response) => {
         const data = response.data.data;
 

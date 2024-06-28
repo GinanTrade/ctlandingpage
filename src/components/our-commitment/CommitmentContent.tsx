@@ -22,7 +22,7 @@ const CommitmentContent = () => {
       <ContentWrapper noMarginTop>
         <BestRateSection />
         <ContactlessServiceSection />
-        <FlexibleCancellationSection />
+        {/* <FlexibleCancellationSection /> */}
         <CommitedCleanSection />
       </ContentWrapper>
       <Footer />
@@ -155,57 +155,57 @@ const ContactlessServiceSection = () => {
   );
 };
 
-const FlexibleCancellationSection = () => {
-  const theme = useTheme();
-  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
-  return (
-    <>
-      <HeaderBottom
-        leftComponent={<></>}
-        middleComponent={<></>}
-        rightComponent={<></>}
-      />
-      <Grid container marginY={isHandheldDevice ? "100px" : 8}>
-        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
-          <Typography variant="h3" maxWidth={"300px"} marginBottom={3}>
-            Flexible Cancellation
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
-          <Stack spacing={3} maxWidth={"1000px"}>
-            <Typography>
-              When you book directly through our website, you get to enjoy
-              flexible cancellation privileges, which allow you to cancel your
-              booking up to 1 day before your arrival.{" "}
-              <b>No cancellation fees</b>.
-            </Typography>
-            <Typography variant="h6" fontWeight={600}>
-              Flight Cancellation
-            </Typography>
-            <Typography>
-              If your flight has been cancelled by the airline, you can email
-              and submit to us the supporting document to be entitled for the
-              free cancellation.
-            </Typography>
-            <Stack>
-              <Typography>Alternatively, you may choose to:</Typography>
-              <Typography>
-                <b>Option 1:</b> Convert your stay to CapsuleCredits
-              </Typography>
-              <Typography>
-                <b>Option 2:</b> Keep your booking(s) up to a 12-month period.
-              </Typography>
-            </Stack>
-            <Typography>
-              For more cancellation related queries, kindly visit our FAR -
-              Cancellation.
-            </Typography>
-          </Stack>
-        </Grid>
-      </Grid>
-    </>
-  );
-};
+// const FlexibleCancellationSection = () => {
+//   const theme = useTheme();
+//   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+//   return (
+//     <>
+//       <HeaderBottom
+//         leftComponent={<></>}
+//         middleComponent={<></>}
+//         rightComponent={<></>}
+//       />
+//       <Grid container marginY={isHandheldDevice ? "100px" : 8}>
+//         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+//           <Typography variant="h3" maxWidth={"300px"} marginBottom={3}>
+//             Flexible Cancellation
+//           </Typography>
+//         </Grid>
+//         <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+//           <Stack spacing={3} maxWidth={"1000px"}>
+//             <Typography>
+//               When you book directly through our website, you get to enjoy
+//               flexible cancellation privileges, which allow you to cancel your
+//               booking up to 1 day before your arrival.{" "}
+//               <b>No cancellation fees</b>.
+//             </Typography>
+//             <Typography variant="h6" fontWeight={600}>
+//               Flight Cancellation
+//             </Typography>
+//             <Typography>
+//               If your flight has been cancelled by the airline, you can email
+//               and submit to us the supporting document to be entitled for the
+//               free cancellation.
+//             </Typography>
+//             <Stack>
+//               <Typography>Alternatively, you may choose to:</Typography>
+//               <Typography>
+//                 <b>Option 1:</b> Convert your stay to CapsuleCredits
+//               </Typography>
+//               <Typography>
+//                 <b>Option 2:</b> Keep your booking(s) up to a 12-month period.
+//               </Typography>
+//             </Stack>
+//             <Typography>
+//               For more cancellation related queries, kindly visit our FAR -
+//               Cancellation.
+//             </Typography>
+//           </Stack>
+//         </Grid>
+//       </Grid>
+//     </>
+//   );
+// };
 
 const CommitedCleanSection = () => {
   const theme = useTheme();
@@ -243,7 +243,7 @@ const CommitedCleanSection = () => {
             >
               <ol>
                 <li>
-                  We record all of our crew&apos; health conditions and
+                  We record all of our crew&apos;s health conditions and
                   temperature daily.
                 </li>
                 <li>

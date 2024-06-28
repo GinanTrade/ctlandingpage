@@ -205,7 +205,6 @@ const StaySectionHome = (props: {
           justifyContent={"center"}
           alignItems={"center"}
           width={"30%"}
-          onMouseLeave={() => setInformationHovered(false)}
         >
           <Image
             src={TrainBusGIF}
@@ -217,26 +216,34 @@ const StaySectionHome = (props: {
               height: "auto",
             }}
           />
-          <Box onMouseEnter={() => setInformationHovered(true)}>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            onMouseEnter={() => setInformationHovered(true)}
+            onMouseLeave={() => setInformationHovered(false)}
+            justifyContent={"center"}
+            alignItems={"center"}
+          >
             {informationHovered ? (
-              <Help color="primary" />
-            ) : (
               <HelpOutline color="primary" />
+            ) : (
+              <Help color="primary" />
+            )}
+            {informationHovered && (
+              <Box
+                position={"fixed"}
+                marginTop={"20vh"}
+                display={"flex"}
+                border={1}
+                width={"300px"}
+                bgcolor={theme.palette.primary.main}
+                padding={2}
+                zIndex={10}
+              >
+                {informationText}
+              </Box>
             )}
           </Box>
-          {informationHovered && (
-            <Box
-              position={"fixed"}
-              display={"flex"}
-              border={1}
-              width={"300px"}
-              bgcolor={theme.palette.primary.main}
-              padding={2}
-              zIndex={10}
-            >
-              {informationText}
-            </Box>
-          )}
         </Box>
         <Box
           display={"flex"}

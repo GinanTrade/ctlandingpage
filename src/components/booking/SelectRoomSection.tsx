@@ -34,6 +34,7 @@ import FemaleSingleImage from "../landside/images/room-single-female@2x.jpg";
 import CTRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { APIHeader } from "@/api/Header";
 const title = "Select Your Room";
 
 const sampleHotel = [
@@ -92,6 +93,7 @@ const SelectRoomSection = (props: {
 const BookingSummary = (props: {
   selectedHotel: IBookingLocation;
   bookingSchedule: IBookingSchedule;
+  handleChangeStepper: (value: number) => void;
 }) => {
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
@@ -154,7 +156,13 @@ const BookingSummary = (props: {
             justifyContent={"flex-end"}
             alignItems={"center"}
           >
-            <CTButton onClick={() => {}} text="Change" variant="secondary" />
+            <CTButton
+              onClick={() => {
+                props.handleChangeStepper(2);
+              }}
+              text="Change"
+              variant="secondary"
+            />
           </Box>
         </Grid>
       </Grid>
@@ -236,7 +244,7 @@ const RoomTypesContent = (props: {
 
     setIsLoadingImage(true);
     axios
-      .get(apiUrl)
+      .get(apiUrl, APIHeader)
       .then((response) => {
         const data = response.data.data;
 
@@ -320,13 +328,18 @@ const RoomTypesContent = (props: {
                       <img
                         src={room.imageUrl}
                         alt={room.name}
-                        style={{ width: "100%", height: 550 }}
+                        style={{
+                          width: "100%",
+                          height: 550,
+                          objectFit: "cover",
+                        }}
                       />
                     ) : (
                       <Box bgcolor={"grey"} width={"100%"} height={550} />
                     )}
                     <Typography variant="h6" fontWeight={700} marginTop={2}>
-                      {room.name} {room.zone ? `(${room.zone})` : ""}
+                      {room.name}
+                      {/* {room.zone ? `(${room.zone})` : ""} */}
                     </Typography>
                     <Stack direction={"row"} spacing={1} marginTop={1}>
                       <Typography color={theme.palette.CtColorScheme.grey400}>

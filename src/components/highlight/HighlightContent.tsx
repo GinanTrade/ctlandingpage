@@ -215,6 +215,7 @@ const LuggageLockerSection = () => {
                   bgcolor: theme.palette.primary.main,
                   height: "5px",
                   marginBottom: 1,
+                  border: 0,
                 }}
               />
               <Typography
@@ -273,6 +274,7 @@ const ShowerServiceSection = () => {
                   bgcolor: theme.palette.primary.main,
                   height: "5px",
                   marginBottom: 1,
+                  border: 0,
                 }}
               />
               <Typography

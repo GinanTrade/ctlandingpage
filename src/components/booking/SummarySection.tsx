@@ -58,7 +58,7 @@ const SummarySection = (props: {
         <SummaryHeader {...props} />
         <RoomBookingSection {...props} />
         <FacilitiesSection {...props} />
-        <AddRoomsSection {...props} />
+        {/* <AddRoomsSection {...props} /> */}
         <PaymentOverview {...props} />
         <PaymentPolicySection />
         <ImportantInformationSection />
@@ -72,6 +72,7 @@ const SummaryHeader = (props: {
   selectedHotel: IBookingLocation;
   bookingSchedule: IBookingSchedule;
   roomBookings: IRoomBooking[];
+  handleChangeStepper: (value: number) => void;
 }) => {
   const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
@@ -163,11 +164,17 @@ const SummaryHeader = (props: {
         <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>
           <Box
             display={"flex"}
-            justifyContent={"center"}
+            justifyContent={"end"}
             alignItems={"center"}
             height={"100%"}
           >
-            <CTButton onClick={() => {}} text="Change" variant="secondary" />
+            <CTButton
+              onClick={() => {
+                props.handleChangeStepper(2);
+              }}
+              text="Change"
+              variant="secondary"
+            />
           </Box>
         </Grid>
       </Grid>
@@ -233,11 +240,18 @@ const RoomBookingSection = (props: {
               <Stack>
                 <Stack direction={"row"} justifyContent={"space-between"}>
                   <Typography variant="h6" fontWeight={700}>
-                    {roomBooking.roomType} {`(${roomBooking.zone})`}
+                    {roomBooking.roomType}
+                    {/* {`(${roomBooking.zone})`} */}
                   </Typography>
                   <Button
                     onClick={() => {
                       props.handleChangeStepper(3);
+                    }}
+                    sx={{
+                      padding: 0,
+                      textAlign: "end",
+                      width: "auto",
+                      minWidth: "auto",
                     }}
                   >
                     Edit

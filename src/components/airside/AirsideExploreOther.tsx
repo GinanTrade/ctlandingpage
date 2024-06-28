@@ -12,19 +12,19 @@ const otherHotels: IOtherHotels[] = [
     title: "Capsule Transit Landside",
     location: "KLIA Terminal 2, Public Area",
     backgroundUrl: LandSideImage,
-    url: "klia-2/landside",
+    url: "/klia-2/landside",
   },
   {
     title: "Capsule Transit MAX",
     location: "KLIA Terminal 2, Public Area",
     backgroundUrl: MaxImage,
-    url: "klia-2/max",
+    url: "/klia-2/max",
   },
   {
     title: "Capsule Transit Sleep Lounge",
     location: "KLIA Terminal 1, Public Area",
     backgroundUrl: SleepLoungeImage,
-    url: "klia-1/sleep-lounge",
+    url: "/klia-1/sleep-lounge",
   },
 ];
 

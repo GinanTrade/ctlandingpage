@@ -10,6 +10,7 @@ import {
   EmailOutlined,
   MapOutlined,
 } from "@mui/icons-material";
+import { APIHeader } from "@/api/Header";
 
 const ContactUsContent = () => {
   const [hotelContact, setHotelContact] = useState<IContactUs[]>([]);
@@ -20,7 +21,7 @@ const ContactUsContent = () => {
 
     // setIsLoadingImage(true);
     axios
-      .get(apiUrl)
+      .get(apiUrl, APIHeader)
       .then((response) => {
         const data = response.data.data;
 

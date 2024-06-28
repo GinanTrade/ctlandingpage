@@ -7,6 +7,8 @@ import {
   FormControlLabel,
   FormGroup,
   Grid,
+  MenuItem,
+  Select,
   Stack,
   Typography,
   useMediaQuery,
@@ -38,41 +40,64 @@ const HotelGallery = (props: {
     <ContentWrapper>
       <HeaderTop title={props.textContents[0]} marginBottom={3}>
         {!isHandheldDevice && (
-          <>
-            <Button
-              onClick={() => setImageDisplay(props.textContents[1])}
-              sx={{
-                color: imageDisplay === props.textContents[2] ? "black" : "",
-              }}
-            >
+          // <>
+          //   <Button
+          //     onClick={() => setImageDisplay(props.textContents[1])}
+          //     sx={{
+          //       color: imageDisplay === props.textContents[2] ? "black" : "",
+          //     }}
+          //   >
+          //     {props.textContents[1]}
+          //     {imageDisplay === props.textContents[2] && (
+          //       <Image
+          //         src={EyeIcon}
+          //         alt={"eye-icon"}
+          //         style={{ marginLeft: 5 }}
+          //       />
+          //     )}
+          //   </Button>
+          //   <Typography variant="h6" color={"grey"}>
+          //     /
+          //   </Typography>
+          //   <Button
+          //     onClick={() => setImageDisplay(props.textContents[2])}
+          //     sx={{
+          //       color: imageDisplay === props.textContents[1] ? "black" : "",
+          //     }}
+          //   >
+          //     {props.textContents[2]}
+          //     {imageDisplay === props.textContents[1] && (
+          //       <Image
+          //         src={EyeIcon}
+          //         alt={"eye-icon"}
+          //         style={{ marginLeft: 5 }}
+          //       />
+          //     )}
+          //   </Button>
+          // </>
+          <Select
+            size="small"
+            value={imageDisplay}
+            onChange={(event) => setImageDisplay(event.target.value)}
+            startAdornment={
+              <Box
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                marginX={1}
+              >
+                <Image src={EyeIcon} alt="eye-icon" />
+              </Box>
+            }
+            sx={{ borderRadius: 0 }}
+          >
+            <MenuItem value={props.textContents[1]}>
               {props.textContents[1]}
-              {imageDisplay === props.textContents[2] && (
-                <Image
-                  src={EyeIcon}
-                  alt={"eye-icon"}
-                  style={{ marginLeft: 5 }}
-                />
-              )}
-            </Button>
-            <Typography variant="h6" color={"grey"}>
-              /
-            </Typography>
-            <Button
-              onClick={() => setImageDisplay(props.textContents[2])}
-              sx={{
-                color: imageDisplay === props.textContents[1] ? "black" : "",
-              }}
-            >
+            </MenuItem>
+            <MenuItem value={props.textContents[2]}>
               {props.textContents[2]}
-              {imageDisplay === props.textContents[1] && (
-                <Image
-                  src={EyeIcon}
-                  alt={"eye-icon"}
-                  style={{ marginLeft: 5 }}
-                />
-              )}
-            </Button>
-          </>
+            </MenuItem>
+          </Select>
         )}
       </HeaderTop>
       <FormGroup row sx={{ marginBottom: 5 }}>

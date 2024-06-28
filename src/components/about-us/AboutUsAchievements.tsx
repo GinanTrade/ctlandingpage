@@ -19,10 +19,10 @@ const content = {
         "Every year, we welcome over 50,000 travellers from around the globe to KLIA, offering them a comfortable and convenient stay experience.",
     },
     {
-      highlight: "04",
-      highlightDescription: "Outlets",
+      highlight: "4",
+      highlightDescription: "Hotels",
       paragraph:
-        "We currently have 4 outlets located in KLIA Terminal 1 and Terminal 2, and we strive to bring more accessibility and experience in the coming years.",
+        "We currently have 4 hotels located in KLIA Terminal 1 and Terminal 2, and we strive to bring more accessibility and experience in the coming years.",
     },
     {
       highlight: "10",
@@ -32,7 +32,7 @@ const content = {
     },
     {
       highlight: "24/7",
-      highlightDescription: "Every Day, Every Time",
+      highlightDescription: "All day, Every Day",
       paragraph:
         "We provide round-the-clock service every day of the year, so that our guests can rely on us for a restful stay no matter what time they arrive.",
     },

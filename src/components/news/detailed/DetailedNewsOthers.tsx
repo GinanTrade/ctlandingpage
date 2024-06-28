@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import IconArrowLeft from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import Image from "next/image";
 import { format } from "date-fns";
+import { APIHeader } from "@/api/Header";
 
 const DetailedNewsOthers = (props: { id: number }) => {
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
@@ -28,7 +29,7 @@ const DetailedNewsOthers = (props: { id: number }) => {
 
     // setIsLoadingImage(true);
     axios
-      .get(apiUrl)
+      .get(apiUrl, APIHeader)
       .then((response) => {
         const data = response.data.data;
 

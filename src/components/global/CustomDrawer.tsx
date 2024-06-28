@@ -13,6 +13,9 @@ import {
   useTheme,
 } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
+import { Instagram } from "@mui/icons-material";
+import { useRouter } from "next/navigation";
 
 import CloseIcon from "@/assets/icons/general/icon-menu-close.svg";
 import CTIcon from "@/assets/icons/general/LogoPrimary.svg";
@@ -21,9 +24,10 @@ import DrawerAirside from "@/assets/images/drawer/menu-airside_2x.png";
 import DrawerLandside from "@/assets/images/drawer/menu-landside_2x.png";
 import DrawerMAX from "@/assets/images/drawer/menu-max_2x.png";
 import DrawerSleepLounge from "@/assets/images/drawer/menu-sleeplounge_2x.png";
-import { useState } from "react";
-import { Instagram } from "@mui/icons-material";
-import { useRouter } from "next/navigation";
+import FacebookIcon from "@/assets/icons/social-media/icon-facebook.svg";
+import InstagramIcon from "@/assets/icons/social-media/icon-instagram.svg";
+import LinkedInIcon from "@/assets/icons/social-media/icon-linkedin.svg";
+import TiktokIcon from "@/assets/icons/social-media/icon-tiktok.svg";
 
 const hotels = [
   {
@@ -45,15 +49,34 @@ const rightSection = {
   links: [
     { title: "About Us", url: "/about-us" },
     { title: "Capsule Highlight", url: "/highlight" },
-    { title: "Out Commitment", url: "/our-commitment" },
+    { title: "Our Commitment", url: "/our-commitment" },
     { title: "Newsroom", url: "/news" },
     { title: "divider", url: "/" },
     { title: "FAQ", url: "/faq" },
     { title: "CSR", url: "/csr" },
     { title: "Best Rate Guarantee", url: "/" },
-    { title: "Instagram", url: "/" },
+    { title: "Social Media", url: "/" },
   ],
 };
+
+const socialMedias = [
+  {
+    icon: InstagramIcon,
+    link: "https://www.instagram.com/capsule.transit/",
+  },
+  {
+    icon: TiktokIcon,
+    link: "https://www.tiktok.com/@capsuletransit",
+  },
+  {
+    icon: FacebookIcon,
+    link: "https://www.facebook.com/capsuletransit/",
+  },
+  {
+    icon: LinkedInIcon,
+    link: "https://www.linkedin.com/company/capsule-hotel-group/?originalSubdomain=my",
+  },
+];
 
 const CustomDrawer = (props: { open: boolean; handleClose: VoidFunction }) => {
   const theme = useTheme();
@@ -115,7 +138,7 @@ const DesktopDrawer = (props: {
     >
       <Box display={"flex"} justifyContent={"flex-end"} width={"100%"}>
         <IconButton onClick={props.handleClose}>
-          <Image src={CloseIcon} alt="close-icon" />
+          <Image src={CloseIcon} alt="close-icon" width={35} height={35} />
         </IconButton>
       </Box>
       <Grid container alignItems={"center"} height={"100%"}>
@@ -267,13 +290,26 @@ const DesktopDrawer = (props: {
                         marginTop: 1,
                       }}
                     />
-                  ) : link.title === "Instagram" ? (
-                    <IconButton
-                      onClick={() => router.push(link.url)}
-                      sx={{ padding: 0, color: "white" }}
+                  ) : link.title === "Social Media" ? (
+                    <Stack
+                      key={index}
+                      direction={"row"}
+                      spacing={3}
+                      paddingTop={1}
                     >
-                      <Instagram />
-                    </IconButton>
+                      {socialMedias.map((socialMedia, index1) => (
+                        <IconButton
+                          key={index1}
+                          onClick={() => router.push(socialMedia.link)}
+                          sx={{ padding: 0 }}
+                        >
+                          <Image
+                            src={socialMedia.icon}
+                            alt={socialMedia.link}
+                          />
+                        </IconButton>
+                      ))}
+                    </Stack>
                   ) : (
                     <Button
                       onClick={() => router.push(link.url)}

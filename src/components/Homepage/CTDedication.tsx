@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, useMediaQuery } from "@mui/material";
+import { Box, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import ContentWrapper from "../global/ContentWrapper";
 import CTButton from "../global/CTButton";
 import Image from "next/image";
@@ -12,11 +12,19 @@ import ETBIcon from "./images/featured_on/logo-featured-etb-bw@2x.png";
 import TV3Icon from "./images/featured_on/logo-featured-tv3-bw@2x.png";
 import BernamaIcon from "./images/featured_on/logo-featured-bernama-bw@2x.png";
 import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react";
+import styles from "./HighlightedText.module.css";
+import { useRouter } from "next/navigation";
 
-const contentTexts = [
-  {
-    text: "We ensure the best experience for our guests with our best rate guarantee, contactless services, flexible cancellation, and dedication to cleanliness.",
-  },
+const contentTexts = {
+  text: "We ensure the best experience for our guests with ",
+};
+
+const items = [
+  "our best rate guarantee",
+  "contactless services",
+  "flexible cancellation",
+  "dedication to cleanliness",
 ];
 
 const featuredOn = [
@@ -31,29 +39,97 @@ const featuredOn = [
 const staticText = ["Featured On"];
 
 const CTDedication = () => {
-  const handleCommitmentClick = () => {};
+  const router = useRouter();
+  const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+
+  const highlightColor = theme.palette.primary.main;
+  const defaultColor = theme.palette.CtColorScheme.black800;
+
+  const [count, setCount] = useState<number>(0);
+  const [updateCount, setUpdateCount] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+      setUpdateCount((prevUpdateCount) => prevUpdateCount + 1);
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (updateCount > 0 && updateCount % 4 === 0) {
+      setCount(0);
+      setUpdateCount(0);
+    }
+  }, [updateCount]);
+
+  const handleCommitmentClick = () => {
+    router.push("/our-commitment");
+  };
+
   return (
     <ContentWrapper>
       {!isHandheldDevice ? (
-        <DesktopView handleCommitmentClick={handleCommitmentClick} />
+        <DesktopView
+          handleCommitmentClick={handleCommitmentClick}
+          count={count}
+          defaultColor={defaultColor}
+          highlightColor={highlightColor}
+        />
       ) : (
-        <HandheldView handleCommitmentClick={handleCommitmentClick} />
+        <HandheldView
+          handleCommitmentClick={handleCommitmentClick}
+          count={count}
+          defaultColor={defaultColor}
+          highlightColor={highlightColor}
+        />
       )}
     </ContentWrapper>
   );
 };
 
-const DesktopView = (props: { handleCommitmentClick: VoidFunction }) => {
+const DesktopView = (props: {
+  handleCommitmentClick: VoidFunction;
+  count: number;
+  highlightColor: string;
+  defaultColor: string;
+}) => {
   return (
     <>
       <Box
         display={"flex"}
         flexDirection={"column"}
-        marginY={4}
-        maxWidth={"900px"}
+        marginTop={2}
+        maxWidth={"780px"}
       >
-        <Typography variant="h3">{contentTexts[0].text}</Typography>
+        <Typography variant="h3">
+          {contentTexts.text}{" "}
+          {items.map((item, index) => (
+            <React.Fragment key={index}>
+              <span
+                className={
+                  props.count === index
+                    ? styles.easeOutAnimation
+                    : props.count - 1 === index ||
+                      (props.count === 0 && index === items.length - 1)
+                    ? styles.easeInAnimation
+                    : ""
+                }
+                style={
+                  {
+                    "--highlight-color": props.highlightColor,
+                    "--default-color": props.defaultColor,
+                  } as React.CSSProperties
+                }
+              >
+                {item}
+              </span>
+              {index < items.length - 1 ? ", " : "."}
+            </React.Fragment>
+          ))}
+        </Typography>
       </Box>
       <Box marginTop={10} marginBottom={"200px"}>
         <CTButton
@@ -72,7 +148,8 @@ const DesktopView = (props: { handleCommitmentClick: VoidFunction }) => {
           }}
         />
       </Box>
-      <Grid
+      <Box borderBottom={1}></Box>
+      {/* <Grid
         container
         borderTop={1}
         borderBottom={1}
@@ -84,26 +161,64 @@ const DesktopView = (props: { handleCommitmentClick: VoidFunction }) => {
         </Grid>
         {featuredOn.map((icon, index) => (
           <Grid item key={index} xs={6} sm={6} md={1.5} lg={1.5} xl={1.5}>
-            <Image
-              src={icon}
-              alt={"featured-on"}
-              style={{
-                height: "50px",
-                width: "80px",
-              }}
-            />
+            <Box
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <Image
+                src={icon}
+                alt={"featured-on"}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "60px",
+                  width: "auto",
+                  height: "auto",
+                }}
+              />
+            </Box>
           </Grid>
         ))}
-      </Grid>
+      </Grid> */}
     </>
   );
 };
 
-const HandheldView = (props: { handleCommitmentClick: VoidFunction }) => {
+const HandheldView = (props: {
+  handleCommitmentClick: VoidFunction;
+  count: number;
+  highlightColor: string;
+  defaultColor: string;
+}) => {
   return (
     <>
       <Box display={"flex"} flexDirection={"column"} marginY={4} width={"100%"}>
-        <Typography variant="h3">{contentTexts[0].text}</Typography>
+        <Typography variant="h3">
+          {contentTexts.text}{" "}
+          {items.map((item, index) => (
+            <React.Fragment key={index}>
+              <span
+                className={
+                  props.count === index
+                    ? styles.easeOutAnimation
+                    : props.count - 1 === index ||
+                      (props.count === 0 && index === items.length - 1)
+                    ? styles.easeInAnimation
+                    : ""
+                }
+                style={
+                  {
+                    "--highlight-color": props.highlightColor,
+                    "--default-color": props.defaultColor,
+                  } as React.CSSProperties
+                }
+              >
+                {item}
+              </span>
+              {index < items.length - 1 ? ", " : "."}
+            </React.Fragment>
+          ))}
+        </Typography>
       </Box>
       <Box marginTop={10} marginBottom={"100px"}>
         <CTButton
@@ -119,7 +234,7 @@ const HandheldView = (props: { handleCommitmentClick: VoidFunction }) => {
           style={{ width: "100%", height: "auto" }}
         />
       </Box>
-      <Grid
+      {/* <Grid
         container
         borderTop={1}
         borderBottom={1}
@@ -217,7 +332,7 @@ const HandheldView = (props: { handleCommitmentClick: VoidFunction }) => {
             </motion.div>
           </div>
         </Grid>
-      </Grid>
+      </Grid> */}
     </>
   );
 };

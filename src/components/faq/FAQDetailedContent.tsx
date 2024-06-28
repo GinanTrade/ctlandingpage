@@ -92,19 +92,7 @@ const FAQDetailedContent = (props: { faqTitle: string }) => {
                   {qna.question}
                 </Typography>
               </AccordionSummary>
-              <AccordionDetails>
-                {qna.answer.map((answer, answerSummaryIndex) =>
-                  typeof answer === "object" ? (
-                    <ul key={answerSummaryIndex}>
-                      {answer.map((answerList, answerDetailedIndex) => (
-                        <li key={answerDetailedIndex}>{answerList}</li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <Typography key={answerSummaryIndex}>{answer}</Typography>
-                  )
-                )}
-              </AccordionDetails>
+              <AccordionDetails>{qna.answer}</AccordionDetails>
             </Accordion>
           ))}
         </Grid>
