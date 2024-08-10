@@ -402,7 +402,8 @@ const BookingPage = () => {
           const iPay88Data = {
             amount: paymentInfo.debitAmount,
             refNo: tempBookingData.bookingId,
-            bookingNo: `${tempBookingData.bookingNo} -> Check In Date: ${singaporeTime}`,
+            // bookingNo: `${tempBookingData.bookingNo} -> Check In Date: ${singaporeTime}`,
+            bookingNo: tempBookingData.bookingNo,
             userContact: formik.values.phone,
             userEmail: formik.values.email,
             userName: formik.values.firstName + " " + formik.values.lastName,
