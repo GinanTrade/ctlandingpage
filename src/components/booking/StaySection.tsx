@@ -8,6 +8,7 @@ import {
   Divider,
   IconButton,
   Stack,
+  TextField,
   Typography,
   useMediaQuery,
   useTheme,
@@ -409,6 +410,12 @@ const KLIAStaySection = (props: {
       <UnavailableBookingDialog
         open={unavailableDialogOpen}
         handleClose={handleCloseUnavailableDialog}
+        handleChangeSelectedHotel={props.handleChangeSelectedHotel}
+        terminalName={"KLIA Terminal 1"}
+        hotelName={"Sleep Lounge"}
+        detailedLocation={
+          "Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia"
+        }
       />
     </Box>
   );
@@ -417,7 +424,21 @@ const KLIAStaySection = (props: {
 const UnavailableBookingDialog = (props: {
   open: boolean;
   handleClose: VoidFunction;
+  handleChangeSelectedHotel: (value: IBookingLocation) => void;
+  terminalName: string;
+  hotelName: string;
+  detailedLocation: string;
 }) => {
+  const [password, setPassword] = useState<string>("");
+
+  const handleGo = () => {
+    if (password === "ASDFGYHJKL")
+      props.handleChangeSelectedHotel({
+        hotelLocation: props.terminalName,
+        hotelName: props.hotelName,
+        hotelDetailedLocation: props.detailedLocation,
+      });
+  };
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
       <DialogTitle fontSize={"1.5rem"} fontWeight={700}>
@@ -430,6 +451,14 @@ const UnavailableBookingDialog = (props: {
           for assistance with your reservations. Thank you for
           your understanding.
         </DialogContentText>
+        <Stack direction={"row"} display={"flex"} marginTop={4}>
+          <TextField
+            size="small"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <Button onClick={handleGo}>Go</Button>
+        </Stack>
       </DialogContent>
     </Dialog>
   );
