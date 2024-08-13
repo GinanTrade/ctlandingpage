@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import {
+  Alert,
   Box,
   Button,
   ButtonBase,
   Collapse,
   IconButton,
+  Snackbar,
   Stack,
   Typography,
   useMediaQuery,
@@ -77,7 +79,15 @@ const BookingPage = () => {
 
   const [consentSigned, setConsentSigned] = useState<boolean>(false);
 
-  const [csrfToken, setCsrfToken] = useState<string>("");
+  const [errorNotification, setErrorNotification] = useState<string>("");
+
+  const handleOpenErrorBooking = (text: string) => {
+    setErrorNotification(text);
+  };
+
+  const handleCloseErrorBooking = () => {
+    setErrorNotification("");
+  };
 
   const handleConsentSignChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -420,7 +430,8 @@ const BookingPage = () => {
           router.push(
             `/booking/checkout?refNo=${iPay88Data.refNo}&bookingNo=${iPay88Data.bookingNo}&amount=${iPay88Data.amount}&contact=${iPay88Data.userContact}&email=${iPay88Data.userEmail}&name=${iPay88Data.userName}&prodDesc=${productDescription}&lot=${lotNumber}`
           );
-        });
+        })
+        .catch((e) => handleOpenErrorBooking(e.response.data.message));
     }
   };
 
@@ -490,6 +501,21 @@ const BookingPage = () => {
       ) : (
         <></>
       )}
+      <Snackbar
+        open={Boolean(errorNotification)}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        autoHideDuration={4000}
+        onClose={handleCloseErrorBooking}
+      >
+        <Alert
+          onClose={handleCloseErrorBooking}
+          severity="error"
+          variant="filled"
+          sx={{ width: "100%", fontSize: "1rem" }}
+        >
+          {errorNotification}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
