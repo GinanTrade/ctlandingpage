@@ -170,6 +170,7 @@ const ScheduleSection = (props: {
                   },
                 },
               }}
+              desktopModeMediaQuery="@media (min-width:0px)"
               sx={{
                 fontWeight: 600,
                 "&::after": {
