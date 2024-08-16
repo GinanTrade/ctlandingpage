@@ -10,14 +10,16 @@ const OTADivider = () => {
       <HeaderBottom
         leftComponent={<Image src={CTIconBlack} alt="ct-icon-black" />}
         middleComponent={
-          <Typography>
-            Starting from <b>RM95</b>
-          </Typography>
+          <></>
+          // <Typography>
+          //   Starting from <b>RM95</b>
+          // </Typography>
         }
         rightComponent={
-          <Typography textAlign={"right"}>
-            Overall ratings <b>7.8/10</b> on OTAs
-          </Typography>
+          <></>
+          // <Typography textAlign={"right"}>
+          //   Overall ratings <b>7.8/10</b> on OTAs
+          // </Typography>
         }
       />
     </ContentWrapper>
