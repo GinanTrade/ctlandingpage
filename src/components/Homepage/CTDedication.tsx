@@ -22,7 +22,7 @@ const contentTexts = {
 
 const items = [
   "our best rate guarantee",
-  "contactless services",
+  "brand promise",
   "flexible cancellation",
   "dedication to cleanliness",
 ];
