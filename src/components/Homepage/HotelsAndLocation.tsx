@@ -156,7 +156,7 @@ const HotelAndLocation = () => {
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
 
   return (
-    <ContentWrapper>
+    <ContentWrapper noMarginTop>
       <HeaderTop title={textContent[0].title}>
         {/* <Stack
           direction={"row"}

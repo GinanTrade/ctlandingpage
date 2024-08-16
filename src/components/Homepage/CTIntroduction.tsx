@@ -11,6 +11,7 @@ import CTButton from "../global/CTButton";
 import Image from "next/image";
 
 import IllustrationCloudMan from "./images/illus-travel-guy.svg";
+import IllustrationPromise from "./images/illus-brand-promise.png";
 import { useRouter } from "next/navigation";
 
 const textContents = [
@@ -158,13 +159,34 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
           *Note: Availability of services may vary by location.
         </Typography>
       </Box>
-      <Box marginY={10}>
-        <CTButton
-          onClick={props.handleHighlightButtonPress}
-          text="SEE HIGHLIGHT DETAIL"
-          variant="secondary"
-        />
-      </Box>
+      <Stack direction={"row"}>
+        <Box width={"20%"} marginY={10}>
+          <CTButton
+            onClick={props.handleHighlightButtonPress}
+            text="SEE HIGHLIGHT DETAIL"
+            variant="secondary"
+          />
+        </Box>
+        <Box
+          display={"flex"}
+          width={"80%"}
+          alignItems={"center"}
+          justifyContent={"flex-end"}
+          height={"400px"}
+        >
+          <Image
+            src={IllustrationPromise}
+            alt="cloud-man-walkin"
+            style={{
+              width: "auto",
+              height: "auto",
+              maxWidth: "100%",
+              maxHeight: "auto",
+              objectFit: "cover",
+            }}
+          />
+        </Box>
+      </Stack>
     </>
   );
 };
@@ -224,11 +246,23 @@ const HandheldView = (props: { handleHighlightButtonPress: VoidFunction }) => {
           *Note: Availability of services may vary by location.
         </Typography>
       </Box>
-      <Box marginY={10}>
+      <Box marginTop={5}>
         <CTButton
           onClick={props.handleHighlightButtonPress}
           text="SEE HIGHLIGHT DETAIL"
           variant="secondary"
+        />
+      </Box>
+      <Box
+        display={"flex"}
+        width={"100%"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Image
+          src={IllustrationPromise}
+          alt="cloud-man-walkin"
+          style={{ width: "100vw", height: "auto" }}
         />
       </Box>
     </>
