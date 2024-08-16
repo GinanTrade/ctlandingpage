@@ -83,7 +83,6 @@ const KLIA2Options: IKLIAOptions = {
       name: "Restricted Area",
       remarks: [
         "If you are transiting between international flights, you can check into this hotel without needing to clear immigration.",
-        "If you are departing from Malaysia, you will need valid documents for flight check-in (boarding pass, passport, or visa) to enter to restricted area and access our Airside",
       ],
       hotels: [
         {
