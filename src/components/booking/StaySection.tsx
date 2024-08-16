@@ -44,7 +44,7 @@ interface IKLIAOptions {
     iconHovered: StaticImageData;
     name: string;
     description?: string;
-    remarks: string;
+    remarks: string[];
     hotels: { name: string; detailedLocation: string }[];
   }[];
 }
@@ -60,8 +60,9 @@ const KLIA1Options: IKLIAOptions = {
       name: "Public Area",
       description:
         "At KLIA Terminal 1, our hotel provides a single-servie sleep-only lounge for you to rest and take a nap",
-      remarks:
+      remarks: [
         "If you are landing in Malaysia, you will need valid entry into Malaysia (visa, landing card) to clear Malaysian Imigration and access our Sleep Lounge",
+      ],
       hotels: [
         {
           name: "Sleep Lounge",
@@ -80,8 +81,10 @@ const KLIA2Options: IKLIAOptions = {
       icon: RestrictedAreaIcon,
       iconHovered: RestrictedAreaIconHovered,
       name: "Restricted Area",
-      remarks:
+      remarks: [
+        "If you are transiting between international flights, you can check into this hotel without needing to clear immigration.",
         "If you are departing from Malaysia, you will need valid documents for flight check-in (boarding pass, passport, or visa) to enter to restricted area and access our Airside",
+      ],
       hotels: [
         {
           name: "Airside",
@@ -94,8 +97,9 @@ const KLIA2Options: IKLIAOptions = {
       icon: PublicAreaIcon,
       iconHovered: PublicAreaIconHovered,
       name: "Public Area",
-      remarks:
+      remarks: [
         "If you are landing in Malaysia, you will need valid entry into Malaysia (visa, landing card) to clear Malaysian Imigration and access our Landside and MAX",
+      ],
       hotels: [
         {
           name: "Landside",
@@ -369,7 +373,15 @@ const KLIAStaySection = (props: {
               <Typography textAlign={"center"}>
                 {location.description}
               </Typography>
-              <Typography textAlign={"center"}>{location.remarks}</Typography>
+              {location.remarks.map((remark, index) => (
+                <Typography
+                  key={index}
+                  textAlign={"center"}
+                  marginTop={index > 0 ? 4 : 0}
+                >
+                  {remark}
+                </Typography>
+              ))}
             </Stack>
             <Stack spacing={3} marginTop={isHandheldDevice ? 6 : 10}>
               {location.hotels.map((hotel, index) => (
