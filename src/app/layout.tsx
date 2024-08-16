@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Head>
+      <head>
         <title>Capsule Transit</title>
         <meta
           name="description"
@@ -37,7 +37,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico" />
         <link rel="manifest" href="/site.webmanifest" />
-      </Head>
+      </head>
       <body style={{ margin: 0 }}>
         <ProviderContext>{children}</ProviderContext>
       </body>
