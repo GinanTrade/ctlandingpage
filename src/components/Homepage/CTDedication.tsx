@@ -192,7 +192,12 @@ const HandheldView = (props: {
 }) => {
   return (
     <>
-      <Box display={"flex"} flexDirection={"column"} marginY={4} width={"100%"}>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        marginBottom={4}
+        width={"100%"}
+      >
         <Typography variant="h3">
           {contentTexts.text}{" "}
           {items.map((item, index) => (
