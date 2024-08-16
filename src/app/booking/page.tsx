@@ -542,7 +542,7 @@ const BookingHeader = () => {
         <IconButton onClick={() => router.push("/")}>
           <Image
             src={isHandheldDevice ? CTLogoOnly : CTLogo}
-            alt="CapsuleTransit-Logo"
+            alt="Airport Transit Hotel In KLIA 1 and KLIA 2"
           />
         </IconButton>
       </Box>

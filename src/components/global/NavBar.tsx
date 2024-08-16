@@ -114,7 +114,10 @@ const DesktopView = (props: {
       </Stack>
       <Box display={"flex"} width={"33%"} justifyContent={"center"}>
         <Button onClick={() => router.push("/")}>
-          <Image src={CTLogo} alt="CapsuleTransit-Logo" />
+          <Image
+            src={CTLogo}
+            alt="Airport Transit Hotel In KLIA 1 and KLIA 2"
+          />
         </Button>
       </Box>
       <Stack
@@ -172,7 +175,10 @@ const HandheldView = (props: {
       </Stack>
       <Box display={"flex"} width={"33%"} justifyContent={"center"}>
         <IconButton onClick={() => router.push("/")}>
-          <Image src={CTLogoMobile} alt="CapsuleTransit-Logo" />
+          <Image
+            src={CTLogoMobile}
+            alt="Airport Transit Hotel In KLIA 1 and KLIA 2"
+          />
         </IconButton>
       </Box>
       <Stack
