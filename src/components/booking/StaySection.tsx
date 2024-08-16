@@ -173,7 +173,7 @@ const StaySectionHome = (props: {
       >
         Where are you departing / landing?
       </Typography>
-      <Stack direction={"row"} spacing={isHandheldDevice ? 0 : "70px"}>
+      <Stack direction={"row"} spacing={isHandheldDevice ? 1 : "70px"}>
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -217,7 +217,7 @@ const StaySectionHome = (props: {
             style={{
               marginBottom: "50px",
               objectFit: "contain",
-              width: isHandheldDevice ? 200 : "100%",
+              width: isHandheldDevice ? "90%" : "100%",
               height: "auto",
             }}
           />
