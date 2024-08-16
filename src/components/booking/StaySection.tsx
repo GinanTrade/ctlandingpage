@@ -375,15 +375,11 @@ const KLIAStaySection = (props: {
               {location.hotels.map((hotel, index) => (
                 <Button
                   onClick={() => {
-                    if (hotel.name != "Sleep Lounge") {
-                      props.handleChangeSelectedHotel({
-                        hotelLocation: props.content.terminalName,
-                        hotelName: hotel.name,
-                        hotelDetailedLocation: hotel.detailedLocation,
-                      });
-                    } else {
-                      handleOpenUnavailableDialog();
-                    }
+                    props.handleChangeSelectedHotel({
+                      hotelLocation: props.content.terminalName,
+                      hotelName: hotel.name,
+                      hotelDetailedLocation: hotel.detailedLocation,
+                    });
                   }}
                   key={index}
                 >
