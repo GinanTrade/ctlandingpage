@@ -9,7 +9,8 @@ const breadCrumbsContent = [
   { name: "Sleep Lounge", url: "" },
 ];
 
-const title = "A sleep-only lounge for a nap with a peace of mind.";
+const title =
+  "Sleep-only lounge in Terminal 1 for a quiet nap or quick recharge.";
 
 const images = [SleepLoungeDisplay1, SleepLoungeDisplay2, SleepLoungeDisplay3];
 
