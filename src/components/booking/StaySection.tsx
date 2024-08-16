@@ -217,7 +217,7 @@ const StaySectionHome = (props: {
             style={{
               marginBottom: "50px",
               objectFit: "contain",
-              width: isSmallDevice ? 150 : isHandheldDevice ? 200 : "100%",
+              width: isHandheldDevice ? 200 : "100%",
               height: "auto",
             }}
           />
@@ -236,8 +236,8 @@ const StaySectionHome = (props: {
             )}
             {informationHovered && (
               <Box
-                position={"fixed"}
-                marginTop={"20vh"}
+                position={"absolute"}
+                marginTop={isHandheldDevice ? "30vh" : "20vh"}
                 display={"flex"}
                 border={1}
                 width={"300px"}
