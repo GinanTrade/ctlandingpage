@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <title>Capsule Transit</title>
+        <title>CapsuleTransit | Airport Transit Hotel in KLIA1 and KLIA2</title>
         <meta
           name="description"
           content="Airport Transit Hotel In KLIA 1 and KLIA 2"
