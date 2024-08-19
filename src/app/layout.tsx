@@ -27,7 +27,10 @@ export default function RootLayout({
           name="description"
           content="Airport Transit Hotel In KLIA 1 and KLIA 2"
         />
-        <meta property="og:title" content="Capsule Transit" />
+        <meta
+          property="og:title"
+          content="CapsuleTransit | Airport Transit Hotel in KLIA1 and KLIA2"
+        />
         <meta
           property="og:description"
           content="Airport Transit Hotel In KLIA 1 and KLIA 2"
