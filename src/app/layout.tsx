@@ -25,7 +25,7 @@ export default function RootLayout({
         <title>CapsuleTransit | Airport Transit Hotel in KLIA1 and KLIA2</title>
         <meta
           name="description"
-          content="Airport Transit Hotel In KLIA 1 and KLIA 2"
+          content="Experience the ultimate convenience at CapsuleTransit Hotel, located within KLIA T1 and T2. Enjoy flexible booking by the hour, check in anytime, gender-specific zones and shower service."
         />
         <meta
           property="og:title"
@@ -33,7 +33,7 @@ export default function RootLayout({
         />
         <meta
           property="og:description"
-          content="Airport Transit Hotel In KLIA 1 and KLIA 2"
+          content="Experience the ultimate convenience at CapsuleTransit Hotel, located within KLIA T1 and T2. Enjoy flexible booking by the hour, check in anytime, gender-specific zones and shower service."
         />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico" />
