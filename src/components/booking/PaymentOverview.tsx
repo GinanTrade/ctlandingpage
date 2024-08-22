@@ -218,7 +218,7 @@ const TotalBillSection = (props: {
           RM{displayThousands(props.paymentInfo.taxAmount)}
         </Typography>
       </Stack>
-      {props.paymentInfo.rounding && (
+      {props.paymentInfo.rounding ? (
         <Stack
           direction={"row"}
           justifyContent={"space-between"}
@@ -229,6 +229,8 @@ const TotalBillSection = (props: {
             RM{displayThousands(props.paymentInfo.rounding)}
           </Typography>
         </Stack>
+      ) : (
+        <></>
       )}
       <Stack direction={"row"} justifyContent={"space-between"} width={"100%"}>
         <Typography variant="h6" fontWeight={700}>
