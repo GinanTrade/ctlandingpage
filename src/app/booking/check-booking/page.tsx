@@ -75,7 +75,7 @@ const CheckBooking = () => {
       );
 
       setIsLoading(false);
-      if (data.status === "Failed") {
+      if (data.status === "failed") {
         return;
       }
 
@@ -84,6 +84,7 @@ const CheckBooking = () => {
         return;
       }
     } catch (error: any) {
+      router.push("/booking/unsuccessful");
       // Notification.failed(error.message);
     }
   }
