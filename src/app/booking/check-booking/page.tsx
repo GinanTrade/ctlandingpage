@@ -97,7 +97,7 @@ const CheckBooking = () => {
   if (bookingData) {
     return (
       <>
-        <div>Test</div>
+        <div>Checking Booking Status... Please do not close the page.</div>
       </>
     );
   } else {
