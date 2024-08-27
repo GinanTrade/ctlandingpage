@@ -54,9 +54,17 @@ const DesktopView = () => {
         marginTop={"60px"}
         marginBottom={"100px"}
       >
-        <Image src={CTLogo} alt="CapsuleTransitLogo" />
+        <Image
+          src={CTLogo}
+          alt="CapsuleTransitLogo"
+          style={{ width: "300px", height: "auto" }}
+        />
         <Image src={CloseIcon} alt="CloseIcon" width={30} height={30} />
-        <Image src={KecharaLogo} alt="KecharaLogo" />
+        <Image
+          src={KecharaLogo}
+          alt="KecharaLogo"
+          style={{ width: "300px", height: "auto" }}
+        />
       </Stack>
     </Box>
   );
@@ -102,9 +110,19 @@ const HandheldView = () => {
         marginTop={"60px"}
         marginBottom={"100px"}
       >
-        <Image src={CTLogo} alt="CapsuleTransitLogo" width={120} height={30} />
+        <Image
+          src={CTLogo}
+          alt="CapsuleTransitLogo"
+          width={130}
+          style={{ height: "auto" }}
+        />
         <Image src={CloseIcon} alt="CloseIcon" width={20} height={20} />
-        <Image src={KecharaLogo} alt="KecharaLogo" width={120} height={30} />
+        <Image
+          src={KecharaLogo}
+          alt="KecharaLogo"
+          width={130}
+          style={{ height: "auto" }}
+        />
       </Stack>
     </Box>
   );

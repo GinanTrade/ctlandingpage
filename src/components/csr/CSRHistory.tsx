@@ -7,10 +7,10 @@ import IllustrationCSR from "./image/illus-CSR.png";
 
 const contentTexts = [
   {
-    text: "We made our first monthly contribution in September 2023, totalling an impressive RM5,711!",
+    text: "Our Core Purpose",
   },
   {
-    text: "Our goal is that by 2028, we will serve 1,000,000 refreshed explorers, and donated RM678,577 to feed the homeless.",
+    text: "To have 1,000 beds and feed 100,000 homeless families by 2030.",
   },
 ];
 
@@ -28,7 +28,9 @@ const DesktopView = () => {
         marginY={4}
         maxWidth={"750px"}
       >
-        <Typography variant="h4">{contentTexts[0].text}</Typography>
+        <Typography variant="h4" fontWeight={800}>
+          {contentTexts[0].text}
+        </Typography>
       </Box>
       <Box
         display={"flex"}
@@ -37,7 +39,7 @@ const DesktopView = () => {
         maxWidth={"750px"}
         marginBottom={"200px"}
       >
-        <Typography variant="h4">{contentTexts[1].text}</Typography>
+        <Typography variant="h5">{contentTexts[1].text}</Typography>
       </Box>
       <Box display={"flex"} alignItems={"flex-end"}>
         <Image

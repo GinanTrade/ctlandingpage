@@ -38,15 +38,15 @@ const CSRData = () => {
       paddingY={4}
       borderBottom={1}
     >
-      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
         <Stack spacing={2} alignItems={"center"}>
           <Typography variant="h3">
             RM <CountUp end={csrData.donationAmount} duration={2} />
           </Typography>
-          <Typography>Donation Made as of April 2024</Typography>
+          <Typography>Total Amount Donated To-Date</Typography>
         </Stack>
       </Grid>
-      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+      {/* <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
         <Stack spacing={2} alignItems={"center"}>
           <Typography variant="h3">
             <CountUp end={csrData.peopleHelped} duration={2} />
@@ -61,7 +61,7 @@ const CSRData = () => {
           </Typography>
           <Typography>people in need</Typography>
         </Stack>
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };

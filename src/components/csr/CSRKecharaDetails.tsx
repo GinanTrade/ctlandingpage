@@ -20,7 +20,7 @@ const CSRKecharaDetails = () => {
       </Typography>
       <Box display={"flex"} maxWidth={"680px"} marginBottom={"60px"}>
         <Typography variant="h4">
-          <b style={{ color: theme.palette.primary.main }}>1RM</b> is donated to
+          <b style={{ color: theme.palette.primary.main }}>RM1</b> is donated to
           Kechara Soup Kitchen to feed the homeless from each check-in at
           CapsuleTransit.
         </Typography>
