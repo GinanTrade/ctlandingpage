@@ -185,6 +185,7 @@ const DesktopView = (props: {
           alignItems={"center"}
           justifyContent={"flex-end"}
           height={"400px"}
+          marginTop={10}
         >
           <Image
             src={IllustrationPromise}
@@ -204,6 +205,7 @@ const DesktopView = (props: {
           width={"20%"}
           justifyContent={"center"}
           height={"400px"}
+          marginTop={10}
         >
           <Typography variant="h4" color={theme.palette.primary.main}>
             Sleep with us!
@@ -293,7 +295,7 @@ const HandheldView = (props: {
         display={"flex"}
         alignItems={"center"}
         justifyContent={"center"}
-        marginTop={4}
+        marginTop={6}
       >
         <Image
           src={IllustrationPromise}
