@@ -32,12 +32,12 @@ const hotels = [
     description:
       "For those who prefers more of everything. Privacy. Space. En-suite bathroom.",
   },
-  {
-    image: CapsuleTransitInterstellar,
-    title: "Interstellar",
-    description:
-      "Sophisticated pods strategically placed in pocket spaces around the airport. Locate, check in, and access into the pods using only your mobile phone.",
-  },
+  // {
+  //   image: CapsuleTransitInterstellar,
+  //   title: "Interstellar",
+  //   description:
+  //     "Sophisticated pods strategically placed in pocket spaces around the airport. Locate, check in, and access into the pods using only your mobile phone.",
+  // },
 ];
 
 const AboutUsCollections = () => {
@@ -63,12 +63,17 @@ const DesktopView = () => {
   return (
     <Grid container marginTop={"90px"} rowSpacing={8}>
       {hotels.map((hotel, index) => (
-        <Grid key={index} xs={12} sm={12} md={6} lg={4} xl={4}>
+        <Grid key={index} xs={12} sm={12} md={6} lg={6} xl={6}>
           <Stack spacing={6}>
             <Image
               src={hotel.image}
               alt={hotel.title}
-              style={{ height: "60px", maxWidth: "60%" }}
+              style={{
+                height: "auto",
+                width: "auto",
+                maxHeight: "auto",
+                maxWidth: "40%",
+              }}
             />
             <Stack direction={"column"} spacing={3}>
               <Divider
@@ -79,7 +84,7 @@ const DesktopView = () => {
                 }}
               />
               <Typography fontWeight={700}>{hotel.title}</Typography>
-              <Typography maxWidth={"60%"}>{hotel.description}</Typography>
+              <Typography maxWidth={"70%"}>{hotel.description}</Typography>
             </Stack>
           </Stack>
         </Grid>
