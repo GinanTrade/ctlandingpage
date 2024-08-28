@@ -24,6 +24,7 @@ const CommitmentContent = () => {
         <ContactlessServiceSection />
         {/* <FlexibleCancellationSection /> */}
         <CommitedCleanSection />
+        <BrandPromiseSection />
       </ContentWrapper>
       <Footer />
     </>
@@ -283,6 +284,51 @@ const CommitedCleanSection = () => {
                   Hand sanitisers are strategically placed all over the hotel.
                 </li>
               </ol>
+            </Typography>
+          </Stack>
+        </Grid>
+      </Grid>
+    </>
+  );
+};
+
+const BrandPromiseSection = () => {
+  const theme = useTheme();
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  return (
+    <>
+      <HeaderBottom
+        leftComponent={<></>}
+        middleComponent={<></>}
+        rightComponent={<></>}
+      />
+      <Grid container marginY={isHandheldDevice ? "100px" : 8}>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+          <Typography variant="h3" maxWidth={"300px"} marginBottom={3}>
+            Brand Promise
+          </Typography>
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={4} xl={4}>
+          <Stack spacing={3} maxWidth={"1000px"}>
+            <Box>
+              <Typography variant="h6" fontWeight={600}>
+                Sleep with us!
+              </Typography>
+              <Typography variant="h6" fontWeight={600}>
+                Not satisfied? Break up in an hour, money back guarantee.
+              </Typography>
+            </Box>
+            <Typography>
+              We always work to bring joy to all our guests but if you are
+              unsatisfied with our service or the comfort of our sleep pods
+              within the first hour of your stay, we’re happy to try to fix it
+              for you. However, if we still fall short of meeting your
+              expectations, you’re entitled to check out and get a full refund
+              with no penalties.
+            </Typography>
+            <Typography variant="caption">
+              ** Refunds are still processed in accordance with local
+              regulations and banking laws.
             </Typography>
           </Stack>
         </Grid>
