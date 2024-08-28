@@ -61,20 +61,32 @@ const CTIntroduction = () => {
   const handleHighlightButtonPress = () => {
     router.push("/highlight");
   };
+  const handleFindOutMoreButtonPress = () => {
+    router.push("/our-commitment");
+  };
 
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
     <ContentWrapper>
       {!isHandheldDevice ? (
-        <DesktopView handleHighlightButtonPress={handleHighlightButtonPress} />
+        <DesktopView
+          handleHighlightButtonPress={handleHighlightButtonPress}
+          handleFindOutMoreButtonPress={handleFindOutMoreButtonPress}
+        />
       ) : (
-        <HandheldView handleHighlightButtonPress={handleHighlightButtonPress} />
+        <HandheldView
+          handleHighlightButtonPress={handleHighlightButtonPress}
+          handleFindOutMoreButtonPress={handleFindOutMoreButtonPress}
+        />
       )}
     </ContentWrapper>
   );
 };
 
-const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
+const DesktopView = (props: {
+  handleHighlightButtonPress: VoidFunction;
+  handleFindOutMoreButtonPress: VoidFunction;
+}) => {
   const theme = useTheme();
   return (
     <>
@@ -169,7 +181,7 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
         </Box>
         <Box
           display={"flex"}
-          width={"80%"}
+          width={"50%"}
           alignItems={"center"}
           justifyContent={"flex-end"}
           height={"400px"}
@@ -186,12 +198,36 @@ const DesktopView = (props: { handleHighlightButtonPress: VoidFunction }) => {
             }}
           />
         </Box>
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          width={"20%"}
+          justifyContent={"center"}
+          height={"400px"}
+        >
+          <Typography variant="h4" color={theme.palette.primary.main}>
+            Sleep with us!
+          </Typography>
+          <Typography>
+            Not satisfied? Break up in an hour, money back guaranteed
+          </Typography>
+          <Box marginTop={2}>
+            <CTButton
+              text="Find out more"
+              onClick={props.handleFindOutMoreButtonPress}
+              variant="secondary"
+            />
+          </Box>
+        </Box>
       </Stack>
     </>
   );
 };
 
-const HandheldView = (props: { handleHighlightButtonPress: VoidFunction }) => {
+const HandheldView = (props: {
+  handleHighlightButtonPress: VoidFunction;
+  handleFindOutMoreButtonPress: VoidFunction;
+}) => {
   const theme = useTheme();
   return (
     <>
@@ -255,15 +291,36 @@ const HandheldView = (props: { handleHighlightButtonPress: VoidFunction }) => {
       </Box>
       <Box
         display={"flex"}
-        width={"100%"}
         alignItems={"center"}
         justifyContent={"center"}
+        marginTop={4}
       >
         <Image
           src={IllustrationPromise}
           alt="cloud-man-walkin"
-          style={{ width: "100vw", height: "auto" }}
+          style={{ width: "100vw", height: "auto", maxWidth: "600px" }}
         />
+      </Box>
+      <Box
+        display={"flex"}
+        flexDirection={"column"}
+        width={"100%"}
+        justifyContent={"center"}
+        marginBottom={6}
+      >
+        <Typography variant="h4" color={theme.palette.primary.main}>
+          Sleep with us!
+        </Typography>
+        <Typography>
+          Not satisfied? Break up in an hour, money back guaranteed
+        </Typography>
+        <Box marginTop={2}>
+          <CTButton
+            text="Find out more"
+            onClick={props.handleFindOutMoreButtonPress}
+            variant="secondary"
+          />
+        </Box>
       </Box>
     </>
   );
