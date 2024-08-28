@@ -321,7 +321,7 @@ const CTNewsSection = () => {
                 {socialMedias.map((socialMedia, index1) => (
                   <IconButton
                     key={index1}
-                    onClick={() => router.push(socialMedia.link)}
+                    onClick={() => window.open(socialMedia.link, "_blank")}
                     sx={{ padding: 0 }}
                   >
                     <Image src={socialMedia.icon} alt={socialMedia.link} />
@@ -388,7 +388,7 @@ const CTNewsSection = () => {
                   {socialMedias.map((socialMedia, index1) => (
                     <IconButton
                       key={index1}
-                      onClick={() => router.push(socialMedia.link)}
+                      onClick={() => window.open(socialMedia.link, "_blank")}
                       sx={{ padding: 0 }}
                     >
                       <Image src={socialMedia.icon} alt={socialMedia.link} />
