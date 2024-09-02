@@ -80,6 +80,7 @@ const DesktopView = () => {
 const HandheldView = () => {
   const theme = useTheme();
   const isSmallerDevice = useMediaQuery("(max-width:500px)");
+  const isVerySmallDevice = useMediaQuery("(max-width:370px)");
   return (
     <Box
       marginBottom={"100px"}
@@ -113,7 +114,12 @@ const HandheldView = () => {
             style={{ maxWidth: "100vw", height: "auto" }}
           />
         </Stack>
-        <Stack direction={"row"} spacing={1} marginTop={6}>
+        <Stack
+          direction={isVerySmallDevice ? "column" : "row"}
+          alignItems={"center"}
+          spacing={1}
+          marginTop={6}
+        >
           <Typography
             variant={isSmallerDevice ? "h6" : "h5"}
             fontWeight={700}
