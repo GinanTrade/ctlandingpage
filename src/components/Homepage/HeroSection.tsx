@@ -115,8 +115,8 @@ const HandheldView = () => {
           />
         </Stack>
         <Stack
-          direction={"row"}
-          // alignItems={"center"}
+          direction={ isSmallerDevice ? "column" : "row"}
+          alignItems={"center"}
           spacing={1}
           marginTop={6}
         >
