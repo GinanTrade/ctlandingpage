@@ -150,7 +150,7 @@ const StaySection = (props: {
 };
 
 const informationText =
-  "If you wish to travel between KLIA Terminal 1 and Terminal 2, you can take either the free shuttle bus service or ERL (Train).";
+  "If you wish to travel between KLIA Terminal 1 and Terminal 2, you can take either the free shuttle bus service (30 minutes ride) or ERL (Train 10 minutes ride).";
 
 const StaySectionHome = (props: {
   handleChangeStaySectionStepper: (title: string) => void;
