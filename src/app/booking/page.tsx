@@ -353,9 +353,22 @@ const BookingPage = () => {
         (country) => country.countryName === formik.values.nationality
       );
 
+      const displayCheckInTime = bookingSchedule.date
+
+      const utcTime = new Date(Date.UTC(
+        displayCheckInTime.getFullYear(),
+        displayCheckInTime.getMonth(),
+        displayCheckInTime.getDate(),
+        displayCheckInTime.getHours(),
+        displayCheckInTime.getMinutes(),
+        displayCheckInTime.getSeconds()
+      ));
+
+      const klUTCTime = new Date(utcTime.getTime() - 8 * 60 * 60 * 1000)
+
       const formData = {
         lotId: getLotNumber(selectedHotel.hotelName),
-        checkinDatetime: bookingSchedule.date.getTime() / 1000,
+        checkinDatetime: klUTCTime.getTime() / 1000,
         duration: bookingSchedule.duration,
         roomTypes: formattedRoomBooking,
         promotionAmount: paymentInfo.promotionAmount,
@@ -407,7 +420,7 @@ const BookingPage = () => {
             hour12: false, // Use 24-hour format
           });
 
-          const singaporeTime = formatter.format(bookingSchedule.date);
+          const singaporeTime = formatter.format(klUTCTime);
 
           const iPay88Data = {
             amount: paymentInfo.debitAmount,
