@@ -115,14 +115,13 @@ const HandheldView = () => {
           />
         </Stack>
         <Stack
-          direction={ isSmallerDevice ? "column" : "row"}
-          alignItems={"center"}
+          direction={"row"}
           spacing={1}
           marginTop={6}
         >
           <Typography
-            variant={
-              isVerySmallDevice ? "caption" : isSmallerDevice ? "h6" : "h5"
+            fontSize={
+              isVerySmallDevice ? "0.5rem" : isSmallerDevice ? "1.25rem" : "1.5rem"
             }
             fontWeight={700}
             color={theme.palette.CtColorScheme.white}
@@ -130,8 +129,8 @@ const HandheldView = () => {
             {textContents[2].text}
           </Typography>
           <Typography
-            variant={
-              isVerySmallDevice ? "caption" : isSmallerDevice ? "h6" : "h5"
+            fontSize={
+              isVerySmallDevice ? "0.5rem" : isSmallerDevice ? "1.25rem" : "1.5rem"
             }
             fontWeight={700}
             color={theme.palette.primary.main}
@@ -139,8 +138,8 @@ const HandheldView = () => {
             /
           </Typography>
           <Typography
-            variant={
-              isVerySmallDevice ? "caption" : isSmallerDevice ? "h6" : "h5"
+            fontSize={
+              isVerySmallDevice ? "0.5rem" : isSmallerDevice ? "1.25rem" : "1.5rem"
             }
             fontWeight={700}
             color={theme.palette.CtColorScheme.white}
