@@ -157,7 +157,7 @@ const StaySectionHome = (props: {
 }) => {
   const theme = useTheme();
   const isHandheldDevice = useMediaQuery("(max-width:1050px)");
-  const isSmallDevice = useMediaQuery("(max-width:500px)");
+  const isSmallDevice = useMediaQuery("(max-width:400px)");
 
   const [informationHovered, setInformationHovered] = useState<boolean>(false);
   return (
@@ -240,7 +240,7 @@ const StaySectionHome = (props: {
             {informationHovered && (
               <Box
                 position={"absolute"}
-                marginTop={isHandheldDevice ? "330px" : "20vh"}
+                marginTop={isSmallDevice ? "380px" : isHandheldDevice ? "330px" : "20vh"}
                 display={"flex"}
                 border={1}
                 width={"300px"}
