@@ -121,7 +121,7 @@ const HandheldView = () => {
         >
           <Typography
             fontSize={
-              isVerySmallDevice ? "0.5rem" : isSmallerDevice ? "1.25rem" : "1.5rem"
+              isVerySmallDevice ? "0.7rem" : "1.1rem"
             }
             fontWeight={700}
             color={theme.palette.CtColorScheme.white}
@@ -130,7 +130,7 @@ const HandheldView = () => {
           </Typography>
           <Typography
             fontSize={
-              isVerySmallDevice ? "0.5rem" : isSmallerDevice ? "1.25rem" : "1.5rem"
+              isVerySmallDevice ? "0.7rem" : "1.1rem"
             }
             fontWeight={700}
             color={theme.palette.primary.main}
@@ -139,7 +139,7 @@ const HandheldView = () => {
           </Typography>
           <Typography
             fontSize={
-              isVerySmallDevice ? "0.5rem" : isSmallerDevice ? "1.25rem" : "1.5rem"
+              isVerySmallDevice ? "0.7rem" : "1.1rem"
             }
             fontWeight={700}
             color={theme.palette.CtColorScheme.white}
