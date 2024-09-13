@@ -244,7 +244,7 @@ const KLIA2Hotels = (props: {
           {props.hovered === data.title && !isHandheldDevice ? (
             <Box
               width="100%"
-              height={isHandheldDevice ? "500px" : "65vh"}
+              height={isHandheldDevice ? "500px" : "700px"}
               display="flex"
               flexDirection={"column"}
               justifyContent="center"
@@ -338,7 +338,7 @@ const KLIA2Hotels = (props: {
           ) : (
             <Box
               width={"100%"}
-              height={isHandheldDevice ? "500px" : "65vh"}
+              height={isHandheldDevice ? "500px" : "700px"}
               zIndex={1}
             >
               {typeof data.backgroundUrl === "string" ? (
@@ -455,7 +455,7 @@ const KLIA1Hotels = (props: {
         {props.hovered === terminal1Hotels.title ? (
           <Box
             width="100%"
-            height={isHandheldDevice ? "500px" : "65vh"}
+            height={isHandheldDevice ? "500px" : "700px"}
             display="flex"
             flexDirection={"column"}
             justifyContent="center"
@@ -547,7 +547,7 @@ const KLIA1Hotels = (props: {
             </Stack>
           </Box>
         ) : (
-          <Box width={"100%"} height={isHandheldDevice ? "500px" : "65vh"}>
+          <Box width={"100%"} height={isHandheldDevice ? "500px" : "700px"}>
             <Image
               src={terminal1Hotels.backgroundUrl}
               alt={terminal1Hotels.title}
@@ -616,7 +616,7 @@ const KLIA1Hotels = (props: {
       </Grid>
       {!isHandheldDevice && (
         <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
-          <Box width={"100%"} height={"65vh"}>
+          <Box width={"100%"} height={"700px"}>
             <Image
               src={SleepLoungImage}
               alt={"capsule-transit-sleep-lounge"}
