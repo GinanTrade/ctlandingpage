@@ -193,6 +193,10 @@ const GuestDetailForm = (props: {
             onChange={(event: any, newValue: string | null) => {
               props.formik.setFieldValue('nationality', newValue || '');
 
+              if (newValue?.toLowerCase() !== 'malaysia') {
+                props.formik.setFieldValue('identification', 'Passport');
+              }
+
               const selectedCountry = props.countries.filter(
                 (country) => country.countryName === newValue
               );
