@@ -238,6 +238,7 @@ const RoomTypesContent = (props: {
         const formattedData: IRoomImages[] = data.map((data: any) => ({
           name: data.attributes.title,
           url: `${process.env.NEXT_PUBLIC_STRAPI_BASE}${data.attributes.image.data.attributes.url}`,
+          beds: data.attributes.beds,
         }));
 
         setRoomImages(formattedData);
@@ -262,6 +263,7 @@ const RoomTypesContent = (props: {
           return {
             ...room,
             imageUrl: imageLocated.url,
+            bedType: imageLocated.beds ? imageLocated.beds : room.bedType,
           };
         } else {
           return room;

@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+import { StaticImageData } from 'next/image';
 
 export interface IBookingLocation {
   hotelName: string;
@@ -9,9 +9,9 @@ export interface IBookingLocation {
 }
 
 export const BookingLocationInitial: IBookingLocation = {
-  hotelLocation: "",
-  hotelName: "",
-  hotelDetailedLocation: "",
+  hotelLocation: '',
+  hotelName: '',
+  hotelDetailedLocation: '',
 };
 
 export interface IBookingSchedule {
@@ -21,7 +21,7 @@ export interface IBookingSchedule {
 }
 
 export const BookingScheduleInitial: IBookingSchedule = {
-  promotion: "",
+  promotion: '',
 };
 
 export interface IRoomBooking {
@@ -84,14 +84,14 @@ export interface IGuestDetail {
 }
 
 export const GuestDetailInitial: IGuestDetail = {
-  email: "",
-  firstName: "",
-  gender: "",
-  identification: "MyKad",
-  idNumber: "",
-  lastName: "",
-  nationality: "",
-  phone: "",
+  email: '',
+  firstName: '',
+  gender: '',
+  identification: 'MyKad',
+  idNumber: '',
+  lastName: '',
+  nationality: '',
+  phone: '',
 };
 
 export interface ICountry {
@@ -105,6 +105,7 @@ export interface ICountry {
 export interface IRoomImages {
   name: string;
   url: string;
+  beds?: string;
 }
 
 export interface IPaymentTerminal {
