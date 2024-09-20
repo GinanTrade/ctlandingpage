@@ -4,7 +4,7 @@ import {
   IGuestDetail,
   IPaymentInfo,
   IRoomBooking,
-} from "@/models/Booking";
+} from '@/models/Booking';
 import {
   Autocomplete,
   Box,
@@ -24,30 +24,30 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
-import { FormikProps, useFormik } from "formik";
+} from '@mui/material';
+import { FormikProps, useFormik } from 'formik';
 // import MuiPhoneNumber from "material-ui-phone-number";
-import PaymentOverview from "./PaymentOverview";
-import Image from "next/image";
+import PaymentOverview from './PaymentOverview';
+import Image from 'next/image';
 
-import IPay88Image from "./images/ipay88.png";
-import CTRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
-import HotelPolicyDialog from "./Dialogs/HotelPolicyDialog";
-import { useRef, useState } from "react";
-import TermsConditionDialog from "./Dialogs/TermsConditionDialog";
-import PrivacyDialog from "./Dialogs/PrivacyDialog";
+import IPay88Image from './images/ipay88.png';
+import CTRight from '@/assets/icons/general/btn-icon-arrow-left.svg';
+import HotelPolicyDialog from './Dialogs/HotelPolicyDialog';
+import { useRef, useState } from 'react';
+import TermsConditionDialog from './Dialogs/TermsConditionDialog';
+import PrivacyDialog from './Dialogs/PrivacyDialog';
 
-const contentWidth = "900px";
-const mobileWidth = "100%";
+const contentWidth = '900px';
+const mobileWidth = '100%';
 
 const textFieldProps = {
-  ".MuiInputBase-input": {
-    paddingY: "10px",
+  '.MuiInputBase-input': {
+    paddingY: '10px',
   },
 };
 
-const genders = ["Male", "Female", "Others"];
-const identifications = ["MyKad", "Passport"];
+const genders = ['Male', 'Female', 'Others'];
+const identifications = ['MyKad', 'Passport'];
 
 const DetailSection = (props: {
   roomBookings: IRoomBooking[];
@@ -61,19 +61,19 @@ const DetailSection = (props: {
   handleAddPromotion: (promotionName: string, promotionAmount: string) => void;
   handleSubmit: VoidFunction;
 }) => {
-  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
   return (
     <>
       <Box
-        display={"flex"}
-        flexDirection={"column"}
-        alignItems={"center"}
+        display={'flex'}
+        flexDirection={'column'}
+        alignItems={'center'}
         paddingX={3}
       >
         <Box
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"center"}
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
           width={isHandheldDevice ? mobileWidth : contentWidth}
           paddingY={10}
           borderBottom={1}
@@ -82,9 +82,9 @@ const DetailSection = (props: {
         </Box>
         <GuestDetailForm formik={props.formik} countries={props.countries} />
         <Box
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"center"}
+          display={'flex'}
+          flexDirection={'column'}
+          alignItems={'center'}
           width={isHandheldDevice ? mobileWidth : contentWidth}
           paddingY={isHandheldDevice ? 6 : 10}
           borderBottom={isHandheldDevice ? 0 : 1}
@@ -112,7 +112,7 @@ const GuestDetailForm = (props: {
   formik: FormikProps<IGuestDetail>;
   countries: ICountry[];
 }) => {
-  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
   return (
     <Grid
       container
@@ -191,12 +191,20 @@ const GuestDetailForm = (props: {
             options={props.countries.map((country) => country.countryName)}
             value={props.formik.values.nationality}
             onChange={(event: any, newValue: string | null) => {
-              props.formik.setFieldValue("nationality", newValue || "");
+              props.formik.setFieldValue('nationality', newValue || '');
+
+              const selectedCountry = props.countries.filter(
+                (country) => country.countryName === newValue
+              );
+              props.formik.setFieldValue(
+                'phone',
+                '+' + selectedCountry[0].prefix
+              );
             }}
-            ListboxProps={{ style: { maxHeight: "200px" } }}
+            ListboxProps={{ style: { maxHeight: '200px' } }}
             sx={{
-              ".MuiInputBase-root": {
-                paddingY: "2px",
+              '.MuiInputBase-root': {
+                paddingY: '2px',
               },
               input: {
                 paddingY: 0,
@@ -242,10 +250,10 @@ const GuestDetailForm = (props: {
       <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
         <FormControl fullWidth variant="outlined">
           <Typography fontWeight={700} marginBottom={1}>
-            Your{" "}
-            {props.formik.values.identification === "MyKad"
-              ? "MyKad"
-              : "Passport"}{" "}
+            Your{' '}
+            {props.formik.values.identification === 'MyKad'
+              ? 'MyKad'
+              : 'Passport'}{' '}
             Number
           </Typography>
           <TextField
@@ -313,18 +321,18 @@ const GuestDetailForm = (props: {
   );
 };
 
-const footerTitle = "Important Information about Your Booking";
+const footerTitle = 'Important Information about Your Booking';
 const footerDetail =
-  "This special discounted rate is non-refundable. If you choose to change or cancel this booking, you will not be refunded any of the payment.";
+  'This special discounted rate is non-refundable. If you choose to change or cancel this booking, you will not be refunded any of the payment.';
 const footerSelectLabel =
-  "By checking this box, I acknowledge that I have read and accept the ";
+  'By checking this box, I acknowledge that I have read and accept the ';
 
-const iPay88Title = "Secure Payment with ipay88";
+const iPay88Title = 'Secure Payment with ipay88';
 
 enum dialogType {
-  hotelPolicy = "hotelPolicy",
-  termsCondition = "termsCondition",
-  privacy = "privacy",
+  hotelPolicy = 'hotelPolicy',
+  termsCondition = 'termsCondition',
+  privacy = 'privacy',
 }
 
 const DetailPageFooter = (props: {
@@ -332,7 +340,7 @@ const DetailPageFooter = (props: {
   handleConsentSignChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const theme = useTheme();
-  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
 
   const [openHotelPolicy, setOpenHotelPolicy] = useState<boolean>(false);
   const [openTermsCondition, setOpenTermsCondition] = useState<boolean>(false);
@@ -372,72 +380,72 @@ const DetailPageFooter = (props: {
       container
       width={isHandheldDevice ? mobileWidth : contentWidth}
       marginTop={8}
-      direction={"row-reverse"}
+      direction={'row-reverse'}
       rowSpacing={2}
     >
       <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
         <Typography fontWeight={700}>{iPay88Title}</Typography>
         <Box
-          display={"flex"}
-          justifyContent={isHandheldDevice ? "center" : "start"}
+          display={'flex'}
+          justifyContent={isHandheldDevice ? 'center' : 'start'}
         >
-          <Image src={IPay88Image} alt="ipay88" style={{ marginTop: "20px" }} />
+          <Image src={IPay88Image} alt="ipay88" style={{ marginTop: '20px' }} />
         </Box>
       </Grid>
 
       <Grid item xs={0} sm={0} md={1} lg={1} xl={1}>
-        <Box display={"flex"} justifyContent={"center"} height={"100%"}>
-          <Divider orientation="vertical" sx={{ width: "1px" }} />
+        <Box display={'flex'} justifyContent={'center'} height={'100%'}>
+          <Divider orientation="vertical" sx={{ width: '1px' }} />
         </Box>
       </Grid>
       {isHandheldDevice && (
         <Grid item xs={12} sm={12} md={12} lg={0} xl={0}>
-          <Divider sx={{ bgcolor: "black" }} />
+          <Divider sx={{ bgcolor: 'black' }} />
         </Grid>
       )}
       <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
         <Typography fontWeight={700}>{footerTitle}</Typography>
-        <Typography width={"500px"} marginTop={1}>
+        <Typography width={'500px'} marginTop={1}>
           {footerDetail}
         </Typography>
-        <Stack direction="row" alignItems={"start"} marginTop={3} spacing={1}>
+        <Stack direction="row" alignItems={'start'} marginTop={3} spacing={1}>
           <Checkbox
             value={props.consentSigned}
             onChange={props.handleConsentSignChange}
             sx={{
               color: theme.palette.CtColorScheme.pink300,
-              "&.Mui-checked": {
+              '&.Mui-checked': {
                 color: theme.palette.CtColorScheme.pink300,
               },
-              "&.MuiCheckbox-root": {
+              '&.MuiCheckbox-root': {
                 padding: 0,
               },
             }}
           />
-          <Box display={"inline"} flexDirection={"row"}>
-            <Typography display={"inline-block"}>
-              {footerSelectLabel}{" "}
+          <Box display={'inline'} flexDirection={'row'}>
+            <Typography display={'inline-block'}>
+              {footerSelectLabel}{' '}
               <Link
-                component={"button"}
+                component={'button'}
                 onClick={() => handleOpenDialog(dialogType.hotelPolicy)}
                 variant="body1"
-                sx={{ color: "black" }}
+                sx={{ color: 'black' }}
               >
                 Rules and Restrictions,
-              </Link>{" "}
+              </Link>{' '}
               <Link
-                component={"button"}
+                component={'button'}
                 onClick={() => handleOpenDialog(dialogType.termsCondition)}
                 variant="body1"
-                sx={{ color: "black" }}
+                sx={{ color: 'black' }}
               >
                 Terms of Use,
-              </Link>{" "}
+              </Link>{' '}
               <Link
-                component={"button"}
+                component={'button'}
                 onClick={() => handleOpenDialog(dialogType.privacy)}
                 variant="body1"
-                sx={{ color: "black" }}
+                sx={{ color: 'black' }}
               >
                 Privacy Policy,
               </Link>
@@ -472,15 +480,15 @@ const ProceedPaymentSection = (props: {
       <ButtonBase
         onClick={props.handleSubmit}
         disabled={!props.consentSigned}
-        sx={{ width: "100%", marginTop: 10 }}
+        sx={{ width: '100%', marginTop: 10 }}
       >
         <Box
-          display={"flex"}
-          justifyContent={"center"}
-          alignItems={"center"}
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
           borderTop={1}
-          width={"100%"}
-          height={"80px"}
+          width={'100%'}
+          height={'80px'}
           zIndex={10}
           bottom={0}
           bgcolor={
@@ -490,17 +498,17 @@ const ProceedPaymentSection = (props: {
           }
         >
           <Box
-            display={"flex"}
-            justifyContent={"flex-end"}
-            alignItems={"center"}
+            display={'flex'}
+            justifyContent={'flex-end'}
+            alignItems={'center'}
           >
             <Typography variant="h4">All Good, Continue</Typography>
             <Image
               src={CTRight}
               alt="CT-Right-Up"
               style={{
-                color: "white",
-                width: "60px",
+                color: 'white',
+                width: '60px',
               }}
             />
           </Box>
