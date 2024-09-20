@@ -483,6 +483,7 @@ const BookingPage = () => {
           selectedHotel={selectedHotel}
           roomBookings={roomBookings}
           taxPercentage={taxPercentage}
+          paymentInfo={paymentInfo}
           handleAddRoomBooking={handleAddRoomBooking}
           handleDeductRoomBooking={handleDeductRoomBooking}
           handleChangeStepper={handleChangeStepper}

@@ -2,6 +2,7 @@ import {
   IBookingLocation,
   IBookingSchedule,
   IHotelRooms,
+  IPaymentInfo,
   IRoomBooking,
   IRoomImages,
 } from "@/models/Booking";
@@ -50,6 +51,7 @@ const SelectRoomSection = (props: {
   bookingSchedule: IBookingSchedule;
   roomBookings: IRoomBooking[];
   taxPercentage: string;
+  paymentInfo: IPaymentInfo;
   handleAddRoomBooking: (value: IRoomBooking) => void;
   handleDeductRoomBooking: (value: IRoomBooking) => void;
   handleChangeStepper: (value: number) => void;
@@ -504,6 +506,7 @@ const RoomTypesContent = (props: {
 
 const BookNowButton = (props: {
   roomBookings: IRoomBooking[];
+  paymentInfo: IPaymentInfo;
   handleChangeStepper: (value: number) => void;
 }) => {
   const theme = useTheme();
@@ -514,9 +517,8 @@ const BookNowButton = (props: {
     0
   );
 
-  const totalAmount = props.roomBookings
-    .reduce((total, curr) => (total = total + curr.price * curr.quantity), 0)
-    .toFixed(2);
+  const totalRoomsPrice = props.paymentInfo.rounding ? props.paymentInfo.debitAmount - props.paymentInfo.rounding : props.paymentInfo.debitAmount
+
   return (
     <Box
       display={"flex"}
@@ -538,10 +540,10 @@ const BookNowButton = (props: {
           <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
             <Stack direction={"row"} alignItems={"flex-end"} spacing={1}>
               <Typography variant="h4">
-                RM{displayThousands(parseFloat(totalAmount))}
+                RM{displayThousands(totalRoomsPrice)}
               </Typography>
               <Typography variant="subtitle1">
-                price before discount and tax
+                Price inclusive of tax
               </Typography>
             </Stack>
           </Grid>
@@ -582,9 +584,9 @@ const BookNowButton = (props: {
           <Stack>
             <Typography variant="h4">
               {amountOfRooms} rooms / RM
-              {displayThousands(parseFloat(totalAmount))}
+              {displayThousands(totalRoomsPrice)}
             </Typography>
-            <Typography>price before discount and tax</Typography>
+            <Typography>Price inclusive of tax</Typography>
           </Stack>
           <Button
             onClick={() => props.handleChangeStepper(4)}
