@@ -318,16 +318,12 @@ const KLIAStaySection = (props: {
     setConfirmationDialogOpen(undefined);
   };
 
-  const onHotelSelect = (hotel: IHotel, byPassValidation: boolean) => {
-    if (hotel.name === 'Airside' && !byPassValidation) {
-      handleOpenConfirmationDialog(hotel);
-    } else {
-      props.handleChangeSelectedHotel({
-        hotelLocation: props.content.terminalName,
-        hotelName: hotel.name,
-        hotelDetailedLocation: hotel.detailedLocation,
-      });
-    }
+  const onHotelSelect = (hotel: IHotel) => {
+    props.handleChangeSelectedHotel({
+      hotelLocation: props.content.terminalName,
+      hotelName: hotel.name,
+      hotelDetailedLocation: hotel.detailedLocation,
+    });
   };
 
   return (
@@ -407,7 +403,10 @@ const KLIAStaySection = (props: {
             </Stack>
             <Stack spacing={3} marginTop={isHandheldDevice ? 6 : 10}>
               {location.hotels.map((hotel, index) => (
-                <Button onClick={() => onHotelSelect(hotel, false)} key={index}>
+                <Button
+                  onClick={() => handleOpenConfirmationDialog(hotel)}
+                  key={index}
+                >
                   <Typography variant="h4" marginRight={3}>
                     {hotel.name}
                   </Typography>
@@ -501,11 +500,11 @@ const confirmationModalTexts = {
 const ConfirmationModal = (props: {
   open?: IHotel;
   handleClose: VoidFunction;
-  redirectFunction: (hotel: IHotel, byPassValidation: boolean) => void;
+  redirectFunction: (hotel: IHotel) => void;
 }) => {
   const onConfirmClick = () => {
     if (props.open) {
-      props.redirectFunction(props.open, true);
+      props.redirectFunction(props.open);
     }
   };
   return (
