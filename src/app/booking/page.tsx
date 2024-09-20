@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import {
   Alert,
   Box,
@@ -13,9 +13,9 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from "@mui/material";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+} from '@mui/material';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import {
   ArticleOutlined,
   BedOutlined,
@@ -25,9 +25,9 @@ import {
   KeyboardArrowUp,
   LocationOnOutlined,
   PersonOutline,
-} from "@mui/icons-material";
-import StaySection from "@/components/booking/StaySection";
-import ScheduleSection from "@/components/booking/ScheduleSection";
+} from '@mui/icons-material';
+import StaySection from '@/components/booking/StaySection';
+import ScheduleSection from '@/components/booking/ScheduleSection';
 import {
   BookingLocationInitial,
   BookingScheduleInitial,
@@ -41,20 +41,20 @@ import {
   IPaymentTerminal,
   IRoomBooking,
   PaymentInfoInitial,
-} from "@/models/Booking";
-import SelectRoomSection from "@/components/booking/SelectRoomSection";
-import SummarySection from "@/components/booking/SummarySection";
-import { lotNumberEnum } from "@/constant/Enums";
-import { getLotNumber, roundingFunction } from "@/utils/functions";
-import DetailSection from "@/components/booking/DetailSection";
-import { FormikProps, useFormik } from "formik";
-import * as Yup from "yup";
-import axios from "axios";
+} from '@/models/Booking';
+import SelectRoomSection from '@/components/booking/SelectRoomSection';
+import SummarySection from '@/components/booking/SummarySection';
+import { lotNumberEnum } from '@/constant/Enums';
+import { getLotNumber, roundingFunction } from '@/utils/functions';
+import DetailSection from '@/components/booking/DetailSection';
+import { FormikErrors, FormikProps, useFormik } from 'formik';
+import * as Yup from 'yup';
+import axios from 'axios';
 
-import CTLogo from "../../assets/icons/general/Logo-CT.svg";
-import CTLogoOnly from "@/assets/icons/general/LogoPrimary.svg";
-import CloseIcon from "@/assets/icons/general/icon-menu-close.svg";
-import { useBookingData } from "@/context/BookingContext";
+import CTLogo from '../../assets/icons/general/Logo-CT.svg';
+import CTLogoOnly from '@/assets/icons/general/LogoPrimary.svg';
+import CloseIcon from '@/assets/icons/general/icon-menu-close.svg';
+import { useBookingData } from '@/context/BookingContext';
 
 const BookingPage = () => {
   const router = useRouter();
@@ -71,22 +71,22 @@ const BookingPage = () => {
   const [paymentInfo, setPaymentInfo] =
     useState<IPaymentInfo>(PaymentInfoInitial);
 
-  const [taxPercentage, setTaxPercentage] = useState<string>("0%");
+  const [taxPercentage, setTaxPercentage] = useState<string>('0%');
   const [serviceChargePercentage, setServiceChargePercentage] =
-    useState<string>("0%");
+    useState<string>('0%');
 
   const [countries, setCountries] = useState<ICountry[]>([]);
 
   const [consentSigned, setConsentSigned] = useState<boolean>(false);
 
-  const [errorNotification, setErrorNotification] = useState<string>("");
+  const [errorNotification, setErrorNotification] = useState<string>('');
 
   const handleOpenErrorBooking = (text: string) => {
     setErrorNotification(text);
   };
 
   const handleCloseErrorBooking = () => {
-    setErrorNotification("");
+    setErrorNotification('');
   };
 
   const handleConsentSignChange = (
@@ -188,7 +188,7 @@ const BookingPage = () => {
     let promotionAmount = 0;
 
     if (paymentInfo.promotion && paymentInfo.promotionDeduct) {
-      if (paymentInfo.promotionDeduct.includes("%")) {
+      if (paymentInfo.promotionDeduct.includes('%')) {
         const promotionDetail = parseFloat(paymentInfo.promotionDeduct);
 
         promotionAmount = parseFloat(
@@ -254,9 +254,9 @@ const BookingPage = () => {
             //   prev.favorite === curr.favorite ? 0 : prev.favorite ? -1 : 1
             // )
             .sort((prev: ICountry, curr: ICountry) => {
-              if (prev.countryName === "Malaysia") {
+              if (prev.countryName === 'Malaysia') {
                 return -1; // 'Malaysia' comes before all other countries
-              } else if (curr.countryName === "Malaysia") {
+              } else if (curr.countryName === 'Malaysia') {
                 return 1; // 'Malaysia' comes before all other countries
               } else {
                 return 0; // Maintain the existing order for other countries
@@ -265,10 +265,11 @@ const BookingPage = () => {
           setCountries(sortedCountry);
 
           const malaysia = sortedCountry.filter(
-            (country) => country.countryName.toLowerCase() === "malaysia"
+            (country) => country.countryName.toLowerCase() === 'malaysia'
           );
 
-          formik.setFieldValue("nationality", malaysia[0].countryName);
+          formik.setFieldValue('nationality', malaysia[0].countryName);
+          formik.setFieldValue('phone', '+' + malaysia[0].prefix);
         });
     };
 
@@ -326,13 +327,13 @@ const BookingPage = () => {
   const formik: FormikProps<IGuestDetail> = useFormik({
     initialValues: GuestDetailInitial,
     validationSchema: Yup.object().shape({
-      firstName: Yup.string().required("First Name is Required"),
-      gender: Yup.string().required("Gender is Required"),
-      nationality: Yup.string().required("Nationality is Required"),
-      identification: Yup.string().required("Identification is Required"),
-      idNumber: Yup.string().required("ID Number is Required"),
-      email: Yup.string().required("Email is Required"),
-      phone: Yup.string().required("Phone Number is Required"),
+      firstName: Yup.string().required('First Name is Required'),
+      gender: Yup.string().required('Gender is Required'),
+      nationality: Yup.string().required('Nationality is Required'),
+      identification: Yup.string().required('Identification is Required'),
+      idNumber: Yup.string().required('ID Number is Required'),
+      email: Yup.string().required('Email is Required'),
+      phone: Yup.string().required('Phone Number is Required'),
     }),
     onSubmit: (values) => {
       handleSubmit();
@@ -342,6 +343,28 @@ const BookingPage = () => {
   const handleSubmit = () => {
     if (bookingSchedule.date && bookingSchedule.duration) {
       const apiUrl = `${process.env.NEXT_PUBLIC_BASE_API}/landing-page/booking/`;
+      const malaysianICRegex = /^\d{6}\d{2}\d{4}$/;
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+      const errors: FormikErrors<IGuestDetail> = {};
+
+      if (
+        formik.values.identification === 'MyKad' &&
+        formik.values.nationality.toLowerCase() === 'malaysia' &&
+        !malaysianICRegex.test(formik.values.idNumber)
+      ) {
+        errors.idNumber = 'Please make sure IC is correct';
+      }
+
+      if (!emailRegex.test(formik.values.email)) {
+        errors.email = 'Please make sure email format is correct';
+      }
+
+      if (Object.keys(errors).length > 0) {
+        formik.setErrors(errors);
+        setErrorNotification('Please Check Guest Detail Form');
+        return;
+      }
 
       const formattedRoomBooking = roomBookings.map((roomBooking) => ({
         roomTypeName: roomBooking.roomType,
@@ -353,18 +376,20 @@ const BookingPage = () => {
         (country) => country.countryName === formik.values.nationality
       );
 
-      const displayCheckInTime = bookingSchedule.date
+      const displayCheckInTime = bookingSchedule.date;
 
-      const utcTime = new Date(Date.UTC(
-        displayCheckInTime.getFullYear(),
-        displayCheckInTime.getMonth(),
-        displayCheckInTime.getDate(),
-        displayCheckInTime.getHours(),
-        displayCheckInTime.getMinutes(),
-        displayCheckInTime.getSeconds()
-      ));
+      const utcTime = new Date(
+        Date.UTC(
+          displayCheckInTime.getFullYear(),
+          displayCheckInTime.getMonth(),
+          displayCheckInTime.getDate(),
+          displayCheckInTime.getHours(),
+          displayCheckInTime.getMinutes(),
+          displayCheckInTime.getSeconds()
+        )
+      );
 
-      const klUTCTime = new Date(utcTime.getTime() - 8 * 60 * 60 * 1000)
+      const klUTCTime = new Date(utcTime.getTime() - 8 * 60 * 60 * 1000);
 
       const formData = {
         lotId: getLotNumber(selectedHotel.hotelName),
@@ -391,8 +416,8 @@ const BookingPage = () => {
           formData,
           {
             headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
             },
           }
         )
@@ -409,14 +434,14 @@ const BookingPage = () => {
 
           setBookingData(tempBookingData);
 
-          const formatter = new Intl.DateTimeFormat("en-US", {
-            timeZone: "Asia/Singapore",
-            year: "numeric",
-            month: "2-digit",
-            day: "2-digit",
-            hour: "2-digit",
-            minute: "2-digit",
-            second: "2-digit",
+          const formatter = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'Asia/Singapore',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
             hour12: false, // Use 24-hour format
           });
 
@@ -429,13 +454,13 @@ const BookingPage = () => {
             // bookingNo: tempBookingData.bookingNo,
             userContact: formik.values.phone,
             userEmail: formik.values.email,
-            userName: formik.values.firstName + " " + formik.values.lastName,
+            userName: formik.values.firstName + ' ' + formik.values.lastName,
             lot: selectedHotel.hotelName,
           };
 
           const roomDescriptions = roomBookings
             .map(formatRoomBooking)
-            .join(", ");
+            .join(', ');
 
           const productDescription = `${iPay88Data.lot} Capsule Transit: ${roomDescriptions}`;
           const lotNumber = getLotNumber(selectedHotel.hotelName);
@@ -454,10 +479,10 @@ const BookingPage = () => {
 
   return (
     <Box
-      display={"flex"}
-      width={"99vw"}
-      flexDirection={"column"}
-      sx={{ overflowX: "hidden" }}
+      display={'flex'}
+      width={'99vw'}
+      flexDirection={'column'}
+      sx={{ overflowX: 'hidden' }}
     >
       <BookingHeader />
       <BookingStepper
@@ -517,7 +542,7 @@ const BookingPage = () => {
       )}
       <Snackbar
         open={Boolean(errorNotification)}
-        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         autoHideDuration={4000}
         onClose={handleCloseErrorBooking}
       >
@@ -525,7 +550,7 @@ const BookingPage = () => {
           onClose={handleCloseErrorBooking}
           severity="error"
           variant="filled"
-          sx={{ width: "100%", fontSize: "1rem" }}
+          sx={{ width: '100%', fontSize: '1rem' }}
         >
           {errorNotification}
         </Alert>
@@ -537,23 +562,23 @@ const BookingPage = () => {
 const BookingHeader = () => {
   const theme = useTheme();
   const router = useRouter();
-  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
   return (
     <Box
-      display={"flex"}
-      width={"100%"}
-      height={"5.5rem"}
-      flexDirection={"row"}
-      justifyContent={"space-between"}
-      alignContent={"center"}
+      display={'flex'}
+      width={'100%'}
+      height={'5.5rem'}
+      flexDirection={'row'}
+      justifyContent={'space-between'}
+      alignContent={'center'}
       paddingY={2}
       paddingX={isHandheldDevice ? 3 : 7}
       zIndex={2}
       bgcolor={theme.palette.CtColorScheme.black900}
     >
-      <Box width={"33%"}></Box>
-      <Box display={"flex"} width={"33%"} justifyContent={"center"}>
-        <IconButton onClick={() => router.push("/")}>
+      <Box width={'33%'}></Box>
+      <Box display={'flex'} width={'33%'} justifyContent={'center'}>
+        <IconButton onClick={() => router.push('/')}>
           <Image
             src={isHandheldDevice ? CTLogoOnly : CTLogo}
             alt="Airport Transit Hotel In KLIA 1 and KLIA 2"
@@ -561,13 +586,13 @@ const BookingHeader = () => {
         </IconButton>
       </Box>
       <Box
-        display={"flex"}
-        width={"33%"}
-        height={"100%"}
-        justifyContent={"flex-end"}
-        alignItems={"center"}
+        display={'flex'}
+        width={'33%'}
+        height={'100%'}
+        justifyContent={'flex-end'}
+        alignItems={'center'}
       >
-        <IconButton onClick={() => router.back()} sx={{ alignSelf: "end" }}>
+        <IconButton onClick={() => router.back()} sx={{ alignSelf: 'end' }}>
           <Image src={CloseIcon} alt="close-icon" width={35} height={35} />
         </IconButton>
       </Box>
@@ -578,27 +603,27 @@ const BookingHeader = () => {
 const steps = [
   {
     icon: <LocationOnOutlined />,
-    title: "Stay",
+    title: 'Stay',
     value: 1,
   },
   {
     icon: <CalendarMonthOutlined />,
-    title: "Schedule",
+    title: 'Schedule',
     value: 2,
   },
   {
     icon: <BedOutlined />,
-    title: "Room",
+    title: 'Room',
     value: 3,
   },
   {
     icon: <ArticleOutlined />,
-    title: "Summary",
+    title: 'Summary',
     value: 4,
   },
   {
     icon: <PersonOutline />,
-    title: "Details",
+    title: 'Details',
     value: 5,
   },
 ];
@@ -611,22 +636,22 @@ const BookingStepper = (props: {
   roomBookings: IRoomBooking[];
 }) => {
   const theme = useTheme();
-  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
   const [handheldExpanded, setHandheldExpanded] = useState<boolean>(false);
 
   const handleDisabled = (value: string) => {
-    if (value === "Schedule" && props.selectedHotel.hotelName === "") {
+    if (value === 'Schedule' && props.selectedHotel.hotelName === '') {
       return true;
     }
     if (
-      value === "Room" &&
-      (props.selectedHotel.hotelName === "" || !props.bookingSchedule.date)
+      value === 'Room' &&
+      (props.selectedHotel.hotelName === '' || !props.bookingSchedule.date)
     ) {
       return true;
     }
     if (
-      (value === "Summary" || value === "Details") &&
-      (props.selectedHotel.hotelName === "" ||
+      (value === 'Summary' || value === 'Details') &&
+      (props.selectedHotel.hotelName === '' ||
         !props.bookingSchedule.date ||
         props.roomBookings.length === 0)
     ) {
@@ -635,10 +660,10 @@ const BookingStepper = (props: {
   };
   return (
     <Stack
-      direction={"row"}
-      width={"100%"}
-      justifyContent={"center"}
-      alignItems={"center"}
+      direction={'row'}
+      width={'100%'}
+      justifyContent={'center'}
+      alignItems={'center'}
       paddingTop={3}
       paddingBottom={3}
       spacing={isHandheldDevice ? 0 : 5}
@@ -652,50 +677,50 @@ const BookingStepper = (props: {
             onClick={() => props.handleChangeStepper(step.value)}
           >
             <Stack
-              direction={"row"}
-              justifyContent={"center"}
-              alignItems={"center"}
+              direction={'row'}
+              justifyContent={'center'}
+              alignItems={'center'}
               bgcolor={
-                props.stepper === step.value ? theme.palette.primary.main : ""
+                props.stepper === step.value ? theme.palette.primary.main : ''
               }
               padding={1}
               spacing={1}
             >
-              {step.title === "Stay" ? (
+              {step.title === 'Stay' ? (
                 <LocationOnOutlined
                   sx={{
-                    color: handleDisabled(step.title) ? "grey" : "black",
+                    color: handleDisabled(step.title) ? 'grey' : 'black',
                   }}
                 />
-              ) : step.title === "Schedule" ? (
+              ) : step.title === 'Schedule' ? (
                 <CalendarMonthOutlined
                   sx={{
-                    color: handleDisabled(step.title) ? "grey" : "black",
+                    color: handleDisabled(step.title) ? 'grey' : 'black',
                   }}
                 />
-              ) : step.title === "Room" ? (
+              ) : step.title === 'Room' ? (
                 <BedOutlined
                   sx={{
-                    color: handleDisabled(step.title) ? "grey" : "black",
+                    color: handleDisabled(step.title) ? 'grey' : 'black',
                   }}
                 />
-              ) : step.title === "Summary" ? (
+              ) : step.title === 'Summary' ? (
                 <ArticleOutlined
                   sx={{
-                    color: handleDisabled(step.title) ? "grey" : "black",
+                    color: handleDisabled(step.title) ? 'grey' : 'black',
                   }}
                 />
-              ) : step.title === "Details" ? (
+              ) : step.title === 'Details' ? (
                 <PersonOutline
                   sx={{
-                    color: handleDisabled(step.title) ? "grey" : "black",
+                    color: handleDisabled(step.title) ? 'grey' : 'black',
                   }}
                 />
               ) : (
-                ""
+                ''
               )}
               <Typography
-                color={handleDisabled(step.title) ? "grey" : "black"}
+                color={handleDisabled(step.title) ? 'grey' : 'black'}
                 fontWeight={step.value === props.stepper ? 700 : 500}
               >
                 {step.title}
@@ -712,18 +737,18 @@ const BookingStepper = (props: {
           </ButtonBase>
         ))
       ) : (
-        <Stack width={"100%"}>
+        <Stack width={'100%'}>
           <Box
             display="flex"
-            width={"100%"}
+            width={'100%'}
             paddingX={3}
-            justifyContent={"space-between"}
-            alignItems={"center"}
+            justifyContent={'space-between'}
+            alignItems={'center'}
           >
             <Stack
-              direction={"row"}
-              justifyContent={"center"}
-              alignItems={"center"}
+              direction={'row'}
+              justifyContent={'center'}
+              alignItems={'center'}
               bgcolor={theme.palette.primary.main}
               padding={1}
               spacing={1}
@@ -751,7 +776,7 @@ const BookingStepper = (props: {
             </Button>
           </Box>
           <Collapse in={handheldExpanded}>
-            <Stack width={"100%"} alignItems={"start"} paddingX={4}>
+            <Stack width={'100%'} alignItems={'start'} paddingX={4}>
               {steps
                 .filter((steps) => steps.value !== props.stepper)
                 .map((step, index) => (
@@ -761,57 +786,57 @@ const BookingStepper = (props: {
                     onClick={() => props.handleChangeStepper(step.value)}
                   >
                     <Stack
-                      direction={"row"}
-                      justifyContent={"center"}
-                      alignItems={"center"}
+                      direction={'row'}
+                      justifyContent={'center'}
+                      alignItems={'center'}
                       padding={1}
                       spacing={1}
                     >
-                      {step.title === "Stay" ? (
+                      {step.title === 'Stay' ? (
                         <LocationOnOutlined
                           sx={{
                             color: handleDisabled(step.title)
-                              ? "grey"
-                              : "black",
+                              ? 'grey'
+                              : 'black',
                           }}
                         />
-                      ) : step.title === "Schedule" ? (
+                      ) : step.title === 'Schedule' ? (
                         <CalendarMonthOutlined
                           sx={{
                             color: handleDisabled(step.title)
-                              ? "grey"
-                              : "black",
+                              ? 'grey'
+                              : 'black',
                           }}
                         />
-                      ) : step.title === "Room" ? (
+                      ) : step.title === 'Room' ? (
                         <BedOutlined
                           sx={{
                             color: handleDisabled(step.title)
-                              ? "grey"
-                              : "black",
+                              ? 'grey'
+                              : 'black',
                           }}
                         />
-                      ) : step.title === "Summary" ? (
+                      ) : step.title === 'Summary' ? (
                         <ArticleOutlined
                           sx={{
                             color: handleDisabled(step.title)
-                              ? "grey"
-                              : "black",
+                              ? 'grey'
+                              : 'black',
                           }}
                         />
-                      ) : step.title === "Details" ? (
+                      ) : step.title === 'Details' ? (
                         <PersonOutline
                           sx={{
                             color: handleDisabled(step.title)
-                              ? "grey"
-                              : "black",
+                              ? 'grey'
+                              : 'black',
                           }}
                         />
                       ) : (
-                        ""
+                        ''
                       )}
                       <Typography
-                        color={handleDisabled(step.title) ? "grey" : "black"}
+                        color={handleDisabled(step.title) ? 'grey' : 'black'}
                         fontWeight={step.value === props.stepper ? 700 : 500}
                       >
                         {step.title}
