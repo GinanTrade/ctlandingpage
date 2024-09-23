@@ -12,24 +12,24 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import { useState, VoidFunctionComponent } from 'react';
-import CTButton from '../global/CTButton';
-import { ChevronLeft, Help, HelpOutline } from '@mui/icons-material';
-import Image, { StaticImageData } from 'next/image';
-import IconArrowRight from '@/assets/icons/general/btn-icon-arrow-left.svg';
-import { IBookingLocation } from '@/models/Booking';
+} from "@mui/material";
+import { useState, VoidFunctionComponent } from "react";
+import CTButton from "../global/CTButton";
+import { ChevronLeft, Help, HelpOutline } from "@mui/icons-material";
+import Image, { StaticImageData } from "next/image";
+import IconArrowRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
+import { IBookingLocation } from "@/models/Booking";
 
-import T1Icon from './images/Icons/t1-icon.svg';
-import T2Icon from './images/Icons/t2-icon.svg';
-import TrainBusGIF from './images/CT-transport.gif';
+import T1Icon from "./images/Icons/t1-icon.svg";
+import T2Icon from "./images/Icons/t2-icon.svg";
+import TrainBusGIF from "./images/CT-transport.gif";
 
-import Terminal1DetailedIcon from './images/Icons/terminal-1-detailed-icon.svg';
-import Terminal1DetailedIconHovered from './images/Icons/terminal-1-detailed-icon-hover.svg';
-import RestrictedAreaIcon from './images/Icons/restricted-area-icon.svg';
-import RestrictedAreaIconHovered from './images/Icons/restricted-area-icon-hover.svg';
-import PublicAreaIcon from './images/Icons/public-area-icon.svg';
-import PublicAreaIconHovered from './images/Icons/public-area-icon-hover.svg';
+import Terminal1DetailedIcon from "./images/Icons/terminal-1-detailed-icon.svg";
+import Terminal1DetailedIconHovered from "./images/Icons/terminal-1-detailed-icon-hover.svg";
+import RestrictedAreaIcon from "./images/Icons/restricted-area-icon.svg";
+import RestrictedAreaIconHovered from "./images/Icons/restricted-area-icon-hover.svg";
+import PublicAreaIcon from "./images/Icons/public-area-icon.svg";
+import PublicAreaIconHovered from "./images/Icons/public-area-icon-hover.svg";
 
 interface IKLIAOptions {
   terminalName: string;
@@ -48,25 +48,25 @@ interface IHotel {
   detailedLocation: string;
 }
 
-const options = [{ title: 'KLIA Terminal 1' }, { title: 'KLIA Terminal 2' }];
+const options = [{ title: "KLIA Terminal 1" }, { title: "KLIA Terminal 2" }];
 
 const KLIA1Options: IKLIAOptions = {
-  terminalName: 'KLIA Terminal 1',
+  terminalName: "KLIA Terminal 1",
   location: [
     {
       icon: Terminal1DetailedIcon,
       iconHovered: Terminal1DetailedIconHovered,
-      name: 'Public Area',
+      name: "Public Area",
       description:
-        'At KLIA Terminal 1, our hotel provides a single-servie sleep-only lounge for you to rest and take a nap',
+        "At KLIA Terminal 1, our hotel provides a single-servie sleep-only lounge for you to rest and take a nap",
       remarks: [
-        'If you are landing in Malaysia, you will need valid entry into Malaysia (visa, landing card) to clear Malaysian Imigration and access our Sleep Lounge',
+        "If you are landing in Malaysia, you will need valid entry into Malaysia (visa, landing card) to clear Malaysian Imigration and access our Sleep Lounge",
       ],
       hotels: [
         {
-          name: 'Sleep Lounge',
+          name: "Sleep Lounge",
           detailedLocation:
-            'Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia',
+            "Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia",
         },
       ],
     },
@@ -74,40 +74,40 @@ const KLIA1Options: IKLIAOptions = {
 };
 
 const KLIA2Options: IKLIAOptions = {
-  terminalName: 'KLIA Terminal 2',
+  terminalName: "KLIA Terminal 2",
   location: [
     {
       icon: RestrictedAreaIcon,
       iconHovered: RestrictedAreaIconHovered,
-      name: 'Restricted Area',
+      name: "Restricted Area",
       remarks: [
-        'If you are transiting between international flights, you can check into this hotel without needing to clear immigration.',
+        "If you are transiting between international flights, you can check into this hotel without needing to clear immigration.",
       ],
       hotels: [
         {
-          name: 'Airside',
+          name: "Airside",
           detailedLocation:
-            'Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia',
+            "Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia",
         },
       ],
     },
     {
       icon: PublicAreaIcon,
       iconHovered: PublicAreaIconHovered,
-      name: 'Public Area',
+      name: "Public Area",
       remarks: [
-        'If you are landing in Malaysia, you will need valid entry into Malaysia (visa, landing card) to clear Malaysian Imigration and access our Landside and MAX',
+        "If you are landing in Malaysia, you will need valid entry into Malaysia (visa, landing card) to clear Malaysian Imigration and access our Landside and MAX",
       ],
       hotels: [
         {
-          name: 'Landside',
+          name: "Landside",
           detailedLocation:
-            'Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia',
+            "Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia",
         },
         {
-          name: 'MAX',
+          name: "MAX",
           detailedLocation:
-            'Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia',
+            "Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia",
         },
       ],
     },
@@ -117,13 +117,13 @@ const KLIA2Options: IKLIAOptions = {
 const StaySection = (props: {
   handleChangeSelectedHotel: (value: IBookingLocation) => void;
 }) => {
-  const [staySectionStepper, setStaySectionStepper] = useState<string>('');
+  const [staySectionStepper, setStaySectionStepper] = useState<string>("");
 
   const handleChangeStaySectionStepper = (title: string) => {
     setStaySectionStepper(title);
   };
 
-  if (staySectionStepper === '') {
+  if (staySectionStepper === "") {
     return (
       <StaySectionHome
         handleChangeStaySectionStepper={handleChangeStaySectionStepper}
@@ -149,87 +149,87 @@ const StaySection = (props: {
 };
 
 const informationText =
-  'If you wish to travel between KLIA Terminal 1 and Terminal 2, you can take either the free shuttle bus service (30 minutes ride) or ERL (Train 10 minutes ride).';
+  "If you wish to travel between KLIA Terminal 1 and Terminal 2, you can take either the free shuttle bus service (30 minutes ride) or ERL (Train 10 minutes ride).";
 
 const StaySectionHome = (props: {
   handleChangeStaySectionStepper: (title: string) => void;
 }) => {
   const theme = useTheme();
-  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
-  const isSmallDevice = useMediaQuery('(max-width:400px)');
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const isSmallDevice = useMediaQuery("(max-width:400px)");
 
   const [informationHovered, setInformationHovered] = useState<boolean>(false);
   return (
     <Box
-      display={'flex'}
-      flexDirection={'column'}
-      height={'100%'}
-      justifyContent={'center'}
-      alignItems={'center'}
+      display={"flex"}
+      flexDirection={"column"}
+      height={"100%"}
+      justifyContent={"center"}
+      alignItems={"center"}
       paddingY={isHandheldDevice ? 6 : 10}
     >
       <Typography
         variant="h4"
-        textAlign={'center'}
-        width={isHandheldDevice ? '350px' : '100%'}
+        textAlign={"center"}
+        width={isHandheldDevice ? "350px" : "100%"}
       >
         Where are you departing / landing?
       </Typography>
-      <Stack direction={'row'} spacing={isHandheldDevice ? 1 : '70px'}>
+      <Stack direction={"row"} spacing={isHandheldDevice ? 1 : "70px"}>
         <Box
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'center'}
-          width={'35%'}
-          height={'600px'}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          width={"35%"}
+          height={"600px"}
         >
           <Box
-            display={'flex'}
-            justifyContent={'center'}
-            alignItems={'center'}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
             marginBottom={2}
           >
             <Image
               src={T1Icon}
               alt="terminal-1-icon"
-              style={{ width: isHandheldDevice ? 100 : 150, height: 'auto' }}
+              style={{ width: isHandheldDevice ? 100 : 150, height: "auto" }}
             />
           </Box>
-          <Typography variant="h4" textAlign={'center'} marginBottom={5}>
+          <Typography variant="h4" textAlign={"center"} marginBottom={5}>
             {options[0].title}
           </Typography>
           <CTButton
             onClick={() =>
               props.handleChangeStaySectionStepper(options[0].title)
             }
-            text={isHandheldDevice ? 'Select' : 'SELECT LOCATION'}
+            text={isHandheldDevice ? "Select" : "SELECT LOCATION"}
             variant="secondary"
           />
         </Box>
         <Box
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          width={'30%'}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          width={"30%"}
         >
           <Image
             src={TrainBusGIF}
             alt="transit-icon"
             style={{
-              marginBottom: '50px',
-              objectFit: 'contain',
-              width: isHandheldDevice ? '90%' : '100%',
-              height: 'auto',
+              marginBottom: "50px",
+              objectFit: "contain",
+              width: isHandheldDevice ? "90%" : "100%",
+              height: "auto",
             }}
           />
           <Box
-            display={'flex'}
-            flexDirection={'column'}
+            display={"flex"}
+            flexDirection={"column"}
             onMouseEnter={() => setInformationHovered(true)}
             onMouseLeave={() => setInformationHovered(false)}
-            justifyContent={'center'}
-            alignItems={'center'}
+            justifyContent={"center"}
+            alignItems={"center"}
           >
             {informationHovered ? (
               <HelpOutline color="primary" />
@@ -238,13 +238,13 @@ const StaySectionHome = (props: {
             )}
             {informationHovered && (
               <Box
-                position={'absolute'}
+                position={"absolute"}
                 marginTop={
-                  isSmallDevice ? '380px' : isHandheldDevice ? '330px' : '20vh'
+                  isSmallDevice ? "380px" : isHandheldDevice ? "330px" : "20vh"
                 }
-                display={'flex'}
+                display={"flex"}
                 border={1}
-                width={'300px'}
+                width={"300px"}
                 bgcolor={theme.palette.primary.main}
                 padding={2}
                 zIndex={10}
@@ -255,32 +255,32 @@ const StaySectionHome = (props: {
           </Box>
         </Box>
         <Box
-          display={'flex'}
-          flexDirection={'column'}
-          justifyContent={'center'}
-          width={'35%'}
-          height={'600px'}
+          display={"flex"}
+          flexDirection={"column"}
+          justifyContent={"center"}
+          width={"35%"}
+          height={"600px"}
         >
           <Box
-            display={'flex'}
-            justifyContent={'center'}
-            alignItems={'center'}
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
             marginBottom={2}
           >
             <Image
               src={T2Icon}
               alt="terminal-2-icon"
-              style={{ width: isHandheldDevice ? 100 : 150, height: 'auto' }}
+              style={{ width: isHandheldDevice ? 100 : 150, height: "auto" }}
             />
           </Box>
-          <Typography variant="h4" textAlign={'center'} marginBottom={5}>
+          <Typography variant="h4" textAlign={"center"} marginBottom={5}>
             {options[1].title}
           </Typography>
           <CTButton
             onClick={() =>
               props.handleChangeStaySectionStepper(options[1].title)
             }
-            text={isHandheldDevice ? 'Select' : 'SELECT LOCATION'}
+            text={isHandheldDevice ? "Select" : "SELECT LOCATION"}
             variant="secondary"
           />
         </Box>
@@ -294,8 +294,8 @@ const KLIAStaySection = (props: {
   handleChangeStaySectionStepper: (title: string) => void;
   handleChangeSelectedHotel: (value: IBookingLocation) => void;
 }) => {
-  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
-  const [hover, setHovered] = useState<string>('');
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
+  const [hover, setHovered] = useState<string>("");
 
   const [unavailableDialogOpen, setUnavailableDialogOpen] =
     useState<boolean>(false);
@@ -328,73 +328,73 @@ const KLIAStaySection = (props: {
 
   return (
     <Box
-      display={'flex'}
-      flexDirection={'column'}
-      height={'100%'}
-      justifyContent={'center'}
-      alignItems={'center'}
+      display={"flex"}
+      flexDirection={"column"}
+      height={"100%"}
+      justifyContent={"center"}
+      alignItems={"center"}
       paddingY={isHandheldDevice ? 6 : 10}
       paddingX={3}
     >
       <Stack
-        direction={isHandheldDevice ? 'column' : 'row'}
-        width={'100%'}
+        direction={isHandheldDevice ? "column" : "row"}
+        width={"100%"}
         marginBottom={6}
-        alignItems={isHandheldDevice ? 'center' : 'start'}
+        alignItems={isHandheldDevice ? "center" : "start"}
       >
-        <Box display={'flex'} width={isHandheldDevice ? '70px' : '33%'}>
-          <Button onClick={() => props.handleChangeStaySectionStepper('')}>
+        <Box display={"flex"} width={isHandheldDevice ? "70px" : "33%"}>
+          <Button onClick={() => props.handleChangeStaySectionStepper("")}>
             <ChevronLeft />
-            <Typography variant="h6" color={'primary'} fontWeight={600}>
+            <Typography variant="h6" color={"primary"} fontWeight={600}>
               Back
             </Typography>
           </Button>
         </Box>
         <Box
-          display={'flex'}
-          justifyContent={'center'}
-          alignItems={'center'}
-          width={isHandheldDevice ? '100%' : '33%'}
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          width={isHandheldDevice ? "100%" : "33%"}
         >
           <Typography variant="h4">{props.content.terminalName}</Typography>
         </Box>
       </Stack>
       <Stack
-        direction={isHandheldDevice ? 'column' : 'row'}
-        width={'100%'}
-        justifyContent={'center'}
-        alignItems={isHandheldDevice ? 'center' : 'start'}
+        direction={isHandheldDevice ? "column" : "row"}
+        width={"100%"}
+        justifyContent={"center"}
+        alignItems={isHandheldDevice ? "center" : "start"}
         spacing={5}
       >
         {props.content.location.map((location, index) => (
           <Box
             key={index}
-            display={'flex'}
-            flexDirection={'column'}
-            alignItems={'center'}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"center"}
             marginTop={10}
-            width={isHandheldDevice ? '350px' : '480px'}
+            width={isHandheldDevice ? "350px" : "480px"}
             onMouseEnter={() => setHovered(location.name)}
-            onMouseLeave={() => setHovered('')}
+            onMouseLeave={() => setHovered("")}
           >
             <Stack spacing={2}>
-              <Box display={'flex'} justifyContent={'center'} height={'80px'}>
+              <Box display={"flex"} justifyContent={"center"} height={"80px"}>
                 {hover === location.name ? (
                   <Image src={location.iconHovered} alt={location.name} />
                 ) : (
                   <Image src={location.icon} alt={location.name} />
                 )}
               </Box>
-              <Typography variant="h6" fontWeight={600} textAlign={'center'}>
+              <Typography variant="h6" fontWeight={600} textAlign={"center"}>
                 {location.name}
               </Typography>
-              <Typography textAlign={'center'}>
+              <Typography textAlign={"center"}>
                 {location.description}
               </Typography>
               {location.remarks.map((remark, index) => (
                 <Typography
                   key={index}
-                  textAlign={'center'}
+                  textAlign={"center"}
                   marginTop={index > 0 ? 4 : 0}
                 >
                   {remark}
@@ -419,7 +419,7 @@ const KLIAStaySection = (props: {
                 <Divider
                   variant="middle"
                   sx={{
-                    width: '350px',
+                    width: "350px",
                     marginTop: 4,
                   }}
                 />
@@ -431,10 +431,10 @@ const KLIAStaySection = (props: {
         open={unavailableDialogOpen}
         handleClose={handleCloseUnavailableDialog}
         handleChangeSelectedHotel={props.handleChangeSelectedHotel}
-        terminalName={'KLIA Terminal 1'}
-        hotelName={'Sleep Lounge'}
+        terminalName={"KLIA Terminal 1"}
+        hotelName={"Sleep Lounge"}
         detailedLocation={
-          'Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia'
+          "Lot L1-1, 2, 3 & 4, Level 1, Gateway Terminal KLIA2, Jalan KLIA 2/1, 64000 KLIA, Sepang, Selangor, Malaysia"
         }
       />
       <ConfirmationModal
@@ -454,10 +454,10 @@ const UnavailableBookingDialog = (props: {
   hotelName: string;
   detailedLocation: string;
 }) => {
-  const [password, setPassword] = useState<string>('');
+  const [password, setPassword] = useState<string>("");
 
   const handleGo = () => {
-    if (password === 'ASDFGYHJKL')
+    if (password === "ASDFGYHJKL")
       props.handleChangeSelectedHotel({
         hotelLocation: props.terminalName,
         hotelName: props.hotelName,
@@ -466,17 +466,17 @@ const UnavailableBookingDialog = (props: {
   };
   return (
     <Dialog open={props.open} onClose={props.handleClose}>
-      <DialogTitle fontSize={'1.5rem'} fontWeight={700}>
+      <DialogTitle fontSize={"1.5rem"} fontWeight={700}>
         We are putting on our final touches for Terminal 1.
       </DialogTitle>
       <DialogContent>
         <DialogContentText>
-          Please email us at{' '}
-          <a href="mailto:klia1@capsuletransit.com">klia1@capsuletransit.com</a>{' '}
+          Please email us at{" "}
+          <a href="mailto:klia1@capsuletransit.com">klia1@capsuletransit.com</a>{" "}
           for assistance with your reservations. Thank you for
           your understanding.
         </DialogContentText>
-        <Stack direction={'row'} display={'flex'} marginTop={4}>
+        <Stack direction={"row"} display={"flex"} marginTop={4}>
           <TextField
             size="small"
             value={password}
@@ -490,11 +490,9 @@ const UnavailableBookingDialog = (props: {
 };
 
 const confirmationModalTexts = {
-  title: 'Document Confirmation',
-  content:
-    'The hotel you have selected is in a restricted area. Please be sure to have your boarding pass and Visa or related documents to enter.',
-  confirmButton: 'OK',
-  backButton: 'Back',
+  title: "Document Confirmation",
+  confirmButton: "OK",
+  backButton: "Back",
 };
 
 const ConfirmationModal = (props: {
@@ -509,18 +507,21 @@ const ConfirmationModal = (props: {
   };
   return (
     <Dialog open={Boolean(props.open)} onClose={props.handleClose}>
-      <DialogTitle fontSize={'1.5rem'} fontWeight={700}>
+      <DialogTitle fontSize={"1.5rem"} fontWeight={700}>
         <Stack>{confirmationModalTexts.title}</Stack>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>{confirmationModalTexts.content}</DialogContentText>
+        <DialogContentText>
+          If you are <b>transiting</b>, please check that you have the proper
+          visa clearance to exit immigration to access this hotel.
+        </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
           variant="contained"
           sx={{
-            '&:hover': {
-              backgroundColor: 'CtColorScheme.neon500',
+            "&:hover": {
+              backgroundColor: "CtColorScheme.neon500",
             },
           }}
         >
@@ -530,8 +531,8 @@ const ConfirmationModal = (props: {
           variant="contained"
           onClick={onConfirmClick}
           sx={{
-            '&:hover': {
-              backgroundColor: 'CtColorScheme.neon500',
+            "&:hover": {
+              backgroundColor: "CtColorScheme.neon500",
             },
           }}
         >
