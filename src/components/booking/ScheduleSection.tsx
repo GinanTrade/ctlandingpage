@@ -5,6 +5,7 @@ import {
   Button,
   MenuItem,
   Select,
+  SelectChangeEvent,
   Snackbar,
   Stack,
   Typography,
@@ -15,14 +16,14 @@ import {
   ArrowDropDownIcon,
   DatePicker,
   LocalizationProvider,
-  TimePicker,
-  multiSectionDigitalClockSectionClasses,
 } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFnsV3";
 
 import IconArrowRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import Image from "next/image";
 import { useState } from "react";
+import { format } from "date-fns";
+import { TimeSelection } from "./constant/TimeSelection";
 
 const title = "When would you like to check in?";
 
@@ -90,6 +91,80 @@ const ScheduleSection = (props: {
     }
   };
 
+  const handleChangeDate = (selectedDate: Date | null) => {
+    if (selectedDate) {
+      const now = new Date();
+      const malaysiaTimeOffset = 8 * 60; // Malaysia is UTC+8
+      const localOffset = now.getTimezoneOffset(); // Get the local offset in minutes
+      const malaysiaTime = new Date(
+        now.getTime() + (malaysiaTimeOffset + localOffset) * 60000
+      );
+
+      const isToday = selectedDate.toDateString() === now.toDateString();
+
+      if (isToday) {
+        // Get the current hour and minutes
+        let hours = malaysiaTime.getHours();
+        let minutes = malaysiaTime.getMinutes();
+
+        // Calculate the next 30-minute mark
+        if (minutes > 30) {
+          minutes = 0;
+          hours += 1; // Move to the next hour
+        } else {
+          minutes = 30;
+        }
+
+        // Set the selectedDate to the rounded time
+        selectedDate.setHours(hours);
+        selectedDate.setMinutes(minutes);
+        selectedDate.setSeconds(0);
+        selectedDate.setMilliseconds(0);
+      } else {
+        selectedDate.setHours(0);
+        selectedDate.setMinutes(0);
+        selectedDate.setSeconds(0);
+        selectedDate.setMilliseconds(0);
+      }
+      handleDateOnChange(selectedDate);
+    }
+  };
+
+  const handleChangeTime = (event: SelectChangeEvent<string>) => {
+    const [hours, minutes] = event.target.value.split(":").map(Number);
+
+    const newDate = props.bookingSchedule.date
+      ? props.bookingSchedule.date
+      : new Date();
+
+    newDate.setHours(hours);
+    newDate.setMinutes(minutes);
+
+    handleDateOnChange(newDate);
+  };
+
+  const filterTimes = (time: string) => {
+    const selectedDate = props.bookingSchedule.date;
+    const now = new Date();
+
+    // Convert current time to Malaysia time (UTC+8)
+    const malaysiaTimeOffset = 8 * 60; // Malaysia is UTC+8
+    const localOffset = now.getTimezoneOffset(); // Get the local offset in minutes
+    const malaysiaTime = new Date(
+      now.getTime() + (malaysiaTimeOffset + localOffset) * 60000
+    );
+
+    const comparisonTime = malaysiaTime.toTimeString().slice(0, 5); // Malaysia time in HH:mm format
+    if (
+      !selectedDate ||
+      selectedDate.toDateString() === malaysiaTime.toDateString()
+    ) {
+      return time > comparisonTime;
+    }
+
+    return true;
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box
@@ -124,7 +199,9 @@ const ScheduleSection = (props: {
             <Typography fontWeight={"600"}>Date</Typography>
             <DatePicker
               value={props.bookingSchedule.date}
-              onChange={(newValue) => handleDateOnChange(newValue as Date)}
+              onChange={(newValue) => {
+                handleChangeDate(newValue);
+              }}
               format="dd/MM/yyyy"
               slots={{
                 openPickerIcon: ArrowDropDownIcon,
@@ -139,9 +216,14 @@ const ScheduleSection = (props: {
             width={isHandheldDevice ? "100%" : "350px"}
             height={isHandheldDevice ? "100px" : "300px"}
             spacing={2}
+            position={"relative"}
           >
             <Typography fontWeight={"600"}>Time</Typography>
-            <TimePicker
+            {/** * TimePicker component has been deprecated and should no longer
+            be used. 
+            * Reason: Dennis requested to change to a select that can select both time at the same time. 
+
+              <TimePicker
               value={props.bookingSchedule.date}
               onChange={(newValue) => handleDateOnChange(newValue as Date)}
               format={"HH:mm"}
@@ -177,7 +259,47 @@ const ScheduleSection = (props: {
                   display: "none", // Hide the ::after pseudo-element if it's causing issues
                 },
               }}
-            />
+            /> */}
+            <Select
+              labelId="time-select-label"
+              value={
+                props.bookingSchedule.date
+                  ? format(props.bookingSchedule.date, "HH:mm")
+                  : ""
+              }
+              placeholder="HH:mm"
+              onChange={handleChangeTime}
+              displayEmpty
+              MenuProps={{
+                PaperProps: {
+                  style: {
+                    maxHeight: 300, // Set the maximum height in pixels
+                  },
+                },
+              }}
+            >
+              <MenuItem disabled value="-">
+                <Typography variant="subtitle2" textOverflow={"clip"}>
+                  <em>HH:mm (MYT, UTC+8).</em>
+                </Typography>
+              </MenuItem>
+              {TimeSelection.filter(filterTimes).map((time) => (
+                <MenuItem key={time} value={time}>
+                  {time}
+                </MenuItem>
+              ))}
+            </Select>
+            <Typography
+              variant="caption"
+              color="textSecondary"
+              sx={{
+                position: "absolute",
+                bottom: -20, // Adjust this value to control distance from Select
+                left: 0,
+                right: 0,
+                textAlign: "center",
+              }}
+            ></Typography>
           </Stack>
           <Stack
             flexDirection={"column"}
