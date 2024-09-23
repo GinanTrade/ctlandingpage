@@ -5,7 +5,7 @@ import {
   IPaymentInfo,
   IRoomBooking,
   IRoomImages,
-} from '@/models/Booking';
+} from "@/models/Booking";
 import {
   Box,
   Button,
@@ -16,27 +16,30 @@ import {
   Typography,
   useMediaQuery,
   useTheme,
-} from '@mui/material';
-import ContentWrapper from '../global/ContentWrapper';
-import { format } from 'date-fns';
-import CTButton from '../global/CTButton';
-import Image from 'next/image';
-import { DurationIcons } from '@/constant/Icons';
-import { featuresEnum, lotNumberEnum } from '@/constant/Enums';
-import { Add, Remove } from '@mui/icons-material';
+} from "@mui/material";
+import ContentWrapper from "../global/ContentWrapper";
+import { format } from "date-fns";
+import CTButton from "../global/CTButton";
+import Image from "next/image";
+import { DurationIcons } from "@/constant/Icons";
+import { featuresEnum, lotNumberEnum } from "@/constant/Enums";
+import { Add, ArrowBackIos, Remove } from "@mui/icons-material";
 import {
   displayThousands,
   getLotNumber,
   matchDurationEnum,
   predictBedType,
-} from '@/utils/functions';
+} from "@/utils/functions";
 
-import FemaleSingleImage from '../landside/images/room-single-female@2x.jpg';
-import CTRight from '@/assets/icons/general/btn-icon-arrow-left.svg';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { APIHeader } from '@/api/Header';
-const title = 'Select Your Room';
+import FemaleSingleImage from "../landside/images/room-single-female@2x.jpg";
+import CTRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { APIHeader } from "@/api/Header";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+
+const title = "Select Your Room";
 
 interface IApiResponseRoom {
   roomTypeName: string;
@@ -72,10 +75,10 @@ const BookingSummary = (props: {
   bookingSchedule: IBookingSchedule;
   handleChangeStepper: (value: number) => void;
 }) => {
-  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   return (
     <Box
-      display={'flex'}
+      display={"flex"}
       paddingY={3}
       borderTop={isHandheldDevice ? 0 : 1}
       borderBottom={1}
@@ -89,11 +92,11 @@ const BookingSummary = (props: {
           />
         </Grid>
         <Grid item xs={0} sm={0} md={0} lg={1} xl={1}>
-          <Divider orientation="vertical" sx={{ width: '1px' }} />
+          <Divider orientation="vertical" sx={{ width: "1px" }} />
         </Grid>
         {isHandheldDevice && (
           <Grid item xs={12} sm={12} md={12} lg={0} xl={0}>
-            <Divider sx={{ bgcolor: 'black' }} />
+            <Divider sx={{ bgcolor: "black" }} />
           </Grid>
         )}
         <Grid item xs={12} sm={12} md={12} lg={2} xl={2}>
@@ -101,8 +104,8 @@ const BookingSummary = (props: {
             title="Date"
             data={
               props.bookingSchedule.date
-                ? format(props.bookingSchedule.date, 'dd MMMM yyyy')
-                : 'N/A'
+                ? format(props.bookingSchedule.date, "dd MMMM yyyy")
+                : "N/A"
             }
           />
         </Grid>
@@ -111,8 +114,8 @@ const BookingSummary = (props: {
             title="Check-in Time"
             data={
               props.bookingSchedule.date
-                ? format(props.bookingSchedule.date, 'h:mm aa')
-                : 'N/A'
+                ? format(props.bookingSchedule.date, "h:mm aa")
+                : "N/A"
             }
           />
         </Grid>
@@ -121,17 +124,17 @@ const BookingSummary = (props: {
             title="Stay Duration"
             data={
               props.bookingSchedule.duration
-                ? props.bookingSchedule.duration + ' hours'
-                : 'N/A'
+                ? props.bookingSchedule.duration + " hours"
+                : "N/A"
             }
           />
         </Grid>
         <Grid item xs={12} sm={12} md={12} lg={2} xl={2}>
           <Box
-            display={'flex'}
-            height={'100%'}
-            justifyContent={'flex-end'}
-            alignItems={'center'}
+            display={"flex"}
+            height={"100%"}
+            justifyContent={"flex-end"}
+            alignItems={"center"}
           >
             <CTButton
               onClick={() => {
@@ -148,7 +151,7 @@ const BookingSummary = (props: {
 };
 
 const SummaryContent = (props: { title: string; data: string }) => {
-  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
   if (!isHandheldDevice) {
     return (
       <Stack spacing={1}>
@@ -158,8 +161,8 @@ const SummaryContent = (props: { title: string; data: string }) => {
     );
   } else {
     return (
-      <Stack direction={'row'} spacing={1}>
-        <Typography width={'140px'}>{props.title}</Typography>
+      <Stack direction={"row"} spacing={1}>
+        <Typography width={"140px"}>{props.title}</Typography>
         <Typography fontWeight={700}>{props.data}</Typography>
       </Stack>
     );
@@ -175,7 +178,7 @@ const RoomTypesContent = (props: {
   handleDeductRoomBooking: (value: IRoomBooking) => void;
 }) => {
   const theme = useTheme();
-  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
 
   const [rooms, setRooms] = useState<IHotelRooms[]>([]);
   const [roomImage, setRoomImages] = useState<IRoomImages[]>([]);
@@ -194,8 +197,8 @@ const RoomTypesContent = (props: {
 
       setIsLoading(true);
       fetch(apiUrl, {
-        method: 'GET',
-        redirect: 'follow',
+        method: "GET",
+        redirect: "follow",
       })
         .then((response) => response.json())
         .then((result) => {
@@ -206,7 +209,7 @@ const RoomTypesContent = (props: {
             zone: data.roomZoneNames,
             bedType: predictBedType(data.maxPax),
             capacity:
-              data.maxPax + (parseInt(data.maxPax) > 1 ? ' Adults' : ' Adult'),
+              data.maxPax + (parseInt(data.maxPax) > 1 ? " Adults" : " Adult"),
             price: parseFloat(data.price),
             availableCount: data.availableCount,
           }));
@@ -235,11 +238,14 @@ const RoomTypesContent = (props: {
       .then((response) => {
         const data = response.data.data;
 
-        const formattedData: IRoomImages[] = data.map((data: any) => ({
-          name: data.attributes.title,
-          url: `${process.env.NEXT_PUBLIC_STRAPI_BASE}${data.attributes.image.data.attributes.url}`,
-          beds: data.attributes.beds,
-        }));
+        const formattedData: IRoomImages[] = data
+          .sort((a: any, b: any) =>
+            a.attributes.title.localeCompare(b.attributes.title)
+          )
+          .map((data: any) => ({
+            name: data.attributes.title,
+            url: `${process.env.NEXT_PUBLIC_STRAPI_BASE}${data.attributes.image.data.attributes.url}`,
+          }));
 
         setRoomImages(formattedData);
       })
@@ -252,18 +258,17 @@ const RoomTypesContent = (props: {
       const data = rooms.map((room) => {
         const strapiName = (
           props.selectedHotel.hotelName +
-          '-' +
+          "-" +
           room.name
         ).toLowerCase();
-        const imageLocated = roomImage.find(
-          (image) => image.name === strapiName
-        );
+        const imageLocated = roomImage
+          .filter((image) => image.name.includes(strapiName))
+          .map((image) => image.url);
 
         if (imageLocated) {
           return {
             ...room,
-            imageUrl: imageLocated.url,
-            bedType: imageLocated.beds ? imageLocated.beds : room.bedType,
+            imageUrl: imageLocated,
           };
         } else {
           return room;
@@ -277,19 +282,19 @@ const RoomTypesContent = (props: {
 
   return (
     <Box
-      display={'flex'}
-      flexDirection={'column'}
-      alignItems={'center'}
+      display={"flex"}
+      flexDirection={"column"}
+      alignItems={"center"}
       marginY={10}
     >
-      <Box display={'flex'} marginBottom={7}>
+      <Box display={"flex"} marginBottom={7}>
         <Typography variant="h4">{title}</Typography>
       </Box>
 
       <Grid
         container
         marginTop={8}
-        maxWidth={'900px'}
+        maxWidth={"900px"}
         columnSpacing={3}
         marginBottom={8}
         rowSpacing={{ xs: 8, sm: 8, md: 5, lg: 5, xl: 5 }}
@@ -297,13 +302,13 @@ const RoomTypesContent = (props: {
         {isLoading || isLoadingImage
           ? [...Array(4)].map((_, index) => (
               <Grid key={index} item xs={12} sm={12} md={6} lg={6} xl={6}>
-                <Box display={'flex'} flexDirection={'column'}>
-                  <Skeleton variant="rectangular" width={'100%'} height={550} />
+                <Box display={"flex"} flexDirection={"column"}>
+                  <Skeleton variant="rectangular" width={"100%"} height={550} />
                 </Box>
               </Grid>
             ))
           : completedRoomData
-              .filter((room) => room.imageUrl)
+              .filter((room) => room.imageUrl && room.imageUrl.length > 0)
               .map((room, index) => {
                 const roomSelected = props.roomBookings.find(
                   (roomBooking) => roomBooking.roomTypeId === room.name
@@ -311,41 +316,61 @@ const RoomTypesContent = (props: {
                 return (
                   <Grid key={index} item xs={12} sm={12} md={6} lg={6} xl={6}>
                     <Box
-                      display={'flex'}
-                      flexDirection={'column'}
+                      display={"flex"}
+                      flexDirection={"column"}
                       sx={{ opacity: room.availableCount < 1 ? 0.5 : 1 }}
                     >
-                      <img
-                        src={room.imageUrl}
-                        alt={room.name}
-                        style={{
-                          width: '100%',
-                          height: 550,
-                          objectFit: 'cover',
-                        }}
-                      />
-
+                      {room.imageUrl && room.imageUrl.length > 1 ? (
+                        <Carousel showThumbs={false} swipeable={true}>
+                          {room.imageUrl.map((image, index) => (
+                            // eslint-disable-next-line @next/next/no-img-element
+                            <img
+                              key={index}
+                              src={image}
+                              alt={room.name}
+                              style={{
+                                width: "100%",
+                                height: 550,
+                                objectFit: "cover",
+                              }}
+                            />
+                          ))}
+                        </Carousel>
+                      ) : (
+                        room.imageUrl && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={room.imageUrl[0]}
+                            alt={room.name}
+                            style={{
+                              width: "100%",
+                              height: 550,
+                              objectFit: "cover",
+                            }}
+                          />
+                        )
+                      )}
                       <Typography variant="h6" fontWeight={700} marginTop={2}>
                         {room.name}
                         {/* {room.zone ? `(${room.zone})` : ""} */}
                       </Typography>
-                      <Stack direction={'row'} spacing={1} marginTop={1}>
+                      <Stack direction={"row"} spacing={1} marginTop={1}>
                         <Typography color={theme.palette.CtColorScheme.grey400}>
                           {room.bedType}
                         </Typography>
-                        <Typography color={'primary'}>/</Typography>
+                        <Typography color={"primary"}>/</Typography>
                         <Typography color={theme.palette.CtColorScheme.grey400}>
                           {room.capacity}
                         </Typography>
                       </Stack>
                       <Stack
-                        direction={isHandheldDevice ? 'column' : 'row'}
+                        direction={isHandheldDevice ? "column" : "row"}
                         marginTop={1}
-                        justifyContent={'space-between'}
+                        justifyContent={"space-between"}
                       >
                         <Stack
-                          direction={'row'}
-                          alignItems={'flex-end'}
+                          direction={"row"}
+                          alignItems={"flex-end"}
                           spacing={1}
                         >
                           <Typography variant="h5">
@@ -361,8 +386,8 @@ const RoomTypesContent = (props: {
                           {props.bookingSchedule.duration &&
                             DurationIcons.duration(
                               matchDurationEnum(props.bookingSchedule.duration)
-                            ) !== '' && (
-                              <Stack direction={'row'} alignItems={'center'}>
+                            ) !== "" && (
+                              <Stack direction={"row"} alignItems={"center"}>
                                 <Image
                                   src={DurationIcons.duration(
                                     matchDurationEnum(
@@ -380,16 +405,16 @@ const RoomTypesContent = (props: {
                             variant="outlined"
                             disabled={room.availableCount < 1}
                             sx={{
-                              color: 'black',
-                              borderColor: 'black',
-                              width: isHandheldDevice ? '100%' : '180px',
-                              height: '40px',
+                              color: "black",
+                              borderColor: "black",
+                              width: isHandheldDevice ? "100%" : "180px",
+                              height: "40px",
                               marginTop: isHandheldDevice ? 1 : 0,
-                              '&.Mui-disabled': {
+                              "&.Mui-disabled": {
                                 opacity: 1, // Set your desired opacity
-                                color: 'black', // Ensure text color remains the same
+                                color: "black", // Ensure text color remains the same
                                 bgcolor: theme.palette.CtColorScheme.grey100,
-                                borderColor: 'black', // Ensure border color remains the same
+                                borderColor: "black", // Ensure border color remains the same
                               },
                             }}
                           >
@@ -397,10 +422,10 @@ const RoomTypesContent = (props: {
                           </Button>
                         ) : roomSelected ? (
                           <Stack
-                            direction={'row'}
-                            width={isHandheldDevice ? '100%' : '180px'}
+                            direction={"row"}
+                            width={isHandheldDevice ? "100%" : "180px"}
                             marginTop={isHandheldDevice ? 1 : 0}
-                            height={'40px'}
+                            height={"40px"}
                           >
                             <Button
                               variant="outlined"
@@ -420,20 +445,20 @@ const RoomTypesContent = (props: {
                                 })
                               }
                               sx={{
-                                width: '10%',
+                                width: "10%",
                                 padding: 0,
                                 border: 1,
-                                color: 'black',
+                                color: "black",
                                 bgcolor: theme.palette.primary.main,
                               }}
                             >
                               <Remove />
                             </Button>
                             <Box
-                              display={'flex'}
-                              justifyContent={'center'}
-                              alignItems={'center'}
-                              width={'80%'}
+                              display={"flex"}
+                              justifyContent={"center"}
+                              alignItems={"center"}
+                              width={"80%"}
                               borderTop={1}
                               borderBottom={1}
                             >
@@ -465,10 +490,10 @@ const RoomTypesContent = (props: {
                                 })
                               }
                               sx={{
-                                width: '10%',
+                                width: "10%",
                                 padding: 0,
                                 border: 1,
-                                color: 'black',
+                                color: "black",
                                 bgcolor: theme.palette.primary.main,
                               }}
                             >
@@ -495,10 +520,10 @@ const RoomTypesContent = (props: {
                               })
                             }
                             sx={{
-                              color: 'black',
-                              borderColor: 'black',
-                              width: isHandheldDevice ? '100%' : '180px',
-                              height: '40px',
+                              color: "black",
+                              borderColor: "black",
+                              width: isHandheldDevice ? "100%" : "180px",
+                              height: "40px",
                               marginTop: isHandheldDevice ? 1 : 0,
                             }}
                           >
@@ -521,7 +546,7 @@ const BookNowButton = (props: {
   handleChangeStepper: (value: number) => void;
 }) => {
   const theme = useTheme();
-  const isHandheldDevice = useMediaQuery('(max-width:1050px)');
+  const isHandheldDevice = useMediaQuery("(max-width:1050px)");
 
   const amountOfRooms = props.roomBookings.reduce(
     (total, curr) => (total = total + curr.quantity),
@@ -534,12 +559,12 @@ const BookNowButton = (props: {
 
   return (
     <Box
-      display={'flex'}
-      alignItems={'center'}
-      position={'fixed'}
+      display={"flex"}
+      alignItems={"center"}
+      position={"fixed"}
       borderTop={1}
-      width={'100%'}
-      height={'80px'}
+      width={"100%"}
+      height={"80px"}
       zIndex={10}
       bottom={0}
       bgcolor={theme.palette.primary.main}
@@ -551,7 +576,7 @@ const BookNowButton = (props: {
             <Typography variant="h4">{amountOfRooms} rooms selected</Typography>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
-            <Stack direction={'row'} alignItems={'flex-end'} spacing={1}>
+            <Stack direction={"row"} alignItems={"flex-end"} spacing={1}>
               <Typography variant="h4">
                 RM{displayThousands(totalRoomsPrice)}
               </Typography>
@@ -562,9 +587,9 @@ const BookNowButton = (props: {
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
             <Box
-              display={'flex'}
-              justifyContent={'flex-end'}
-              alignItems={'center'}
+              display={"flex"}
+              justifyContent={"flex-end"}
+              alignItems={"center"}
             >
               <Button
                 onClick={() => {
@@ -575,13 +600,13 @@ const BookNowButton = (props: {
                   padding: 0,
                 }}
               >
-                <Typography variant="h4">{'Book Now'}</Typography>
+                <Typography variant="h4">{"Book Now"}</Typography>
                 <Image
                   src={CTRight}
                   alt="CT-Right-Up"
                   style={{
-                    color: 'white',
-                    width: '60px',
+                    color: "white",
+                    width: "60px",
                   }}
                 />
               </Button>
@@ -590,9 +615,9 @@ const BookNowButton = (props: {
         </Grid>
       ) : (
         <Stack
-          width={'100%'}
-          direction={'row'}
-          justifyContent={'space-between'}
+          width={"100%"}
+          direction={"row"}
+          justifyContent={"space-between"}
         >
           <Stack>
             <Typography variant="h4">
@@ -611,8 +636,8 @@ const BookNowButton = (props: {
               src={CTRight}
               alt="CT-Right-Up"
               style={{
-                color: 'white',
-                width: '60px',
+                color: "white",
+                width: "60px",
               }}
             />
           </Button>

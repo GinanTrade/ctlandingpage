@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   IBookingLocation,
   IBookingSchedule,
@@ -30,6 +31,8 @@ import { useState } from "react";
 
 import CTRight from "@/assets/icons/general/btn-icon-arrow-left.svg";
 import PaymentOverview from "./PaymentOverview";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const contentWidth = "900px";
 const mobileWidth = "100%";
@@ -223,11 +226,38 @@ const RoomBookingSection = (props: {
               height={"250px"}
               bgcolor={"grey"}
             >
-              {roomBooking.imageUrl && (
-                <img
-                  src={roomBooking.imageUrl}
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
+              {roomBooking.imageUrl && roomBooking.imageUrl.length > 1 ? (
+                <Carousel
+                  showThumbs={false}
+                  swipeable={true}
+                  dynamicHeight={false}
+                >
+                  {roomBooking.imageUrl.map((image, index) => (
+                    <img
+                      key={index}
+                      src={image}
+                      alt={`slide-${index}`}
+                      style={{
+                        width: "100%",
+                        height: "250px",
+                        objectFit: "cover",
+                      }}
+                    />
+                  ))}
+                </Carousel>
+              ) : (
+                roomBooking.imageUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={roomBooking.imageUrl[0]}
+                    alt={roomBooking.roomType}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                  />
+                )
               )}
             </Box>
           </Grid>
