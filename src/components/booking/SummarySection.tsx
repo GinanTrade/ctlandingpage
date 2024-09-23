@@ -108,12 +108,22 @@ const SummaryHeader = (props: {
                 {props.selectedHotel.hotelDetailedLocation}
               </Typography>
             </Stack>
-            {props.selectedHotel.hotelName === "Airside" && (
+            {props.selectedHotel.hotelName === "Airside" ? (
               <Typography color={theme.palette.CtColorScheme.pink300}>
                 <ul style={{ marginTop: 0, paddingLeft: "20px" }}>
                   <li>
                     Make sure you have your boarding pass and Visa or related
                     documents to enter the restricted area.
+                  </li>
+                </ul>
+              </Typography>
+            ) : (
+              <Typography color={theme.palette.CtColorScheme.pink300}>
+                <ul style={{ marginTop: 0, paddingLeft: "20px" }}>
+                  <li>
+                    If you are <b>transiting</b>, please check that you have the
+                    proper visa clearance to exit immigration to access this
+                    hotel.
                   </li>
                 </ul>
               </Typography>
