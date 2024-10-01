@@ -519,6 +519,7 @@ const ConfirmationModal = (props: {
       <DialogActions>
         <Button
           variant="contained"
+          onClick={props.handleClose}
           sx={{
             "&:hover": {
               backgroundColor: "CtColorScheme.neon500",
