@@ -511,10 +511,17 @@ const ConfirmationModal = (props: {
         <Stack>{confirmationModalTexts.title}</Stack>
       </DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          If you are <b>transiting</b>, please check that you have the proper
-          visa clearance to exit immigration to access this hotel.
-        </DialogContentText>
+        {props.open?.name === "Airside" ? (
+          <DialogContentText>
+            Make sure you have your boarding pass and Visa or related documents
+            to enter the restricted area.
+          </DialogContentText>
+        ) : (
+          <DialogContentText>
+            If you are <b>transiting</b>, please check that you have the proper
+            visa clearance to exit immigration to access this hotel.
+          </DialogContentText>
+        )}
       </DialogContent>
       <DialogActions>
         <Button
