@@ -375,10 +375,13 @@ const RoomTypesContent = (props: {
                         >
                           <Typography variant="h5">
                             RM
-                            {(
-                              room.price +
-                              (room.price * parseInt(props.taxPercentage)) / 100
-                            ).toFixed(2)}
+                            {room.price
+                              /**
+                               * Below is the code to calculate the room after tax, changed back due to client's request
+                               */
+                              // room.price +
+                              // (room.price * parseInt(props.taxPercentage)) / 100
+                              .toFixed(2)}
                           </Typography>
                           <Typography variant="subtitle2">
                             for {props.bookingSchedule.duration}h
@@ -557,6 +560,10 @@ const BookNowButton = (props: {
     ? props.paymentInfo.debitAmount - props.paymentInfo.rounding
     : props.paymentInfo.debitAmount;
 
+  const totalAmount = props.roomBookings
+    .reduce((total, curr) => (total = total + curr.price * curr.quantity), 0)
+    .toFixed(2);
+
   return (
     <Box
       display={"flex"}
@@ -578,10 +585,10 @@ const BookNowButton = (props: {
           <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
             <Stack direction={"row"} alignItems={"flex-end"} spacing={1}>
               <Typography variant="h4">
-                RM{displayThousands(totalRoomsPrice)}
+                RM{displayThousands(parseFloat(totalAmount))}
               </Typography>
               <Typography variant="subtitle1">
-                Price inclusive of tax
+                price before discount and tax
               </Typography>
             </Stack>
           </Grid>
@@ -622,9 +629,9 @@ const BookNowButton = (props: {
           <Stack>
             <Typography variant="h4">
               {amountOfRooms} rooms / RM
-              {displayThousands(totalRoomsPrice)}
+              {displayThousands(parseFloat(totalAmount))}
             </Typography>
-            <Typography>Price inclusive of tax</Typography>
+            <Typography>price before discount and tax</Typography>
           </Stack>
           <Button
             onClick={() => props.handleChangeStepper(4)}
